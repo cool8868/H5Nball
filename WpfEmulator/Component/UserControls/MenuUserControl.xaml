@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Games.NBall.WpfEmulator.Component.UserControls.MenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="22" d:DesignWidth="1290">
+    <Grid>
+        <Menu x:Name="MenuMain" VerticalAlignment="Top" Height="22" Width="1290" Canvas.Top="0" Style="{DynamicResource SimpleMenu}" Cursor="Hand">
+            <MenuItem Header="_File">
+                <MenuItem Header="_刷新经理信息" x:Name="MenuItemRefreshManager" Click="MenuItemRefreshManager_Click" />
+                <MenuItem Header="_Exit" x:Name="MenuItemExit" Click="MenuItemExit_Click" />
+                
+            </MenuItem>
+            <MenuItem Header="_工具">
+                <MenuItem Header="_创建肉鸡" x:Name="MenuItemCreateBot" Click="MenuItemCreateBot_OnClick"></MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</UserControl>

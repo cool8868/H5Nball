@@ -1,0 +1,11 @@
+D:\H5Nball\Entity\bin\Debug\Games.NBall.Entity.XML
+D:\H5Nball\Entity\bin\Debug\Games.NBall.Entity.dll
+D:\H5Nball\Entity\bin\Debug\Games.NBall.Entity.pdb
+D:\H5Nball\Entity\bin\Debug\Games.NBall.Common.dll
+D:\H5Nball\Entity\bin\Debug\log4net.dll
+D:\H5Nball\Entity\bin\Debug\Newtonsoft.Json.dll
+D:\H5Nball\Entity\bin\Debug\protobuf-net.dll
+D:\H5Nball\Entity\bin\Debug\Games.NBall.Common.pdb
+D:\H5Nball\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+D:\H5Nball\Entity\obj\Debug\Games.NBall.Entity.dll
+D:\H5Nball\Entity\obj\Debug\Games.NBall.Entity.pdb

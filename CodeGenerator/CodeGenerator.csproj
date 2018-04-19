@@ -1,0 +1,1093 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB82DC46-C3D7-48D3-80F1-A82E834F8EDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeGenerator</RootNamespace>
+    <AssemblyName>CodeGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeTemplate\Entity.cs.cst" />
+    <None Include="CodeTemplate\EntityInit.cs.cst" />
+    <None Include="CodeTemplate\Entity_Shadow.cs.cst" />
+    <None Include="CodeTemplate\Managers.cs.cst" />
+    <None Include="CodeTemplate\ManagersInit.cs.cst" />
+    <None Include="CodeTemplate\Model.csp.cst" />
+    <None Include="CodeTemplate\Model_SystemLog.csp.cst" />
+    <None Include="CodeTemplate\Model_Process.csp.cst" />
+    <None Include="CodeTemplate\SqlServerProcedure.csp.cst" />
+    <None Include="CodeTemplate\SqlServerProcedure.cst" />
+    <None Include="CodeTemplate\SqlServerProvider.cs.cst" />
+    <None Include="CodeTemplate\SqlServerProvider_Shadow.cs.cst" />
+    <None Include="CodeTemplate\SqlServerProvider_SystemLog.cs.cst" />
+    <None Include="CodeTemplate\SqlServerProvider_Process.cs.cst" />
+    <None Include="CodeTemplate\SqlServerProviderInit.cs.cst" />
+    <None Include="CodeTemplate\Start.csp.cst" />
+    <None Include="CodeTemplate\Model_Config.csp.cst" />
+    <None Include="CodeTemplate\SqlServerProvider_Config.cs.cst" />
+    <None Include="CodeTemplate\Response.cs.cst" />
+    <None Include="CodeTemplate\Model_Monitor.csp.cst" />
+    <None Include="CodeTemplate\SqlServerProvider_Monitor.cs.cst" />
+    <None Include="CodeTemplate\Managers_Support.cs.cst" />
+    <None Include="Config\1_Generator.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCrowdMorale.csp" />
+    <None Include="Config\Generator\ConfigCrowdPrize.csp" />
+    <None Include="Config\Generator\ConfigCrowdRankPrize.csp" />
+    <None Include="Config\Generator\ConfigCrowdScore.csp" />
+    <None Include="Config\Generator\ConfigGambleIcon.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllCSDK.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigAppsetting.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigRevelationAwary.csp" />
+    <None Include="Config\Generator\ConfigRevelationCheckpoint.csp" />
+    <None Include="Config\Generator\ConfigRevelationNpcLink.csp" />
+    <None Include="Config\Generator\ConfigRevelationShop.csp" />
+    <None Include="Config\Generator\ConfigRevelationSynthesizeion.csp" />
+    <None Include="Config\Generator\ConfigRevelationTheBadgeAwary.csp" />
+    <None Include="Config\Generator\ConfigRevelationVIP.csp" />
+    <None Include="Config\Generator\CSDKisRegist.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigPlayerkillPoint.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCrossSite.csp" />
+    <None Include="Config\Generator\ConfigDailycupPrize.csp" />
+    <None Include="Config\Generator\ConfigDailyEventTime.csp" />
+    <None Include="Config\Generator\ConfigInvest.csp" />
+    <None Include="Config\Generator\ConfigManagerlevel.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigFunctionOpen.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSynthesisCard.csp" />
+    <None Include="Config\Generator\ConfigTask.csp" />
+    <None Include="Config\Generator\ConfigTaskRequire.csp" />
+    <None Include="Config\Generator\ConfigVipPackage.csp" />
+    <None Include="Config\Generator\DicActivity.csp" />
+    <None Include="Config\Generator\DicActivityPrize.csp" />
+    <None Include="Config\Generator\DicActivityStep.csp" />
+    <None Include="Config\Generator\DicCrossLadderExchange.csp" />
+    <None Include="Config\Generator\DicCrossLadderPrize.csp" />
+    <None Include="Config\Generator\DicFormationPoint.csp" />
+    <None Include="Config\Generator\DicGiftPack.csp" />
+    <None Include="Config\Generator\DicGiftPackPrize.csp" />
+    <None Include="Config\Generator\DicArenaBagConfig.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicSkillcard.csp" />
+    <None Include="Config\Generator\DicSkillCardTips.csp" />
+    <None Include="Config\Generator\DicStarArousalSkills.csp" />
+    <None Include="Config\Generator\DicStarskills.csp" />
+    <None Include="Config\Generator\DicStarSkillTips.csp" />
+    <None Include="Config\Generator\TemplateGiants.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\TemplateRegister.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\TemplateRegisterplayer.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllApp.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllDatabase.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllLogFunction.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllUaFactory.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\Allzoneinfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllUaPlatform.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigVipLevel.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllPlatMap.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\AllSiteMap.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicPlayer.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigEquipmentPrecisionCasting.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigBuffEngine.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigBuffPool.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigEquipmentplus.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigEquipmentsynthesize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigEquipmentUpgrade.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigFormationlevel.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLottery.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLotteryRelation.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigMallDirect.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigMallExtra.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigPlayerlevel.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSchedule.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicBallsoul.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicBuff.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicCardLibrary.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicEquipment.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicEquipmentSuit.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicFormation.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicFormationdetail.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicItem.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicItemtype.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicPlayercarddec.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicSkill.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicSKillBuffMatch.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigDecompose.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigFriendInvitePrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSkillcardaskrank.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSkillcardlevel.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigStrength.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSynthesis.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicGuildSkill.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicMallItem.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicManagerTalent.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicManagerTalentTips.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicManagerWill.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicManagerWillPartTips.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicManagerWillTips.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicNamePrefix.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicNpc.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicGrow.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicSyntheticItem.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLeague.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLeagueMark.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLeaguePrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigScouting.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicLadderExchange.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicLadderPrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicNewPlayerPack.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicLeagueExchange.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigDaysAttendPrize.csp" />
+    <None Include="Config\Generator\DicMail.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicNameSuffix.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLeagueWinCountPrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLadderDayPrize.csp" />
+    <None Include="Config\Generator\ConfigSkillUpgrade.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigPrpoSell.csp" />
+    <None Include="Config\Generator\DicSkillstree.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicSkillsTreeDesDic.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigSkillTreePoint.csp" />
+    <None Include="Config\Generator\ConfigShare.csp" />
+    <None Include="Config\Generator\ConfigMallGiftBag.csp" />
+    <None Include="Config\Generator\ConfigLeagueFightMap.csp" />
+    <None Include="Config\Generator\ConfigEuropePrize.csp" />
+    <None Include="Config\Generator\DicClubSkill.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigLeagueStar.csp" />
+    <None Include="Config\Generator\ConfigLeagueGoals.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\DicPlayerlink.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigTurntablePrize.csp" />
+    <None Include="Config\Generator\ConfigTurntableReset.csp" />
+    <None Include="Config\Generator\ConfigPlayerTheStar.csp" />
+    <None Include="Config\Generator\ConfigPotential.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigPotentialCard.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigOlympicExchangerize.csp" />
+    <None Include="Config\Generator\ConfigOlympicTheGoldMedal.csp" />
+    <None Include="Config\Generator\ConfigArenaNpcLink.csp" />
+    <None Include="Config\Generator\ConfigArenaDanGrading.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigArenaNpcOpponent.csp" />
+    <None Include="Config\Generator\ConfigArenaPrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigArenaShop.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigPenaltyKickPrize.csp" />
+    <None Include="Config\Generator\DicStarSkillLevelTips.csp" />
+    <None Include="Config\Generator\ConfigEverydayActivityLegend.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCrossActivityPrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigTxChargeId.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigRevelation.csp" />
+    <None Include="Config\Generator\ConfigRevelationDraw.csp" />
+    <None Include="Config\Generator\ConfigRevelationNpcTemp.csp" />
+    <None Include="Config\Generator\ConfigCoachInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCoachSkill.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCoachUpgrade.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Generator\ConfigCoachStar.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\Start.csp.cst" />
+    <None Include="NBall\1_Generator.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\A8csdkStartGame.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ActivityExHistory.csp" />
+    <None Include="NBall\Generator\ActivityExPrizeRecord.csp" />
+    <None Include="NBall\Generator\ActivityExRank.csp" />
+    <None Include="NBall\Generator\ActivityExRecord.csp" />
+    <None Include="NBall\Generator\ActivityExSendLog.csp" />
+    <None Include="NBall\Generator\ActivityHistory.csp" />
+    <None Include="NBall\Generator\ActivityPrizeRecord.csp" />
+    <None Include="NBall\Generator\ActivityRecord.csp" />
+    <None Include="NBall\Generator\ConstellationPackage.csp" />
+    <None Include="NBall\Generator\DailyAttendanceManager.csp" />
+    <None Include="NBall\Generator\DailyCupCompetitors.csp" />
+    <None Include="NBall\Generator\DailyCupGamble.csp" />
+    <None Include="NBall\Generator\DailyCupInfo.csp" />
+    <None Include="NBall\Generator\DailyCupMatch.csp" />
+    <None Include="NBall\Generator\EveryDayActivityPrize.csp" />
+    <None Include="NBall\Generator\FriendInvite.csp" />
+    <None Include="NBall\Generator\FriendInvitePrizeRecord.csp" />
+    <None Include="NBall\Generator\FriendManager.csp" />
+    <None Include="NBall\Generator\FriendMatch.csp" />
+    <None Include="NBall\Generator\GambleDetail.csp" />
+    <None Include="NBall\Generator\GambleHost.csp" />
+    <None Include="NBall\Generator\GambleOption.csp" />
+    <None Include="NBall\Generator\GambleRank.csp" />
+    <None Include="NBall\Generator\GambleRankRewardLog.csp" />
+    <None Include="NBall\Generator\GambleSeason.csp" />
+    <None Include="NBall\Generator\Gamble_HostOptionRate.csp" />
+    <None Include="NBall\Generator\GambleTitle.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\InformationPopup - 复制.csp" />
+    <None Include="NBall\Generator\InformationPopup.csp" />
+    <None Include="NBall\Generator\InvestManager.csp" />
+    <None Include="NBall\Generator\LadderHook.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\A8csdk.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBManagerCommonPackage.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerShare.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationChallengeRevord.csp" />
+    <None Include="NBall\Generator\RevelationCheckpoint.csp" />
+    <None Include="NBall\Generator\RevelationHistoryOfTheGap.csp" />
+    <None Include="NBall\Generator\RevelationMain.csp" />
+    <None Include="NBall\Generator\RevelationMyHistoryOfTheGap.csp" />
+    <None Include="NBall\Generator\TurntableManager.csp" />
+    <None Include="NBall\Generator\Tx_Yellowvip.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBManagerVipPackage.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbUser.csp" />
+    <None Include="NBall\Generator\ShareManager.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PlayerKillInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PlayerKillMatch.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PlayerKillRevenge.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManager.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerextra.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ScoutingRecord.csp" />
+    <None Include="NBall\Generator\TaskDailyHistory.csp" />
+    <None Include="NBall\Generator\TaskDailyRecord.csp" />
+    <None Include="NBall\Generator\TaskHistory.csp" />
+    <None Include="NBall\Generator\TaskPending.csp" />
+    <None Include="NBall\Generator\TaskRecord.csp" />
+    <None Include="NBall\Generator\Teammember.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\TeammemberGrow.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\TeammemberTrain.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\TemplateRegisterplayer.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\AMoveDataToServeRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\GuildList.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\OnlineInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\OnlineLockManager.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBUserReg.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBManagerHonor.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbMatchstat.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbSolution.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PayChargehistory.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PayConsumehistory.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PayContinuing.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\PayUser.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ItemPackage.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\MailInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\MailShareInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\MallExtraRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\MallSaleRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ManagerSkillLib.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ManagerSkillUse.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ManagerSkillWillSrc.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerBuffMember.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerBuffPool.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBManagerMatchAchievement.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerskillask.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerskillaskrecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerskillbag.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NbManagerskillmixrecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LaegueManagerInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueEncounter.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueManagerRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueNpcManager.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueRank.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\Scouting_Manager.csp" />
+    <None Include="NBall\Generator\Scouting_RecordForDays.csp" />
+    <None Include="NBall\Generator\LadderExchangeRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderMatch.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderHonorRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderManager.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderManagerHistory.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderSeason.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RankingLadderYesterday.csp" />
+    <None Include="NBall\Generator\RankingYesterday.csp" />
+    <None Include="NBall\Generator\LeagueExchangeRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\AchievementManager.csp" />
+    <None Include="NBall\Generator\VipManager.csp" />
+    <None Include="NBall\Generator\FriendOpenBoxRecord.csp" />
+    <None Include="NBall\Generator\LeagueWincountRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ManagerSkillNew.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LadderDayPrize.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\NBManagerTree.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ManagerMonthCard.csp" />
+    <None Include="NBall\Generator\ManagerChargeNumber.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\EuropeGamble.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\EuropeGambleRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ActivityExCountRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\LeagueFightMap.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\TurntableLuckyRecord.csp" />
+    <None Include="NBall\Generator\OlympicManager.csp" />
+    <None Include="NBall\Generator\OlympicRecord.csp" />
+    <None Include="NBall\Generator\ArenaTeammember.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ArenaShop.csp" />
+    <None Include="NBall\Generator\ArenaExChangeRecord.csp" />
+    <None Include="NBall\Generator\PenaltyKickManager.csp" />
+    <None Include="NBall\Generator\PenaltyKickSeason.csp" />
+    <None Include="NBall\Generator\ActivityExItemRecord.csp" />
+    <None Include="NBall\Generator\GoldBarRecord.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\ScoutingGoldBar.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\TxLoginInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationInfo.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationDraw.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationHook.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationMyHistory.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\RevelationShop.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NBall\Generator\CoachManager.csp" />
+    <None Include="NBall\Start.csp.cst" />
+    <None Include="Process\1_Generator.csp" />
+    <None Include="Process\Generator\Matchprocess.csp" />
+    <None Include="Process\Start.csp.cst" />
+    <None Include="Support\Generator\ActivityExCrossRank.csp" />
+    <None Include="Support\Generator\ActivityExZone.csp" />
+    <None Include="Support\Generator\CrossActivityRecord.csp" />
+    <None Include="Support\Generator\CrossCrowdInfo.csp" />
+    <None Include="Support\Generator\CrossCrowdManager.csp" />
+    <None Include="Support\Generator\CrossCrowdManagerHistory.csp" />
+    <None Include="Support\Generator\CrossCrowdMatch.csp" />
+    <None Include="Support\Generator\CrossCrowdPairRecord.csp" />
+    <None Include="Support\Generator\CrossCrowdPrizeRecord.csp" />
+    <None Include="Support\Generator\CrossLadderExchangeRecord.csp" />
+    <None Include="Support\Generator\CrossLadderHonorRecord.csp" />
+    <None Include="Support\Generator\CrossLadderInfo.csp" />
+    <None Include="Support\Generator\CrossLadderManager.csp" />
+    <None Include="Support\Generator\CrossLadderManagerDailyHistory.csp" />
+    <None Include="Support\Generator\CrossLadderManagerHistory.csp" />
+    <None Include="Support\Generator\CrossLadderMatch.csp" />
+    <None Include="Support\Generator\CrossRobotManager.csp" />
+    <None Include="Support\Generator\CrossLadderSeason.csp" />
+    <None Include="Support\Generator\ExchangeInfo.csp" />
+    <None Include="Support\Generator\GmLog.csp" />
+    <None Include="Support\Generator\MonitorDailyEvent.csp" />
+    <None Include="Support\Generator\MonitorSchedule.csp" />
+    <None Include="Support\Generator\StatisticClick.csp" />
+    <None Include="Support\Generator\StatisticDetail.csp" />
+    <None Include="Support\Generator\StatisticInfo.csp" />
+    <None Include="Support\Generator\StatisticKpi.csp" />
+    <None Include="Support\Generator\StatisticOnline.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Support\Generator\TemplateActivityEx.csp">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Support\Generator\TemplateActivityExDetail.csp" />
+    <None Include="Support\Generator\TemplateActivityExGroup.csp" />
+    <None Include="Support\Generator\TemplateActivityExPrize.csp" />
+    <None Include="Support\Generator\Announcement.csp" />
+    <None Include="Support\Generator\UserLoginZone.csp" />
+    <None Include="Support\Generator\EuropeMatch.csp" />
+    <None Include="Support\Generator\ZoneDailyEventTime.csp" />
+    <None Include="Support\Generator\ArenaManagerInfo.csp" />
+    <None Include="Support\Generator\ArenaManagerRecord.csp" />
+    <None Include="Support\Generator\ArenaSeason.csp" />
+    <None Include="Support\Generator\ArenaSeasonInfo.csp" />
+    <None Include="Support\Generator\CrossCrowdMaxKillerRecord.csp" />
+    <None Include="Support\Generator\CrossLadderHook.csp" />
+    <None Include="Support\Generator\TransferDropOut.csp" />
+    <None Include="Support\Generator\TransferMain.csp" />
+    <None Include="Support\Generator\CrossActivityMain.csp" />
+    <None Include="代码生成说明.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\Generator\SqlScript\AllApp.sql" />
+    <Content Include="Config\Generator\SqlScript\AllCSDK.sql" />
+    <Content Include="Config\Generator\SqlScript\AllDatabase.sql" />
+    <Content Include="Config\Generator\SqlScript\Alllogfunction.sql" />
+    <Content Include="Config\Generator\SqlScript\AllPlatMap.sql" />
+    <Content Include="Config\Generator\SqlScript\AllSiteMap.sql" />
+    <Content Include="Config\Generator\SqlScript\AllUaFactory.sql" />
+    <Content Include="Config\Generator\SqlScript\AllUaPlatform.sql" />
+    <Content Include="Config\Generator\SqlScript\Allzoneinfo.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigAppsetting.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigArenaDanGrading.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigArenaNpcLink.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigArenaNpcOpponent.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigArenaPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigArenaShop.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigBuffEngine.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigBuffPool.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCoachInfo.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCoachSkill.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCoachStar.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCoachUpgrade.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCrossActivityPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCrossSite.sql" />
+    <Content Include="Config\Generator\SqlScript\Configcrowdmorale.sql" />
+    <Content Include="Config\Generator\SqlScript\Configcrowdprize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigCrowdRankPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\Configcrowdscore.sql" />
+    <Content Include="Config\Generator\SqlScript\Configdailycupprize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigDailyEventTime.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigDaysAttendPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\Configdecompose.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigEquipmentplus.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigEquipmentsynthesize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigEuropePrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigEverydayActivityLegend.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigExchangerize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigFormationlevel.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigFriendInvitePrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigFunctionOpen.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigGambleIcon.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigInvest.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLadderDayPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeague.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeagueFightMap.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeagueGoals.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeagueMark.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeaguePrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeagueStar.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLeagueWinCountPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigLottery.sql" />
+    <Content Include="Config\Generator\SqlScript\Configlotteryrelation.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigMallDirect.sql" />
+    <Content Include="Config\Generator\SqlScript\Configmallextra.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigMallGiftBag.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigManagerlevel.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigOlympicExchangerize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigOlympicTheGoldMedal.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPenaltyKickPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPlayerkillPoint.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPlayerlevel.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPlayerTheStar.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPotential.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPotentialCard.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigPrpoSell.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelation.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationAwary.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationCheckpoint.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationDraw.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationNpcLink.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationNpcTemp.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationShop.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationSynthesizeion.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationTheBadgeAwary.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigRevelationVIP.sql" />
+    <Content Include="Config\Generator\SqlScript\Configschedule.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigScouting.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigShare.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigSkillcardaskrank.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigSkillcardlevel.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigSkillTreePoint.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigSkillUpgrade.sql" />
+    <Content Include="Config\Generator\SqlScript\Configstrength.sql" />
+    <Content Include="Config\Generator\SqlScript\Configsynthesis.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigSynthesisCard.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigTask.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigTaskrequire.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigTurntablePrize.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigTurntableReset.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigTxChargeId.sql" />
+    <Content Include="Config\Generator\SqlScript\Configviplevel.sql" />
+    <Content Include="Config\Generator\SqlScript\ConfigVipPackage.sql" />
+    <Content Include="Config\Generator\SqlScript\Config_EquipmentPrecisionCasting.sql" />
+    <Content Include="Config\Generator\SqlScript\Config_EquipmentUpgrade.sql" />
+    <Content Include="Config\Generator\SqlScript\Config_OlympicTheGoldMedal.sql" />
+    <Content Include="Config\Generator\SqlScript\CSDKisRegist.sql" />
+    <Content Include="Config\Generator\SqlScript\DicActivity.sql" />
+    <Content Include="Config\Generator\SqlScript\DicActivityPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\DicActivityStep.sql" />
+    <Content Include="Config\Generator\SqlScript\DicArenaBagConfig.sql" />
+    <Content Include="Config\Generator\SqlScript\DicBallsoul.sql" />
+    <Content Include="Config\Generator\SqlScript\DicBuff.sql" />
+    <Content Include="Config\Generator\SqlScript\Diccardlibrary.sql" />
+    <Content Include="Config\Generator\SqlScript\DicClubSkill.sql" />
+    <Content Include="Config\Generator\SqlScript\DicCrossLadderExchange.sql" />
+    <Content Include="Config\Generator\SqlScript\DicCrossLadderPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\DicEquipment.sql" />
+    <Content Include="Config\Generator\SqlScript\DicEquipmentSuit.sql" />
+    <Content Include="Config\Generator\SqlScript\DicFormation.sql" />
+    <Content Include="Config\Generator\SqlScript\DicFormationdetail.sql" />
+    <Content Include="Config\Generator\SqlScript\DicFormationPoint.sql" />
+    <Content Include="Config\Generator\SqlScript\DicGrow.sql" />
+    <Content Include="Config\Generator\SqlScript\DicGuildSkill.sql" />
+    <Content Include="Config\Generator\SqlScript\DicItem.sql" />
+    <Content Include="Config\Generator\SqlScript\DicItemtype.sql" />
+    <Content Include="Config\Generator\SqlScript\DicLadderExchange.sql" />
+    <Content Include="Config\Generator\SqlScript\DicLadderPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\DicLeagueExchange.sql" />
+    <Content Include="Config\Generator\SqlScript\DicMail.sql" />
+    <Content Include="Config\Generator\SqlScript\Dicmallitem.sql" />
+    <Content Include="Config\Generator\SqlScript\DicManagerTalent.sql" />
+    <Content Include="Config\Generator\SqlScript\DicManagerTalentTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicManagerWill.sql" />
+    <Content Include="Config\Generator\SqlScript\DicManagerWillPartTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicManagerWillTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicNameprefix.sql" />
+    <Content Include="Config\Generator\SqlScript\DicNamesuffix.sql" />
+    <Content Include="Config\Generator\SqlScript\DicNewPlayerPack.sql" />
+    <Content Include="Config\Generator\SqlScript\DicNpc.sql" />
+    <Content Include="Config\Generator\SqlScript\DicPlayer.sql" />
+    <Content Include="Config\Generator\SqlScript\DicPlayercarddec.sql" />
+    <Content Include="Config\Generator\SqlScript\DicPlayerlink.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSkill.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSKillBuffMatch.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSkillcard.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSkillCardTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSkillstree.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSkillsTreeDesDic.sql" />
+    <Content Include="Config\Generator\SqlScript\DicStarArousalSkills.sql" />
+    <Content Include="Config\Generator\SqlScript\DicStarSkillLevelTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicStarskills.sql" />
+    <Content Include="Config\Generator\SqlScript\DicStarSkillTips.sql" />
+    <Content Include="Config\Generator\SqlScript\DicSyntheticItem.sql" />
+    <Content Include="Config\Generator\SqlScript\Dic_GiftPack.sql" />
+    <Content Include="Config\Generator\SqlScript\Dic_GiftPackPrize.sql" />
+    <Content Include="Config\Generator\SqlScript\TemplateGiants.sql" />
+    <Content Include="Config\Generator\SqlScript\TemplateRegister.sql" />
+    <Content Include="Config\Generator\SqlScript\TemplateRegisterplayer.sql" />
+    <Content Include="NBall\Generator\SqlScript\A8csdk.sql" />
+    <Content Include="NBall\Generator\SqlScript\A8csdkStartGame.sql" />
+    <Content Include="NBall\Generator\SqlScript\A8csdkState.sql" />
+    <Content Include="NBall\Generator\SqlScript\AchievementManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExCountRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExHistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExItemRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExPrizeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExRank.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityExSendLog.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityHistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityPrizeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ActivityRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\AMoveDataToServeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ArenaExChangeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ArenaShop.sql" />
+    <Content Include="NBall\Generator\SqlScript\ArenaTeammember.sql" />
+    <Content Include="NBall\Generator\SqlScript\CoachManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\ConstellationPackage.sql" />
+    <Content Include="NBall\Generator\SqlScript\DailyAttendanceManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\Dailycupcompetitors.sql" />
+    <Content Include="NBall\Generator\SqlScript\Dailycupgamble.sql" />
+    <Content Include="NBall\Generator\SqlScript\Dailycupinfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\Dailycupmatch.sql" />
+    <Content Include="NBall\Generator\SqlScript\EuropeGamble.sql" />
+    <Content Include="NBall\Generator\SqlScript\EuropeGambleRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\EuropeMatch.sql" />
+    <Content Include="NBall\Generator\SqlScript\EuropeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\EuropeSeason.sql" />
+    <Content Include="NBall\Generator\SqlScript\EveryDayActivityPrize.sql" />
+    <Content Include="NBall\Generator\SqlScript\FriendInvite.sql" />
+    <Content Include="NBall\Generator\SqlScript\FriendInvitePrizeRecord_PrizeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\FriendManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\FriendMatch.sql" />
+    <Content Include="NBall\Generator\SqlScript\FriendOpenBoxRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleDetail.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleHost.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleHostOptionRate.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleOption.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleRank.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleRankRewardLog.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleSeason.sql" />
+    <Content Include="NBall\Generator\SqlScript\GambleTitle.sql" />
+    <Content Include="NBall\Generator\SqlScript\GoldBarRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\GuildList.sql" />
+    <Content Include="NBall\Generator\SqlScript\InformationPopup.sql" />
+    <Content Include="NBall\Generator\SqlScript\InvestManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\ItemPackage.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderDayPrize.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderExchangeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderHonorRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderHook.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderManagerHistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderMatch.sql" />
+    <Content Include="NBall\Generator\SqlScript\LadderSeason.sql" />
+    <Content Include="NBall\Generator\SqlScript\LaegueManagerInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueEncounter.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueExchangeRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueFightMap.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueManagerRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueNpcManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueRank.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\LeagueWincountRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\MailInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\MailShareInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\MallExtrarecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\Mallsalerecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerChargeNumber.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerMonthCard.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerSkillLib.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerSkillNew.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerSkillUse.sql" />
+    <Content Include="NBall\Generator\SqlScript\ManagerSkillWillSrc.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerBuffMember.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBManagerBuffPool.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBManagerCommonPackage.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerextra.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerHonor.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBManagerMatchAchievement.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerskillask.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerskillaskrecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerskillbag.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbManagerskillmixrecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBManagerTree.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBManagerVipPackage.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbMatchstat.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbSolution.sql" />
+    <Content Include="NBall\Generator\SqlScript\NbUser.sql" />
+    <Content Include="NBall\Generator\SqlScript\NBUserreg.sql" />
+    <Content Include="NBall\Generator\SqlScript\OlympicManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\OlympicRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\NB_ManagerShare.sql" />
+    <Content Include="NBall\Generator\SqlScript\Onlineinfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\OnlineLockManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\PayChargehistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\PayConsumehistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\PayContinuing.sql" />
+    <Content Include="NBall\Generator\SqlScript\PayUser.sql" />
+    <Content Include="NBall\Generator\SqlScript\PenaltyKickManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\PenaltyKickSeason.sql" />
+    <Content Include="NBall\Generator\SqlScript\PlayerKillInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\PlayerKillMatch.sql" />
+    <Content Include="NBall\Generator\SqlScript\PlayerKillRevenge.sql" />
+    <Content Include="NBall\Generator\SqlScript\RankingLadderYesterday.sql" />
+    <Content Include="NBall\Generator\SqlScript\RankingYesterday.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationChallengeRevord.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationCheckpoint.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationDraw.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationHistoryOfTheGap.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationHook.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationMain.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationMyHistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationMyHistoryOfTheGap.sql" />
+    <Content Include="NBall\Generator\SqlScript\RevelationShop.sql" />
+    <Content Include="NBall\Generator\SqlScript\ScoutingGoldBar.sql" />
+    <Content Include="NBall\Generator\SqlScript\ScoutingManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\Scoutingrecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\ScoutingRecordForDays.sql" />
+    <Content Include="NBall\Generator\SqlScript\ShareManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\TaskDailyhistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\TaskDailyrecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\TaskHistory.sql" />
+    <Content Include="NBall\Generator\SqlScript\TaskPending.sql" />
+    <Content Include="NBall\Generator\SqlScript\TaskRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\Teammember.sql" />
+    <Content Include="NBall\Generator\SqlScript\TeammemberGrow.sql" />
+    <Content Include="NBall\Generator\SqlScript\TeammemberTrain.sql" />
+    <Content Include="NBall\Generator\SqlScript\TemplateRegisterplayer.sql" />
+    <Content Include="NBall\Generator\SqlScript\TurntableLuckyRecord.sql" />
+    <Content Include="NBall\Generator\SqlScript\TurntableManager.sql" />
+    <Content Include="NBall\Generator\SqlScript\TxLoginInfo.sql" />
+    <Content Include="NBall\Generator\SqlScript\TxYellowvip.sql" />
+    <Content Include="NBall\Generator\SqlScript\VipManager.sql" />
+    <Content Include="Support\Generator\SqlScript\ActivityExCrossRank.sql" />
+    <Content Include="Support\Generator\SqlScript\ActivityExZone.sql" />
+    <Content Include="Process\Generator\SqlScript\Matchprocess.sql" />
+    <Content Include="Support\Generator\SqlScript\Announcement.sql" />
+    <Content Include="Support\Generator\SqlScript\ArenaManagerInfo.sql" />
+    <Content Include="Support\Generator\SqlScript\ArenaManagerRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\ArenaSeason.sql" />
+    <Content Include="Support\Generator\SqlScript\ArenaSeasonInfo.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossActivityMain.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossActivityRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdInfo.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdManager.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdManagerHistory.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdMatch.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdMaxKillerRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdPairRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossCrowdPrizeRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderExchangeRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderHonorRecord.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderHook.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderInfo.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderManager.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderManagerDailyHistory.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderManagerHistory.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderMatch.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossLadderSeason.sql" />
+    <Content Include="Support\Generator\SqlScript\CrossRobotManager.sql" />
+    <Content Include="Support\Generator\SqlScript\EuropeMatch.sql" />
+    <Content Include="Support\Generator\SqlScript\Exchangeinfo.sql" />
+    <Content Include="Support\Generator\SqlScript\GmLog.sql" />
+    <Content Include="Support\Generator\SqlScript\MonitorDailyEvent.sql" />
+    <Content Include="Support\Generator\SqlScript\MonitorSchedule.sql" />
+    <Content Include="Support\Generator\SqlScript\StatisticClick.sql" />
+    <Content Include="Support\Generator\SqlScript\Statisticdetail.sql" />
+    <Content Include="Support\Generator\SqlScript\Statisticinfo.sql" />
+    <Content Include="Support\Generator\SqlScript\Statistickpi.sql" />
+    <Content Include="Support\Generator\SqlScript\Statisticonline.sql" />
+    <Content Include="Support\Generator\SqlScript\TemplateActivityEx.sql" />
+    <Content Include="Support\Generator\SqlScript\TemplateActivityExDetail.sql" />
+    <Content Include="Support\Generator\SqlScript\TemplateActivityExGroup.sql" />
+    <Content Include="Support\Generator\SqlScript\TemplateActivityExPrize.sql" />
+    <Content Include="Support\Generator\SqlScript\TransferDropOut.sql" />
+    <Content Include="Support\Generator\SqlScript\TransferMain.sql" />
+    <Content Include="Support\Generator\SqlScript\UserLoginZone.sql" />
+    <Content Include="Support\Generator\SqlScript\ZoneDailyEventTime.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

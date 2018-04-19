@@ -1,0 +1,23 @@
+﻿<Window x:Class="Games.NBall.WpfEmulator.Component.Forms.ChargeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:win="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="充值" Height="180" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="点券：" VerticalAlignment="Center" Margin="50,0,0,0"></Label>
+        <TextBox x:Name="txtPoint" Height="25" Width="120" HorizontalAlignment="Left" Style="{DynamicResource SimpleTextBox}" Margin="96,0,0,0"/>
+        <Label Content="日期：" VerticalAlignment="Center" Margin="50,0,0,0" Grid.Row="1"></Label>
+
+        <DatePicker x:Name="dpChargeDate" Grid.Row="1" Width="160" Height="25" HorizontalAlignment="Left" Margin="96,8,0,8" SelectedDateFormat="Long"></DatePicker>
+        <Button x:Name="btnChargeTest" Content="连续充值" Grid.Row="2" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnChargeTest_Click" Margin="62,0,0,0" HorizontalAlignment="Left"></Button>
+        
+        <Button x:Name="btnClose" Content="关闭" Grid.Row="2" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnClose_Click" Margin="0,0,62,0" HorizontalAlignment="Right"></Button>
+        <Button x:Name="btnCharge" Content="正常充值" Grid.Row="3" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnCharge_Click" Margin="62,0,0,0" HorizontalAlignment="Left"></Button>
+    </Grid>
+</Window>

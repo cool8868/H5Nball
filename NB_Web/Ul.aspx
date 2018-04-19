@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ul.aspx.cs" Inherits="Games.NBall.NB_Web.Ul" %>

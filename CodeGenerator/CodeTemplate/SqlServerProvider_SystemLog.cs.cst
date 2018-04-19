@@ -1,0 +1,347 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate" Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text.RegularExpressions" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+<% string []SingleRowReaderCommands=SingleRowReaderCommandNames.Split(',');
+    string []MultiRowReaderCommands=MultiRowReaderCommandNames.Split(',');
+    string []ScalarCommands=ScalarCommandNames.Split(',');
+    string []NoQueryCommands=NoQueryCommandNames.Split(',');
+ %>
+
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using <%=Namespace.Trim()%>.Entity;
+using <%=Namespace.Trim()%>.Entity.Enums;
+
+namespace <%=Namespace.Trim()%>.Dal
+{
+    
+    public partial class <%=GetClassName(SourceTable.Name)%>Provider
+    {
+        #region properties
+
+        private const EnumDbType DBTYPE = EnumDbType.SystemLog;
+
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        protected string ConnectionString = "";
+        #endregion 
+        
+        #region Helper Functions
+        
+        #region LoadSingleRow
+		/// <summary>
+		/// 将IDataReader的当前记录读取到<%=GetClassName(SourceTable.Name)%>Entity 对象
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <returns></returns>
+		public <%=GetClassName(SourceTable.Name)%>Entity LoadSingleRow(IDataReader reader)
+		{
+			var obj = new <%=GetClassName(SourceTable.Name)%>Entity();
+			
+            <%{int i =0;%>
+			<% foreach (ColumnSchema col in SourceTable.Columns) { %>
+            obj.<%=col.Name%> = (<%=GetFixedSystemType(col)%>) reader["<%=col.Name%>"];
+			<% } }%>
+		
+			return obj;
+		}
+		#endregion
+        
+        #region LoadRows
+        /// <summary>
+        /// 将IDataReader的记录读取到PostEntity 列表
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public List<<%=GetClassName(SourceTable.Name)%>Entity> LoadRows(IDataReader reader)
+        {
+            var clt = new List<<%=GetClassName(SourceTable.Name)%>Entity>();
+            while (reader.Read())
+            {
+                clt.Add(LoadSingleRow(reader));
+            }
+            return clt;
+        }
+        #endregion
+        
+        #endregion
+        
+        #region 构造函数
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public <%=GetClassName(SourceTable.Name)%>Provider()
+        {
+            this.ConnectionString = ConnectionFactory.Instance.GetConnectionString(DBTYPE);
+        }
+
+        public <%=GetClassName(SourceTable.Name)%>Provider(string zoneName)
+        {
+            this.ConnectionString = ConnectionFactory.Instance.GetConnectionString(zoneName,DBTYPE);
+        }
+        #endregion
+         
+		<%foreach(string cmdName in SingleRowReaderCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+		/// <summary>
+        /// <%=GetFuncName(cmd.Name)%>
+        /// </summary>
+<%=DalCodeGen.GetProcCallFuncSummary(cmd)%>
+        /// <returns><%=GetClassName(SourceTable.Name)%>Entity</returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public <%=GetClassName(SourceTable.Name)%>Entity <%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+			var database = new SqlDatabase(this.ConnectionString);
+            
+            DbCommand commandWrapper = database.GetStoredProcCommand("<%=cmd.Name%>");
+            <%=DalCodeGen.GetCallProcMakeParamStr(cmd)%>
+            
+            <%=GetClassName(SourceTable.Name)%>Entity obj=null;
+            using (IDataReader reader = database.ExecuteReader(commandWrapper))
+            {
+                if(reader.Read())
+                {
+                    
+            
+                    obj = LoadSingleRow(reader);
+                }
+            }
+            <% foreach (ParameterSchema parameter in cmd.AllOutputParameters) {%>
+                    <%=DalCodeGen.GetParamName(parameter)%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+                    <%}%>
+            return obj;
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+		<%foreach(string cmdName in MultiRowReaderCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+		/// <summary>
+        /// <%=GetFuncName(cmd.Name)%>
+        /// </summary>
+        /// <returns><%=GetClassName(SourceTable.Name)%>Entity列表</returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public List<<%=GetClassName(SourceTable.Name)%>Entity> <%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+			var database = new SqlDatabase(this.ConnectionString);
+            
+            DbCommand commandWrapper = database.GetStoredProcCommand("<%=cmd.Name%>");
+            <%=DalCodeGen.GetCallProcMakeParamStr(cmd)%>
+            
+            List<<%=GetClassName(SourceTable.Name)%>Entity> list = null;
+            using (IDataReader reader = database.ExecuteReader(commandWrapper))
+            {
+                list = LoadRows(reader);
+            }
+            <% foreach (ParameterSchema parameter in cmd.AllOutputParameters) {%>
+                <%=DalCodeGen.GetParamName(parameter)%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+                <%}%>
+                
+            return list;
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+		<%foreach(string cmdName in ScalarCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+		/// <summary>
+        /// <%=GetFuncName(cmd.Name)%>
+        /// </summary>
+<%=DalCodeGen.GetProcCallFuncSummary(cmd)%>
+        /// <returns><%=cmd.CommandResults[0].Columns[0].SystemType.Name%></returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public <%=cmd.CommandResults[0].Columns[0].SystemType.Name%> <%=GetFuncName(cmd.Name)%> (<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+            var database = new SqlDatabase(this.ConnectionString);
+            
+            DbCommand commandWrapper = database.GetStoredProcCommand("<%=cmd.Name%>");
+            <%=DalCodeGen.GetCallProcMakeParamStr(cmd)%>
+            
+            
+            <%=cmd.CommandResults[0].Columns[0].SystemType.Name%> rValue = (<%=cmd.CommandResults[0].Columns[0].SystemType.Name%>)database.ExecuteScalar(commandWrapper);
+            
+            <% foreach (ParameterSchema parameter in cmd.AllOutputParameters) {%>
+            <%=DalCodeGen.GetParamName(parameter)%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+            <%}%>
+
+            return rValue;
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+		<%foreach(string cmdName in NoQueryCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+		/// <summary>
+        /// <%=GetFuncName(cmd.Name)%>
+        /// </summary>
+<%=DalCodeGen.GetProcCallFuncSummary(cmd)%>
+        /// <returns>int 影响的数据行数</returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public bool <%=GetFuncName(cmd.Name)%> (<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%><%if(!string.IsNullOrEmpty(DalCodeGen.GetProcCallFuncParamDeclare(cmd))){%>,<%}%>DbTransaction trans=null)
+        {
+            var database = new SqlDatabase(this.ConnectionString);
+            
+            DbCommand commandWrapper = database.GetStoredProcCommand("<%=cmd.Name%>");
+            <%=DalCodeGen.GetCallProcMakeParamStr(cmd)%>
+            
+            
+            int rValue = 0;
+            if(trans!=null)
+            {
+                rValue = (int)database.ExecuteNonQuery(commandWrapper,trans);
+            }
+            else
+            {
+                rValue = (int)database.ExecuteNonQuery(commandWrapper);
+            }
+
+            <% foreach (ParameterSchema parameter in cmd.AllOutputParameters) {%>
+            <%=DalCodeGen.GetParamName(parameter)%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+            <%}%>
+            
+            return Convert.ToBoolean(rValue);
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+		#region Insert
+		
+        /// <summary>
+        /// Insert
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="trans">The trans.</param>
+        /// <returns></returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public bool Insert(<%=GetClassName(SourceTable.Name)%>Entity entity)
+        {
+            return Insert(entity,null);
+        }
+        
+		/// <summary>
+        /// 带事务Insert
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="trans">The trans.</param>
+        /// <returns></returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public bool Insert(<%=GetClassName(SourceTable.Name)%>Entity entity,DbTransaction trans)
+        {
+            var database = new SqlDatabase(this.ConnectionString);
+            DbCommand commandWrapper = database.GetStoredProcCommand("dbo.P_<%=GetClassName(SourceTable.Name,"2")%>_Insert");
+                        
+            <%{%>
+            <%CommandSchema cmdTemp = SourceTable.Database.Commands[string.Format("P_{0}_Insert",GetClassName(SourceTable.Name,"2"))];%>
+            <%=DalCodeGen.GetCallProcMakeEntityParamStr(cmdTemp)%>
+            <%}%>
+            int results = 0;
+
+            if(trans!=null)
+            {
+                results = database.ExecuteNonQuery(commandWrapper,trans);
+            }
+            else
+            {
+                results = database.ExecuteNonQuery(commandWrapper);
+            }
+            
+            <%{%>
+            <%CommandSchema cmdTemp = SourceTable.Database.Commands[string.Format("P_{0}_Insert",GetClassName(SourceTable.Name,"2"))];%>
+            <% foreach (ParameterSchema parameter in cmdTemp.AllOutputParameters) {%>
+            entity.<%=parameter.Name.TrimStart('@')%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+            <%}}%>
+            
+            return Convert.ToBoolean(results);		
+        }
+		
+		#endregion
+		
+		#region Update
+		
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public bool Update(<%=GetClassName(SourceTable.Name)%>Entity entity)
+        {
+            return Update(entity,null);
+        }
+            
+		/// <summary>
+        /// 带事务的Update
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="trans">The trans.</param>
+        /// <returns></returns>
+        /// <remarks><%= DateTime.Now %></remarks>
+        public bool Update(<%=GetClassName(SourceTable.Name)%>Entity entity,DbTransaction trans)
+        {
+            var database = new SqlDatabase(this.ConnectionString);
+            DbCommand commandWrapper = database.GetStoredProcCommand("dbo.P_<%=GetClassName(SourceTable.Name,"2")%>_Update");
+	    <%{%>
+            <%CommandSchema cmdTemp = SourceTable.Database.Commands[string.Format("P_{0}_Update",GetClassName(SourceTable.Name,"2"))];%>
+            <%=DalCodeGen.GetCallProcMakeEntityParamStr(cmdTemp)%>
+            <%}%>
+            
+            int results = 0;
+
+            if(trans!=null)
+            {
+                results = database.ExecuteNonQuery(commandWrapper,trans);
+            }
+            else
+            {
+                results = database.ExecuteNonQuery(commandWrapper);
+            }
+
+	    <%{%>
+            <%CommandSchema cmdTemp = SourceTable.Database.Commands[string.Format("P_{0}_Insert",GetClassName(SourceTable.Name,"2"))];%>
+            <% foreach (ParameterSchema parameter in cmdTemp.AllOutputParameters) {%>
+            entity.<%=parameter.Name.TrimStart('@')%>=(<%=parameter.SystemType%>)database.GetParameterValue(commandWrapper, "<%=parameter.Name%>");
+            <%}}%>
+            
+            return Convert.ToBoolean(results);		
+        }
+		
+		#endregion
+        
+	}
+}
+
+<script runat="template">
+
+</script>

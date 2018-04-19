@@ -1,0 +1,13 @@
+﻿<Window x:Class="Games.NBall.WpfEmulator.Tools.CalHashcodeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="200" Width="384"
+        Title="工具-计算所属分表" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
+
+    <Canvas>
+        <Label Content="Guid：" Canvas.Left="10" Canvas.Top="33"></Label>
+        <TextBox x:Name="txtGuid" Text="" Width="312" Canvas.Left="56" Canvas.Top="33" Style="{DynamicResource SimpleTextBox}"></TextBox>
+        <Label x:Name="lblResult" Content="结果：" Canvas.Left="56" Canvas.Top="64"></Label>
+        <Button x:Name="btnCalHashcode" Content="计算" Width="74" Height="25" Canvas.Left="160" Canvas.Top="112" Click="btnCalHashcode_Click"></Button>
+    </Canvas>
+
+</Window>

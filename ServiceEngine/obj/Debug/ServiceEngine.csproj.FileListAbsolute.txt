@@ -1,0 +1,14 @@
+D:\H5Nball\ServiceEngine\bin\Debug\component.config
+D:\H5Nball\ServiceEngine\bin\Debug\Games.NBall.ServiceEngine.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Games.NBall.ServiceEngine.pdb
+D:\H5Nball\ServiceEngine\bin\Debug\Castle.Core.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Castle.Windsor.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Enyim.Caching.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Games.NBall.Common.dll
+D:\H5Nball\ServiceEngine\bin\Debug\log4net.dll
+D:\H5Nball\ServiceEngine\bin\Debug\protobuf-net.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Newtonsoft.Json.dll
+D:\H5Nball\ServiceEngine\bin\Debug\Games.NBall.Common.pdb
+D:\H5Nball\ServiceEngine\obj\Debug\ServiceEngine.csprojResolveAssemblyReference.cache
+D:\H5Nball\ServiceEngine\obj\Debug\Games.NBall.ServiceEngine.dll
+D:\H5Nball\ServiceEngine\obj\Debug\Games.NBall.ServiceEngine.pdb

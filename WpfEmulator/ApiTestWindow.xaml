@@ -1,0 +1,131 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Component="clr-namespace:Games.NBall.WpfEmulator.Component" xmlns:UserControls="clr-namespace:Games.NBall.WpfEmulator.Component.UserControls" x:Class="WpfEmulator.ApiTestWindow"
+        Height="790" Width="1300" Icon="Images\app.ico"
+    Title="测试" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded_1" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
+    <Canvas Margin="0,0,0,0">
+        <Canvas x:Name="CanvasMain" Height="762" Width="1290" Background="LightGray" Margin="0,0,0,0">
+            <Grid Canvas.Left="0" Canvas.Top="25" Width="190" Height="130"  Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <UserControls:LogoUserControl x:Name="logoUserControl1" Height="60" Width="60" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"/>
+                <Label x:Name="lblManagerVip" Content="Vip1" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" ></Label>
+                
+                <Label x:Name="lblManagerLevel" Content="Lv1" Grid.Column="0" Grid.Row="0" Margin="5,0,0,0" Foreground="Teal"></Label>
+                <Label x:Name="lblManagerName" Content="name"  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Center" Margin="40,0,0,0"></Label>
+                <Label x:Name="lblManagerExp" Content="经验 100/100" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"></Label>
+                <Label x:Name="lblManagerStamina" Content="体力 100/100" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"></Label>
+                <Label x:Name="lblManagerStaminaResume" Content="体力恢复" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"></Label>
+                <Label x:Name="lblManagerPoint" Content="点券 100" Grid.Column="1" Grid.Row="4" Margin="5,0,0,0"></Label>
+                <Label x:Name="lblManagerMoney" Content="金币 100" Grid.Column="1"  Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,5,0"></Label>
+
+            </Grid>
+            <Canvas Canvas.Left="195" Canvas.Top="25" Width="1085" Height="54" Background="White">
+                <Label Content="消息编号:" Canvas.Left="10" Canvas.Top="5"></Label>
+                <TextBox x:Name="txtMessageCode" Style="{DynamicResource SimpleTextBox}" Width="107" Canvas.Left="76" Canvas.Top="5"></TextBox>
+                <Button x:Name="btnGetMessage" Content="获取" Style="{DynamicResource SimpleButton}" Width="60" Height="25" Canvas.Left="188" Canvas.Top="5" Click="btnGetMessage_Click"></Button>
+                <Label Content="消息内容:" Canvas.Left="10" Canvas.Top="28"></Label>
+                <Label x:Name="lblMessageDes" Content="" Canvas.Left="76" Canvas.Top="28" Foreground="Green"></Label>
+                <Label Content="服务器时间:" Canvas.Left="618" Canvas.Top="28"></Label>
+                <Label x:Name="lblServerTime" Content="" Canvas.Left="908" Canvas.Top="28" Background="DarkKhaki" Width="142"></Label>
+                <Label x:Name="lblServerTimeTick" Content="" Canvas.Left="714" Canvas.Top="28" Background="DarkKhaki" Width="142"></Label>
+                <Button x:Name="btnCharge" Content="充值"  Height="25" Width="60" Canvas.Left="943" Canvas.Top="4" Style="{DynamicResource SimpleButton}" Click="btnCharge_Click"></Button>
+                <Button x:Name="btnLogout" Content="注销" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnLogout_Click" Canvas.Left="1015" Canvas.Top="4"/>
+            </Canvas>
+            
+                <Component:LeftTreeUserControl x:Name="LeftTreeUserControl1" Canvas.Top="160" Height="592" Width="190" />
+                <TabControl x:Name="TabMain" Grid.Row="0" Grid.Column="1" Canvas.Left="195" Canvas.Top="84" Height="668" Width="1085" >
+                    <TabItem  Header="Main" x:Name="TabItemMain">
+                        <Grid x:Name="GridTabMain">
+                        </Grid>
+                    </TabItem>
+                    <TabItem  Header="Response" x:Name="TabItemResponse">
+                        <Component:ResponseLogUserControl x:Name="ResponseLogUserControl1" Canvas.Left="5" Canvas.Top="0"/>
+                    </TabItem>
+                    
+                </TabControl>
+        </Canvas>
+        <Grid x:Name="GridLogin" Visibility="Hidden" Canvas.Top="240" Canvas.Left="490" Height="163" Width="300" >
+            <Rectangle Stroke="Gray" Width="300" Height="163"></Rectangle>
+            <Rectangle Height="30" Width="296" Fill="LightGray" Margin="1,0,0,130" ></Rectangle>
+            <Label Content="用户名：" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtLoginAccount" HorizontalAlignment="Left" Height="23" Margin="73,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Style="{DynamicResource SimpleTextBox}"/>
+            <Button x:Name="btnLogin" Cursor="Hand" Content="登录" HorizontalAlignment="Left" Margin="112,126,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click" />
+            <Label Content="请输入用户名!" x:Name="lblLoginMessage" Foreground="Red" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
+           
+            <Label Content="登录" HorizontalAlignment="Center" Margin="0,0,0,131" />
+        </Grid>
+        <Grid x:Name="GridRegister" Visibility="Visible" Canvas.Top="240" Canvas.Left="490" Height="200" Width="300" >
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="15"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle Stroke="Gray" Width="300" Height="200" Grid.ColumnSpan="4" Grid.RowSpan="7"></Rectangle>
+            <Rectangle Height="30" Width="296" Fill="LightGray" Margin="1,0,0,167" Grid.ColumnSpan="4" Grid.RowSpan="6"></Rectangle>
+            <Label Content="经理名：" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"></Label>
+            <TextBox x:Name="txtRegisterName" Grid.Column="2" Grid.Row="1" Style="{ DynamicResource SimpleTextBox}" Height="25"></TextBox>
+            <Label Content="赛区：" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right"></Label>
+            <ComboBox x:Name="cmbRegisterArea" Grid.Column="2" Grid.Row="2" Height="25">
+                <ComboBoxItem Content="1" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="2"></ComboBoxItem>
+                <ComboBoxItem Content="3"></ComboBoxItem>
+            </ComboBox>
+            <Label Content="Logo：" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right"></Label>
+            <ComboBox x:Name="cmbRegisterLogo" Grid.Column="2" Grid.Row="3" Height="25">
+                <ComboBoxItem Content="1" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="2"></ComboBoxItem>
+                <ComboBoxItem Content="3"></ComboBoxItem>
+                <ComboBoxItem Content="4"></ComboBoxItem>
+                <ComboBoxItem Content="5"></ComboBoxItem>
+                <ComboBoxItem Content="6"></ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="btnRegister" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Width="80" Content="确定" Style="{ DynamicResource SimpleButton}" Click="btnRegister_Click"></Button>
+            
+            <Label Content="注册" HorizontalAlignment="Center" Grid.ColumnSpan="4" Margin="0,0,0,38"/>
+        </Grid>
+        <Menu x:Name="MenuMain" VerticalAlignment="Top" Height="22" Width="1290" Canvas.Top="0" Style="{DynamicResource SimpleMenu}" Cursor="Hand">
+            <MenuItem Header="_File" Height="22" VerticalAlignment="Top">
+                <MenuItem Header="_刷新经理信息" x:Name="MenuItemRefreshManager" Click="MenuItemRefreshManager_Click" />
+                
+                <MenuItem Header="_Exit" x:Name="MenuItemExit" Click="MenuItemExit_Click" />
+
+            </MenuItem>
+            <MenuItem Header="_工具">
+                <MenuItem Header="_预创建经理" x:Name="MenuItemCreateBot" Click="MenuItemCreateBot_OnClick"></MenuItem>
+                <MenuItem Header="_注册Bot" x:Name="MenuItemRegisterBot" Click="MenuItemRegisterBot_OnClick"></MenuItem>
+                <MenuItem Header="_计算HashCode" x:Name="MenuItemHashCode" Click="MenuItemHashCode_Click" />
+                <MenuItem Header="_生成阵容模板" x:Name="MenuItemTemplate" Click="MenuItemTemplate_Click" />
+                <MenuItem Header="_重建NPC数据" x:Name="MenuItemRebuildNpc" Click="MenuItemRebuildNpc_Click" />
+                <MenuItem Header="_检查NPC数据" x:Name="MenuItemCheckNpc" Click="MenuItemCheckNpc_Click" />
+            </MenuItem>
+            <MenuItem Header="_导出数据" x:Name="MenuItemExport" Click="MenuItemExport_OnClick"></MenuItem>
+            <MenuItem Header="_导入数据" x:Name="MenuItemImport" Click="MenuItemImport_OnClick"></MenuItem>
+            <MenuItem Header="_Json格式化" x:Name="MenuItemJson" Click="MenuItemJson_OnClick"></MenuItem>
+            <MenuItem Header="线上比赛测试" Name="MenuItemOnlineMatch" Click="MenuItemOnlineMatch_Click"></MenuItem>
+            <MenuItem Header="生成AS文件" Name="MenuItemGenerateASFile" Click="MenuItemGenerateASFile_Click"></MenuItem>
+        </Menu>
+
+    </Canvas>
+</Window>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ItemShadowDataSet" targetNamespace="http://tempuri.org/ItemShadowDataSet.xsd" xmlns:mstns="http://tempuri.org/ItemShadowDataSet.xsd" xmlns="http://tempuri.org/ItemShadowDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NB_ShadowConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NB_ShadowConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Games.NBall.Dal.Properties.Settings.GlobalReference.Default.NB_ShadowConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ItemShadowDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ItemShadowDataSet" msprop:Generator_UserDSName="ItemShadowDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Item" msprop:Generator_TableClassName="ItemDataTable" msprop:Generator_TableVarName="tableItem" msprop:Generator_TablePropName="Item" msprop:Generator_RowDeletingName="ItemRowDeleting" msprop:Generator_RowChangingName="ItemRowChanging" msprop:Generator_RowEvHandlerName="ItemRowChangeEventHandler" msprop:Generator_RowDeletedName="ItemRowDeleted" msprop:Generator_UserTableName="Item" msprop:Generator_RowChangedName="ItemRowChanged" msprop:Generator_RowEvArgName="ItemRowChangeEvent" msprop:Generator_RowClassName="ItemRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Idx" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIdx" msprop:Generator_ColumnPropNameInRow="Idx" msprop:Generator_ColumnPropNameInTable="IdxColumn" msprop:Generator_UserColumnName="Idx" type="xs:long" />
+              <xs:element name="TransactionId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnTransactionId" msprop:Generator_ColumnPropNameInRow="TransactionId" msprop:Generator_ColumnPropNameInTable="TransactionIdColumn" msprop:Generator_UserColumnName="TransactionId" type="xs:string" />
+              <xs:element name="OperationType" msprop:Generator_ColumnVarNameInTable="columnOperationType" msprop:Generator_ColumnPropNameInRow="OperationType" msprop:Generator_ColumnPropNameInTable="OperationTypeColumn" msprop:Generator_UserColumnName="OperationType" type="xs:int" />
+              <xs:element name="ItemId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnItemId" msprop:Generator_ColumnPropNameInRow="ItemId" msprop:Generator_ColumnPropNameInTable="ItemIdColumn" msprop:Generator_UserColumnName="ItemId" type="xs:string" />
+              <xs:element name="ItemCode" msprop:Generator_ColumnVarNameInTable="columnItemCode" msprop:Generator_ColumnPropNameInRow="ItemCode" msprop:Generator_ColumnPropNameInTable="ItemCodeColumn" msprop:Generator_UserColumnName="ItemCode" type="xs:int" />
+              <xs:element name="ItemCount" msprop:Generator_ColumnVarNameInTable="columnItemCount" msprop:Generator_ColumnPropNameInRow="ItemCount" msprop:Generator_ColumnPropNameInTable="ItemCountColumn" msprop:Generator_UserColumnName="ItemCount" type="xs:int" />
+              <xs:element name="ItemType" msprop:Generator_ColumnVarNameInTable="columnItemType" msprop:Generator_ColumnPropNameInRow="ItemType" msprop:Generator_ColumnPropNameInTable="ItemTypeColumn" msprop:Generator_UserColumnName="ItemType" type="xs:int" />
+              <xs:element name="IsBinding" msprop:Generator_ColumnVarNameInTable="columnIsBinding" msprop:Generator_ColumnPropNameInRow="IsBinding" msprop:Generator_ColumnPropNameInTable="IsBindingColumn" msprop:Generator_UserColumnName="IsBinding" type="xs:boolean" />
+              <xs:element name="ItemProperty" msprop:Generator_ColumnVarNameInTable="columnItemProperty" msprop:Generator_ColumnPropNameInRow="ItemProperty" msprop:Generator_ColumnPropNameInTable="ItemPropertyColumn" msprop:Generator_UserColumnName="ItemProperty" type="xs:base64Binary" />
+              <xs:element name="GridIndex" msprop:Generator_ColumnVarNameInTable="columnGridIndex" msprop:Generator_ColumnPropNameInRow="GridIndex" msprop:Generator_ColumnPropNameInTable="GridIndexColumn" msprop:Generator_UserColumnName="GridIndex" type="xs:int" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Item" />
+      <xs:field xpath="mstns:Idx" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

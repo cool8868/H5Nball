@@ -1,0 +1,12 @@
+﻿<Window x:Class="Games.NBall.WpfEmulator.Tools.JsonFormatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:viewer="clr-namespace:EPocalipse.Json.Viewer;assembly=JsonViewer"
+        Title="Json格式化" Height="600" Width="800">
+    <Grid>
+        <WindowsFormsHost Grid.Column="1" Margin="2,0,0,0">
+            <viewer:JsonViewer x:Name="jsonViewer1" />
+        </WindowsFormsHost>
+    </Grid>
+</Window>

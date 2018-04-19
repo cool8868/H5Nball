@@ -1,0 +1,1973 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HTB.DevFx</name>
+    </assembly>
+    <members>
+        <member name="T:HTB.DevFx.Cache.Cacher">
+            <summary>
+            整个框架的缓存管理器
+            </summary>
+            <remarks>
+            与框架的配合配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;!--缓存管理模块--&gt;
+            					&lt;module name="cache" type="HTB.DevFx.Cache.Cacher" configName="cache" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            				
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+            <example>
+            下面的示例演示了以相对时间过期策略来缓存对象：
+            	<code>
+            		......
+            		string key = Guid.NewGuid().ToString();
+            		object cachingObject = new YourCachingObject();
+            		ICache cache = Cacher.GetCache("your cache instance name");
+            		cache.Add(key, cachingObject, new ExpirationCacheDependency(TimeSpan.FromSeconds(20)));
+            		......
+            	</code>
+            </example>
+        </member>
+        <member name="T:HTB.DevFx.Core.CoreModule">
+            <summary>
+            实现IModule的核心模块，建议所有的模块都从此类继承
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Core.IModule">
+            <summary>
+            框架模块接口
+            </summary>
+            <remarks>
+            模块如要嵌入到框架中，请按如下格式配置：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;module name="模块名称" type="实现模块接口的类型" configName="此模块实际的配置节名" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            IFramework实例将会对配置的模块进行初始化，调用<c>IModule.Init(IFramework, IConfigSetting)</c>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Core.IModule.Init(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Core.IModule.GetInstance">
+            <summary>
+            获取本模块的实例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.Core.IModule.Name">
+            <summary>
+            模块名
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Core.IModule.Setting">
+            <summary>
+            本模块的配置节
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreModule.#ctor">
+            <summary>
+            保护构造函数
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Core.CoreModule.name">
+            <summary>
+            模块名称（在配置文件中配置）
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Core.CoreModule.framework">
+            <summary>
+            IFramework的实例
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Core.CoreModule.moduleSetting">
+            <summary>
+            模块的配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Core.CoreModule.setting">
+            <summary>
+            模块实际指向的配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Core.CoreModule.initialized">
+            <summary>
+            是否已初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreModule.Initialized(System.Boolean)">
+            <summary>
+            模块是否被初始化
+            </summary>
+            <param name="throwOnError">如果没有初始化，是否抛出异常</param>
+            <returns>true/false</returns>
+            <remarks>
+            如果没有被初始化，则抛出异常 <see cref="T:HTB.DevFx.ExceptionManagement.BaseException"/>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreModule.OnInit(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreModule.Init(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreModule.GetInstance">
+            <summary>
+            获取本模块的实例（可以是单例模式也可以是多例模式），抽象方法
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.Core.CoreModule.Name">
+            <summary>
+            模块名
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Core.CoreModule.Setting">
+            <summary>
+            本模块的配置节
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Core.IFactory">
+            <summary>
+            工厂接口
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.IFactory.GetManager(System.Object[])">
+            <summary>
+            获取管理器
+            </summary>
+            <param name="parameters">初始化管理器需要的参数列表</param>
+            <returns>管理器</returns>
+        </member>
+        <member name="M:HTB.DevFx.Cache.Cacher.OnInit(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Cache.Cacher.GetInstance">
+            <summary>
+            获取本模块的事例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="M:HTB.DevFx.Cache.Cacher.GetCache(System.String)">
+            <summary>
+            获取已配置的缓存器
+            </summary>
+            <param name="cacheName">配置文件中配置的缓存器名称</param>
+            <returns>ICache的实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Cache.Cacher.GetCacheValue(System.String,System.String)">
+            <summary>
+            获取缓存项值
+            </summary>
+            <param name="cacheName">配置文件中配置的缓存器名称</param>
+            <param name="key">缓存项健值</param>
+            <returns>缓存项值，如果没有命中，则返回<c>null</c></returns>
+        </member>
+        <member name="M:HTB.DevFx.Cache.Cacher.GetCacheValue(System.String,System.String,System.Boolean)">
+            <summary>
+            获取缓存项值
+            </summary>
+            <param name="cacheName">配置文件中配置的缓存器名称</param>
+            <param name="key">缓存项健值</param>
+            <param name="throwOnError">如果有错误，是否抛出异常</param>
+            <returns>缓存项值，如果没有命中，则返回<c>null</c></returns>
+        </member>
+        <member name="P:HTB.DevFx.Cache.Cacher.Instance">
+            <summary>
+            缓存管理器的唯一实例（单件模式）
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.Configer">
+            <summary>
+            整个框架的配置管理器
+            </summary>
+            <remarks>
+            在应用程序中可以这么使用：<c>Configer.Setting["配置节名"]</c><br/>
+            建议在应用程序中不要直接使用此管理器，要获得应用程序自己的配置信息，请在框架配置文件中添加如下的节
+            	<code>
+            		&lt;framework&gt;
+            			&lt;modules&gt;
+            				......
+            				&lt;!--name表示应用程序模块的名称，linkNode表示配置节名称--&gt;
+            				&lt;module name="app" type="HTB.DevFx.Core.AppModule" linkNode="app" /&gt;
+            			&lt;/modules&gt;
+            		&lt;/framework&gt;
+            		......
+            		......
+            		&lt;!--下面就可以填入应用程序自己的配置信息--&gt;
+            		&lt;app&gt;
+            		&lt;/app&gt;
+            	</code>
+            在代码中要获得<c>&lt;app&gt;&lt;/app&gt;</c>这个配置信息，请使用如下代码：
+            	<code>
+            		......
+            		Framework.GetModule("app").Setting;
+            		......
+            	</code>
+            更具体的信息，请参看 <see cref="T:HTB.DevFx.Core.AppModule"/>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.Config.IConfigManager">
+            <summary>
+            配置管理器接口
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.IConfigManager.GetSetting(System.String)">
+            <summary>
+            获得配置节
+            </summary>
+            <param name="xpath">配置节的XPath，如果为<c>null</c>，则返回根配置节</param>
+            <returns><see cref="T:HTB.DevFx.Config.IConfigSetting"/></returns>
+        </member>
+        <member name="M:HTB.DevFx.Config.IConfigManager.Init(System.String,System.Boolean)">
+            <summary>
+            初始化，提供给框架调用，进行管理器的初始化工作，比如载入配置文件等等
+            </summary>
+            <param name="configFile">配置文件信息</param>
+            <param name="monitor">是否要监视此配置的变化</param>
+            <remarks>
+            参数<paramref name="monitor" />表示，监视配置文件变化，以更新配置信息
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.IConfigManager.Reset">
+            <summary>
+            重新载入相关配置信息
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.IConfigManager.Setting">
+            <summary>
+            此管理器所管理的配置节
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.Configer.HTB#DevFx#Config#IConfigManager#Reset">
+            <summary>
+            重新载入相关配置信息
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.Configer.HTB#DevFx#Config#IConfigManager#GetSetting(System.String)">
+            <summary>
+            获得配置节
+            </summary>
+            <param name="xpath">配置节的XPath，如果为<c>null</c>，则返回根配置节</param>
+            <returns><see cref="T:HTB.DevFx.Config.IConfigSetting"/></returns>
+        </member>
+        <member name="M:HTB.DevFx.Config.Configer.Init(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Config.Configer.GetInstance">
+            <summary>
+            获取本模块的事例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.Config.Configer.Current">
+            <summary>
+            Configer的唯一实例，提供给框架使用
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.ConfigManager">
+            <summary>
+            配置管理器的抽象实现
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile">配置文件信息</param>
+            <param name="monitor">是否要监视配置文件</param>
+        </member>
+        <member name="F:HTB.DevFx.Config.ConfigManager.configFile">
+            <summary>
+            配置文件信息
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Config.ConfigManager.monitor">
+            <summary>
+            是否要监视配置文件
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Config.ConfigManager.initialized">
+            <summary>
+            管理器是否已初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.OnInit(System.String,System.Boolean)">
+            <summary>
+            初始化
+            </summary>
+            <param name="configFile">配置文件信息</param>
+            <param name="monitor">是否要监视此配置的变化</param>
+            <remarks>
+            参数<paramref name="monitor" />表示，监视配置文件变化，以更新配置信息
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.Init(System.String,System.Boolean)">
+            <summary>
+            初始化，提供给框架调用，进行管理器的初始化工作，比如载入配置文件等等
+            </summary>
+            <param name="configFile">配置文件信息</param>
+            <param name="monitor">是否要监视此配置的变化</param>
+            <remarks>
+            参数<paramref name="monitor" />表示，监视配置文件变化，以更新配置信息
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.GetSetting(System.String)">
+            <summary>
+            获得配置节
+            </summary>
+            <param name="xpath">配置节的XPath，如果为<c>null</c>，则返回根配置节</param>
+            <returns><see cref="T:HTB.DevFx.Config.IConfigSetting"/></returns>
+        </member>
+        <member name="M:HTB.DevFx.Config.ConfigManager.Reset">
+            <summary>
+            重新载入相关配置信息
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.ConfigManager.Setting">
+            <summary>
+            此管理器所管理的配置
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.ConfigManagerCollection">
+            <summary>
+            配置管理器集合
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.ConfigSectionHandler">
+            <summary>
+            配置在<c>web.config</c>中，.NET需要的配置节处理器
+            </summary>
+            <remarks>
+            这个提供给配置内容存放的一种方式，就存放在与应用程序配置文件一起，例如<c>web.config，app.config</c><br />
+            按下面的方式添加：
+            	<code>
+            		&lt;configuration&gt;
+            			&lt;configSections&gt;
+            				&lt;section name="htb.devfx" type="HTB.DevFx.Config.ConfigSectionHandler, HTB.DevFx" /&gt;
+            			&lt;/configSections&gt;
+            			......
+            			
+            			&lt;htb.devfx&gt;
+            				&lt;framework&gt;
+            				......
+            				&lt;/framework&gt;
+            				......
+            			&lt;/htb.devfx&gt;
+            			
+            			......
+            		&lt;/configuration&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.Config.DevFxConfigAttribute">
+            <summary>
+            配置元属性
+            </summary>
+            <remarks>
+            这个提供配置文件地址和配置管理器的一种方式<br />
+            用法，在应用程序中添加如下元属性，注意Priority必须大于1000才能起作用
+            	<code>
+            		[assembly: DevFxConfig(RealType=typeof(HTB.DevFx.Config.XmlConfigImpl.ConfigManager), Priority = 1000)]
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile">指定配置文件地址</param>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigAttribute.GetConfigAttributeFromAssembly(System.Reflection.Assembly[])">
+            <summary>
+            从程序集中获得配置元属性
+            </summary>
+            <param name="assemblies">程序集，如果为null，则从当前应用程序域中获取所载入的所有程序集</param>
+            <returns>找到的配置元属性的数组</returns>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigAttribute.ConfigFile">
+            <summary>
+            获取/设置配置文件
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigAttribute.Priority">
+            <summary>
+            获取/设置此配置的优先级
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigAttribute.RealType">
+            <summary>
+            获取/设置此配置对应的配置管理器类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigAttribute.TypeName">
+            <summary>
+            获取/设置此配置管理器的类型名
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.DevFxConfigFileAttribute">
+            <summary>
+            配置文件属性
+            </summary>
+            <remarks>
+            这个提供配置文件合并的一种方式<br />
+            用法，在应用程序中添加如下元属性，注意ConfigIndex必须不小于1000才能起作用
+            	<code>
+            		[assembly: DevFxConfigFile(ConfigFile="res://HTB.DevFx.Config.htb.devfx.config", ConfigIndex = 1000)]
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigFileAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile">指定配置文件地址</param>
+            <param name="fileInType">如果是内置资源，指定此资源所在的<see cref="T:System.Reflection.Assembly"/></param>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigFileAttribute.GetFileInType">
+            <summary>
+            获取此资源所在的<see cref="T:System.Reflection.Assembly"/>
+            </summary>
+            <returns>Type</returns>
+        </member>
+        <member name="M:HTB.DevFx.Config.DevFxConfigFileAttribute.GetConfigFileAttributeFromAssembly(System.Reflection.Assembly[])">
+            <summary>
+            从程序集中获得元属性
+            </summary>
+            <param name="assemblies">程序集，如果为null，则从当前应用程序域中获取所载入的所有程序集</param>
+            <returns>找到的元属性的数组</returns>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigFileAttribute.ConfigFile">
+            <summary>
+            获取/设置配置文件，除了硬盘文件，其他必需加前缀
+            </summary>
+            <remarks>
+            内置资源：res:// <br />
+            HTTP资源：http://
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigFileAttribute.ConfigIndex">
+            <summary>
+            获取/设置此配置合并时的顺序
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigFileAttribute.FileInType">
+            <summary>
+            获取/设置此资源所在的<see cref="T:System.Reflection.Assembly"/>
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Config.DevFxConfigFileAttribute.FileInTypeName">
+            <summary>
+            获取/设置此资源所在的<see cref="T:System.Reflection.Assembly"/>名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Config.XmlConfigImpl.ConfigManager">
+            <summary>
+            使用XML实现配置管理器接口
+            </summary>
+            <remarks>
+            如果不指定配置文件，则从下面顺序寻找配置文件：
+            <list type="number">
+            	<item>
+            		<description>
+            			在以下目录寻找名为htb.devfx.config的配置文件：
+            			<code>
+            				"./",
+            				"./../",
+            				"./../../",
+            				"./../../../",
+            				"./../Configuration/",
+            				"./../../Configuration/",
+            				"./../../../Configuration/",
+            				Environment.CurrentDirectory + "/",
+            				AppDomain.CurrentDomain.SetupInformation.ApplicationBase
+            			</code>
+            		</description>
+            	</item>
+            	<item>
+            		<description>
+            			如果没找到，则查找由<see cref="T:HTB.DevFx.Config.DevFxConfigAttribute"/>指定的配置文件
+            		</description>
+            	</item>
+            	<item>
+            		<description>
+            			如果没找到，则查找由web/app.config中的如下节指定位置的配置文件：
+            			<code>
+            				&lt;appSettings&gt;
+            					&lt;add key="htb.devfx.config" value="..\configFiles\htb.devfx.config" /&gt;
+            				&lt;/appSettings&gt;
+            			</code>
+            			其中key值指定为“htb.devfx.config”，value为配置文件相对应用程序根目录的相对地址
+            		</description>
+            	</item>
+            	<item>
+            		<description>
+            			如果还没找到，则抛出异常
+            		</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configFile">指定配置文件地址</param>
+            <param name="monitor">是否监视配置文件</param>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.Init(System.String,System.Boolean)">
+            <summary>
+            初始化，提供给框架调用，进行管理器的初始化工作，比如载入配置文件等等
+            </summary>
+            <param name="configFile">配置文件信息</param>
+            <param name="monitor">是否要监视此配置的变化</param>
+            <remarks>
+            参数<paramref name="monitor" />表示，监视配置文件变化，以更新配置信息
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.Reset">
+            <summary>
+            重新载入相关配置信息
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.InitData(System.String)">
+            <summary>
+            初始化配置节数据
+            </summary>
+            <param name="configFile">配置文件地址</param>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.InitSetting">
+            <summary>
+            分析初始化配置节
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.FindConfigFile">
+            <summary>
+            查找配置文件地址
+            </summary>
+            <returns>配置文件地址</returns>
+        </member>
+        <member name="P:HTB.DevFx.Config.XmlConfigImpl.ConfigManager.Setting">
+            <summary>
+            此管理器所管理的配置
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Core.AppModule">
+            <summary>
+            应用程序模块
+            </summary>
+            <remarks>
+            一般的应用系统，可以把此类作为配置来源<br />
+            例如：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;module name="app" type="HTB.DevFx.Core.AppModule" configName="app" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            			......
+            			......
+            			&lt;app&gt;&lt;/app&gt;
+            		&lt;/htb.devfx&gt;
+            	</code>
+            在代码中要获得<c>&lt;app&gt;&lt;/app&gt;</c>这个配置节信息，请使用如下代码：
+            	<code>
+            		......
+            		IConfigSetting mySetting = Framework.GetModules("app").Setting;
+            		......
+            	</code>
+            或者应用系统自己继续新的类来获取，这种方式比较灵活，推荐使用这种方式获取应用系统的配置节<br />
+            例如：
+            	<code>
+            		//使用单例模式
+            		public class MyAppModule : AppModule
+            		{
+            			private MyAppModule() {
+            				if(instance == null) {//保存第一个实例
+            					instance = this;
+            				}
+            			}
+            			
+            			private static MyAppModule instance;
+            			
+            			public static MyAppModule Instance {
+            				get {
+            					if(instance == null) {
+            						instance = new MyAppModule();
+            					}
+            					return instance;
+            				}
+            			}
+            			
+            			//重写此方法以获取配置信息，注意这里传进来的setting是模块本身的配置节
+            			public override void Init(IFramework framework, IConfigSetting setting) {
+            				if(!this.initialized) {
+            					base.Init(framework, setting);
+            					IConfigSetting mySetting = this.setting;//获得自己的配置信息
+            					//在这里进行您的初始化
+            					......
+            				}
+            			}
+            			
+            			......
+            		}
+            		
+            		//在你的代码中，可以这样获得配置节信息：
+            		IConfigSetting mySetting = MyAppModule.Instance.Setting;
+            		......
+            		......
+            	</code>
+            当然，也可以实现多例模式，但请注意，<c>Init</c>方法只有一次被框架调用的机会
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Core.AppModule.#ctor">
+            <summary>
+            保护构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.AppModule.GetInstance">
+            <summary>
+            获取本模块的实例（可以是单例模式也可以是多例模式，由实现者决定）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="T:HTB.DevFx.Core.CoreFramework">
+            <summary>
+            框架核心类
+            </summary>
+            <remarks>
+            对各模块进行初始化工作<br />
+            配置文件格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;module name="config" type="HTB.DevFx.Config.ConfigFactory" configName="config" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            			......
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.Core.IFramework">
+            <summary>
+            框架接口
+            </summary>
+            <remarks>
+            为各模块起到桥梁协调作用
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Core.IFramework.GetModule(System.String)">
+            <summary>
+            获取指定的模块
+            </summary>
+            <param name="moduleName">模块名</param>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.Core.IFramework.Modules">
+            <summary>
+            所有模块
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreFramework.#ctor">
+            <summary>
+            保护构造函数，不允许实例化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreFramework.FrameworkInit">
+            <summary>
+            初始化框架设置（读取配置等）
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Core.CoreFramework.OnInit">
+            <summary>
+            初始化框架设置（读取配置等）
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.ExceptionFormatter">
+            <summary>
+            异常收集器接口简单实现
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.IExceptionFormatter">
+            <summary>
+            异常信息收集格式化接口，用于收集对异常时的所处的环境信息以及对这些信息进行格式化
+            </summary>
+            <remarks>
+            配置节格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			&lt;exception type="......"&gt;
+            				.....
+            				&lt;handlers&gt;
+            					......
+            					&lt;handler name="异常处理器名" exceptionType="所处理的异常类型" exceptionFormatter="异常收集器类型" type="异常处理器类型" /&gt;
+            					......
+            				&lt;/handlers&gt;
+            			&lt;/exception&gt;
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionFormatter.GetFormatString(System.Exception,System.Object)">
+            <summary>
+            获取格式化的信息
+            </summary>
+            <param name="e">发生的异常</param>
+            <param name="attachObject">附加对象</param>
+            <returns>格式化后的字符串</returns>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionFormatter.GetFormatString(System.Exception,System.Object)">
+            <summary>
+            获取格式化的信息
+            </summary>
+            <param name="e">发生的异常</param>
+            <param name="attachObject">附加对象</param>
+            <returns>格式化后的字符串</returns>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.ExceptionHandler">
+            <summary>
+            异常处理器接口实现，建议应用程序自定义的处理器都从本类继承
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.IExceptionHandle">
+            <summary>
+            异常处理器接口
+            </summary>
+            <example>
+            配置节格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			&lt;exception type="......"&gt;
+            				.....
+            				&lt;handlers&gt;
+            					......
+            					&lt;handler name="异常处理器名" exceptionType="所处理的异常类型" exceptionFormatter="异常收集器类型" type="异常处理器类型" /&gt;
+            					......
+            				&lt;/handlers&gt;
+            			&lt;/exception&gt;
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionHandle.Init(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            初始化异常处理器（由异常管理器调用）
+            </summary>
+            <param name="setting">对应的配置节</param>
+            <param name="logManager">日志记录器</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionHandle.Handle(System.Exception,System.Int32)">
+            <summary>
+            进行异常处理（由异常管理器调用）
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（传递给日志记录器处理）</param>
+            <returns>处理结果，将影响下面的处理器</returns>
+            <remarks>
+            异常管理器将根据返回的结果进行下一步的处理，约定：<br />
+            	返回的结果中，ResultNo值：
+            	<list type="bullet">
+            		<item><description>
+            			小于0：表示处理异常，管理器将立即退出异常处理
+            		</description></item>
+            		<item><description>
+            			0：处理正常
+            		</description></item>
+            		<item><description>
+            			1：已处理，需要下一个异常处理器进一步处理，<br />
+            			此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）
+            		</description></item>
+            		<item><description>
+            			2：已处理，需要重新轮询异常处理器进行处理<br />
+            				此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）<br />
+            				此时异常管理器将重新进行异常处理
+            		</description></item>
+            	</list>
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.IExceptionHandle.Name">
+            <summary>
+            异常处理器名
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.IExceptionHandle.ExceptionType">
+            <summary>
+            此异常处理器处理的异常类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.IExceptionHandle.ExceptionFormatter">
+            <summary>
+            异常信息收集格式化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionHandler.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionHandler.#ctor(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">对应的配置节</param>
+            <param name="logManager">日志记录器</param>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.setting">
+            <summary>
+            配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.logManager">
+            <summary>
+            日志管理器
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.handlerName">
+            <summary>
+            处理器名
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.exceptionType">
+            <summary>
+            处理的异常类型
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.exceptionFormatter">
+            <summary>
+            异常收集器
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionHandler.isInit">
+            <summary>
+            是否初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionHandler.Init(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+            <param name="logManager">日志管理器</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionHandler.Handle(System.Exception,System.Int32)">
+            <summary>
+            进行异常处理（由异常管理器调用）
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（传递给日志记录器处理）</param>
+            <returns>处理结果，将影响下面的处理器</returns>
+            <remarks>
+            异常管理器将根据返回的结果进行下一步的处理，约定：<br />
+            	返回的结果中，ResultNo值：
+            	<list type="bullet">
+            		<item><description>
+            			小于0：表示处理异常，管理器将立即退出异常处理
+            		</description></item>
+            		<item><description>
+            			0：处理正常
+            		</description></item>
+            		<item><description>
+            			1：已处理，需要下一个异常处理器进一步处理，<br />
+            			此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）
+            		</description></item>
+            		<item><description>
+            			2：已处理，需要重新轮询异常处理器进行处理<br />
+            				此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）<br />
+            				此时异常管理器将重新进行异常处理
+            		</description></item>
+            	</list>
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.ExceptionHandler.Name">
+            <summary>
+            异常处理器名
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.ExceptionHandler.ExceptionType">
+            <summary>
+            此异常处理器处理的异常类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.ExceptionHandler.ExceptionFormatter">
+            <summary>
+            异常信息收集格式化
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.ExceptionManager">
+            <summary>
+            异常管理器接口实现
+            </summary>
+            <remarks>如果要替换为自己的管理器，建议从本类继承</remarks>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.IExceptionManager">
+            <summary>
+            异常管理接口
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		&lt;exception type="HTB.DevFx.ExceptionManagement.ExceptionManager"&gt;
+            			&lt;logModule name="log" /&gt;
+            			&lt;handlers&gt;
+            				......
+            			&lt;/handlers&gt;
+            		&lt;/exception&gt;
+            	</code>
+            依赖日志管理器的配置
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionManager.Init(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+            <param name="logManager">日志管理器</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionManager.Publish(System.Exception)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.IExceptionManager.Publish(System.Exception,System.Int32)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（决定由哪个日志记录器记录）</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.#ctor(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">配置节</param>
+            <param name="logManager">日志管理器</param>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionManager.setting">
+            <summary>
+            配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionManager.logManager">
+            <summary>
+            日志管理器
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionManager.handlers">
+            <summary>
+            异常处理器集合
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.ExceptionManagement.ExceptionManager.isInit">
+            <summary>
+            是否初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.Init(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+            <param name="logManager">日志管理器</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.Publish(System.Exception)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.Publish(System.Exception,System.Int32)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（决定由哪个日志记录器记录）</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.ExceptionManager.AppOnError(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            桌面应用程序错误捕捉
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Exceptor">
+            <summary>
+            整个框架的异常管理器
+            </summary>
+            <remarks>
+            与框架的配合配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;!--异常处理模块--&gt;
+            					&lt;module name="exception" type="HTB.DevFx.ExceptionManagement.Exceptor" configName="exception" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            				
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+            <example>
+            	<code>
+            		......
+            		try {
+            			......
+            		} catch(Exception e) {
+            			Exceptor.Publish(e);
+            			throw e;
+            		} finally {
+            			......
+            		}
+            		......
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Exceptor.Publish(System.Exception)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Exceptor.Publish(System.Exception,System.Int32)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（决定由哪个日志记录器记录）</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Exceptor.OnInit(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Exceptor.GetInstance">
+            <summary>
+            获取本模块的事例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.Exceptor.Instance">
+            <summary>
+            异常管理器的唯一的实例（单件模式）
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Web.ExceptionHttpModule">
+            <summary>
+            捕捉WEB项目异常的<see cref="T:System.Web.IHttpModule"/>
+            </summary>
+            <remarks>
+            在web.config中添加如下的配置：
+            	<code>
+            		&lt;system.web&gt;
+            			&lt;httpModules&gt;
+            				......
+            				&lt;add name="ExceptionHttpModule" type="HTB.DevFx.ExceptionManagement.Web.ExceptionHttpModule, HTB.DevFx" /&gt;
+            				......
+            			&lt;/httpModules&gt;
+            			......
+            		&lt;/system.web&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.ExceptionHttpModule.WebOnError(System.Object,System.EventArgs)">
+            <summary>
+            WEB应用程序异常捕捉
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.ExceptionHttpModule.Init(System.Web.HttpApplication)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="context"><see cref="T:System.Web.HttpApplication"/> 实例</param>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Web.HttpWebException">
+            <summary>
+            WEB项目的异常
+            </summary>
+            <remarks>
+            在WEB项目中，能发现的异常都会包装成此类的实例，此类异常将由<see cref="T:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler"/>处理
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebException.#ctor(System.Exception,System.Web.HttpApplication)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="innerException">内部异常</param>
+            <param name="httpApp">HttpApplication实例</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebException.#ctor(System.Web.HttpApplication)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="httpApp">HttpApplication实例</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebException.#ctor(System.String,System.Exception,System.Web.HttpApplication)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+            <param name="httpApp">HttpApplication实例</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebException.#ctor(System.Int32,System.String,System.Exception,System.Web.HttpApplication)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编码</param>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+            <param name="httpApp">HttpApplication实例</param>
+        </member>
+        <member name="P:HTB.DevFx.ExceptionManagement.Web.HttpWebException.HttpAppInstance">
+            <summary>
+            HttpApplication实例
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionFormatter">
+            <summary>
+            收集WEB异常的异常收集器
+            </summary>
+            <remarks>
+            主要收集了异常发生时的如下信息：
+            <list type="bullet">
+            	<item><description>异常信息</description></item>
+            	<item><description>HTTP请求方式 请求的页面</description></item>
+            	<item><description>请求页面的Hash Code（提供给对照异常使用）</description></item>
+            	<item><description>请求的HTTP头</description></item>
+            	<item><description>异常堆栈</description></item>
+            	<item><description>请求的HTTP BODY</description></item>
+            	<item><description>客户端IP</description></item>
+            	<item><description>服务端IP</description></item>
+            	<item><description>当前登录的用户名</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler">
+            <summary>
+            处理WEB异常的异常处理器
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			&lt;exception type="......"&gt;
+            				.....
+            				&lt;handlers&gt;
+            					......
+            					&lt;handler name="HttpWebExceptionHandler"
+            						exceptionType="HTB.DevFx.ExceptionManagement.Web.HttpWebException"
+            						exceptionFormatter="HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionFormatter"
+            						type="HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler"
+            						defaultRedirect="~/frame/error.aspx?hc={0}&amp;amp;ec={1}&amp;amp;level={2}&amp;amp;msg={3}&amp;amp;url={4}" /&gt;
+            					......
+            				&lt;/handlers&gt;
+            			&lt;/exception&gt;
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            其中defaultRedirect为异常时转向的页面地址，其中参数含义为：
+            <list type="bullet">
+            	<item><description>hc：发生异常的页面Hash Code</description></item>
+            	<item><description>ec：异常编码</description></item>
+            	<item><description>level：异常等级</description></item>
+            	<item><description>msg：异常信息</description></item>
+            	<item><description>url：发生异常的页面地址</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler.Init(HTB.DevFx.Config.IConfigSetting,HTB.DevFx.Log.ILogManager)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+            <param name="logManager">日志管理器</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.HttpWebExceptionHandler.Handle(System.Exception,System.Int32)">
+            <summary>
+            进行异常处理（由异常管理器调用）
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（传递给日志记录器处理）</param>
+            <returns>处理结果，将影响下面的处理器</returns>
+            <remarks>
+            异常管理器将根据返回的结果进行下一步的处理，约定：<br />
+            	返回的结果中，ResultNo值：
+            	<list type="bullet">
+            		<item><description>
+            			小于0：表示处理异常，管理器将立即退出异常处理
+            		</description></item>
+            		<item><description>
+            			0：处理正常
+            		</description></item>
+            		<item><description>
+            			1：已处理，需要下一个异常处理器进一步处理，<br />
+            			此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）
+            		</description></item>
+            		<item><description>
+            			2：已处理，需要重新轮询异常处理器进行处理<br />
+            				此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）<br />
+            				此时异常管理器将重新进行异常处理
+            		</description></item>
+            	</list>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.ExceptionManagement.Web.PageException">
+            <summary>
+            WEB项目的Page页面异常
+            </summary>
+            <remarks>
+            在WEB项目中，能发现的异常都会包装成此类的实例
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.PageException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.PageException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.PageException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.PageException.#ctor(System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.ExceptionManagement.Web.PageException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="T:HTB.DevFx.Framework">
+            <summary>
+            统一开发框架的统一入口类
+            </summary>
+            <remarks>
+            在使用框架前，建议调用本类的 <see cref="M:HTB.DevFx.Framework.Init"/> 静态方法，以让框架进行前期初始化工作<br/>
+            配置文件格式请参见另附的文件：htb.devfx.config
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Framework.#ctor">
+            <summary>
+            私有构造函数，防止外部实例化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Framework.Init">
+            <summary>
+            框架的前期初始化
+            </summary>
+            <remarks>
+            建议在使用框架前的代码中调用请此方法，如果是在WEB项目中，也可加入HttpModule，此HttpModule自动调用本方法<br />
+            HttpModule在web.config内的配置格式如下：
+            	<code>
+            		......
+            		&lt;system.web&gt;
+            			&lt;httpModules&gt;
+            				&lt;add name="ExceptionHttpModule" type="HTB.DevFx.ExceptionManagement.Web.ExceptionHttpModule, HTB.DevFx" /&gt;
+            			&lt;/httpModules&gt;
+            			......
+            			......
+            		&lt;/system.web&gt;
+            		......
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Framework.GetModule(System.String)">
+            <summary>
+            获取指定的模块
+            </summary>
+            <param name="moduleName">模块名</param>
+            <returns>IModule</returns>
+        </member>
+        <member name="P:HTB.DevFx.Framework.Configer">
+            <summary>
+            获取整个框架的配置管理器
+            </summary>
+            <remarks>
+            建议在应用程序中不要直接使用此管理器，要获得应用程序自己的配置信息，请在框架配置文件中添加如下的节
+            	<code>
+            		&lt;framework&gt;
+            			&lt;modules&gt;
+            				......
+            				&lt;!--name表示应用程序模块的名称，configName表示配置节名称--&gt;
+            				&lt;module name="app" type="HTB.DevFx.Core.AppModule" configName="app" /&gt;
+            			&lt;/modules&gt;
+            		&lt;/framework&gt;
+            		......
+            		......
+            		&lt;!--下面就可以填入应用程序自己的配置信息--&gt;
+            		&lt;app&gt;
+            		&lt;/app&gt;
+            	</code>
+            在代码中要获得&lt;app&gt;&lt;/app&gt;这个配置信息，请使用如下代码：
+            	<code>
+            		......
+            		Framework.GetModule("app").Setting;
+            		......
+            	</code>
+            更具体的信息，请参看 <see cref="T:HTB.DevFx.Core.AppModule"/>
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Framework.Loggor">
+            <summary>
+            日志管理器
+            </summary>
+            <remarks>
+            还可以直接使用 <see cref="T:HTB.DevFx.Log.Loggor"/> 来写日志<br/>
+            在调用此方法前，请在框架配置文件中配置好，具体请参见日志的配置说明
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Framework.Exceptor">
+            <summary>
+            异常管理器
+            </summary>
+            <remarks>
+            还可以直接使用 <see cref="T:HTB.DevFx.ExceptionManagement.Exceptor"/> 来处理<br/>
+            在调用此方法前，请在框架配置文件中配置好，具体请参见异常处理的配置说明
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Framework.Cacher">
+            <summary>
+            缓存管理器
+            </summary>
+            <remarks>
+            还可以直接使用 <see cref="T:HTB.DevFx.Cache.Cacher"/> 来处理<br/>
+            在调用此方法前，请在框架配置文件中配置好，具体请参见缓存的配置说明
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Framework.Modules">
+            <summary>
+            所有模块
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Log.ILogger">
+            <summary>
+            日志记录器接口
+            </summary>
+            <remarks>
+            日志记录器的配置：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			
+            			&lt;log type="HTB.DevFx.Log.LogManager"&gt;
+            				&lt;loggers&gt;
+            					......
+            					&lt;logger name="记录器名" minLevel="此记录器处理的最小Level" maxLevel="此记录器处理的最大Level" type="记录器类型名" /&gt;
+            					......
+            				&lt;/loggers&gt;
+            			&lt;/log&gt;
+            			
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogger.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogger.Log(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Log.ILogger.Name">
+            <summary>
+            日志记录器名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Log.ILogger.MinLevel">
+            <summary>
+            此日志记录器记录级别的最小值
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Log.ILogger.MaxLevel">
+            <summary>
+            此日志记录器记录级别的最大值
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Log.ILogManager">
+            <summary>
+            日志管理器接口
+            </summary>
+            <remarks>
+            日志管理器的配置：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			
+            			&lt;log type="日志管理器类型"&gt;
+            				&lt;loggers&gt;&lt;!--这里配置日志记录器--&gt;
+            					......
+            				&lt;/loggers&gt;
+            			&lt;/log&gt;
+            			
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogManager.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由框架调用
+            </summary>
+            <param name="setting">日志管理器的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogManager.WriteLog(System.Int32,System.String)">
+            <summary>
+            写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogManager.WriteLog(System.Int32,System.Object)">
+            <summary>
+            写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogManager.WriteLog(System.Object,System.Int32,System.String)">
+            <summary>
+            写日志
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.ILogManager.WriteLog(System.Object,System.Int32,System.Object)">
+            <summary>
+            写日志
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+        </member>
+        <member name="T:HTB.DevFx.Log.Logger">
+            <summary>
+            日志记录器的抽象实现，建议应用系统自己编写的记录器都从此类继承
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.Logger.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.Logger.#ctor(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="F:HTB.DevFx.Log.Logger.setting">
+            <summary>
+            配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Log.Logger.isInit">
+            <summary>
+            是否已初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.Logger.GetExactSourc(System.Object)">
+            <summary>
+            获取正确的日志来源（当缺省日志来源时，从调用堆栈中获取发出调用的方法）
+            </summary>
+            <param name="source">日志来源</param>
+            <returns>如果找到，则返回定义调用方法的类和方法名等信息</returns>
+        </member>
+        <member name="M:HTB.DevFx.Log.Logger.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.Logger.Log(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Log.Logger.Name">
+            <summary>
+            日志记录器名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Log.Logger.MinLevel">
+            <summary>
+            此日志记录器记录级别的最小值
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Log.Logger.MaxLevel">
+            <summary>
+            此日志记录器记录级别的最大值
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Log.LoggerImpl.ConsoleLogger">
+            <summary>
+            以控制台输出方式的日志记录器
+            </summary>
+            <remarks>
+            提供给控制台应用程序使用<br />
+            配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			
+            			&lt;log type="HTB.DevFx.Log.LogManager"&gt;
+            				&lt;loggers&gt;
+            					......
+            					&lt;logger name="consoleLogger" minLevel="此记录器处理的最小Level" maxLevel="此记录器处理的最大Level" type="HTB.DevFx.Log.LoggerImpl.ConsoleLogger" /&gt;
+            					......
+            				&lt;/loggers&gt;
+            			&lt;/log&gt;
+            			
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.ConsoleLogger.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.ConsoleLogger.#ctor(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.ConsoleLogger.Log(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Log.LoggerImpl.MailLogger">
+            <summary>
+            以邮件发送方式的日志记录器
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			
+            			&lt;log type="HTB.DevFx.Log.LogManager"&gt;
+            				&lt;loggers&gt;
+            					......
+            					&lt;logger name="mailLogger" minLevel="min" maxLevel="max" type="HTB.DevFx.Log.LoggerImpl.MailLogger"&gt;
+            						&lt;!--bufferSize为收集到的日志数后再去发送邮件，mailForm为发件人地址，mailSubject为邮件主题，mailList为邮件接收人列表，多个接收人用英文分号“;”隔开--&gt;
+            						&lt;mail bufferSize="5" mailFrom="开发组&lt;group@devfx.net&gt;" mailSubject="来自统一开发框架系统日志" mailList="R2@DevFx.NET" /&gt;
+            					&lt;/logger&gt;
+            					......
+            				&lt;/loggers&gt;
+            			&lt;/log&gt;
+            			
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            本记录器依赖<see cref="T:HTB.DevFx.Utils.Mail.MailSender"/>的正确配置
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.#ctor(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.SendMail">
+            <summary>
+            开始进入发邮件进程
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.SendMessage(System.Boolean)">
+            <summary>
+            发邮件
+            </summary>
+            <param name="force">是否强制发送，而不管日志书是否到达BufferSize</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.Finalize">
+            <summary>
+            析构函数，把收集到的日志发送出去
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.MailLogger.Log(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Log.LoggerImpl.TextLogger">
+            <summary>
+            以文本文件方式的日志记录器
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			......
+            			
+            			&lt;log type="HTB.DevFx.Log.LogManager"&gt;
+            				&lt;loggers&gt;
+            					......
+            					&lt;logger name="textLogger" minLevel="min" maxLevel="max" type="HTB.DevFx.Log.LoggerImpl.TextLogger"&gt;
+            						&lt;!--注意在使用时需配置directory属性，以指定日志存放的目录，filenameFormat为日志文件名格式，遵循.NET格式化语法--&gt;
+            						&lt;file filenameFormat="yyyy-MM-dd\.\l\o\g" directory="日志文件的目录地址" /&gt;
+            					&lt;/logger>
+            					......
+            				&lt;/loggers&gt;
+            			&lt;/log&gt;
+            			
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.TextLogger.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.TextLogger.#ctor(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.TextLogger.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LoggerImpl.TextLogger.Log(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Log.Loggor">
+            <summary>
+            整个框架的日志管理器
+            </summary>
+            <remarks>
+            与框架的配合配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;!--日志管理模块--&gt;
+            					&lt;module name="log" type="HTB.DevFx.Log.Loggor" configName="log" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            				
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+            <example>
+            	<code>
+            		......
+            		Loggor.WriteLog(Level.Info, "this is a log message!");
+            		......
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.OnInit(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="framework">IFramework</param>
+            <param name="setting">对应的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.GetInstance">
+            <summary>
+            获取本模块的事例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.WriteLog(System.Int32,System.String)">
+            <summary>
+            调用配置管理器写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.WriteLog(System.Int32,System.Object)">
+            <summary>
+            调用配置管理器写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.WriteLog(System.Object,System.Int32,System.String)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Log.Loggor.WriteLog(System.Object,System.Int32,System.Object)">
+            <summary>
+            日志记录
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志级别（决定处理方法）</param>
+            <param name="message">日志信息</param>
+            <returns>返回处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Log.Loggor.Instance">
+            <summary>
+            日志管理器的唯一实例（单件模式）
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Log.LogManager">
+            <summary>
+            日志管理器接口实现
+            </summary>
+            <remarks>如果要替换为自己的管理器，建议从本类继承</remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.#ctor(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="F:HTB.DevFx.Log.LogManager.setting">
+            <summary>
+            配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Log.LogManager.loggers">
+            <summary>
+            日志记录器集合
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Log.LogManager.isInit">
+            <summary>
+            是否初始化
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由框架调用
+            </summary>
+            <param name="setting">日志管理器的配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.WriteLog(System.Int32,System.String)">
+            <summary>
+            写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.WriteLog(System.Int32,System.Object)">
+            <summary>
+            写日志
+            </summary>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+            <remarks>
+            日志来源将从系统堆栈中获取
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.WriteLog(System.Object,System.Int32,System.String)">
+            <summary>
+            写日志
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Log.LogManager.WriteLog(System.Object,System.Int32,System.Object)">
+            <summary>
+            写日志
+            </summary>
+            <param name="source">日志来源</param>
+            <param name="level">日志等级，<see cref="T:HTB.DevFx.Log.LogLevel"/></param>
+            <param name="message">日志消息</param>
+        </member>
+        <member name="T:HTB.DevFx.Utils.Mail.MailModule">
+            <summary>
+            邮件发送工具配置模块
+            </summary>
+            <remarks>
+            配置节格式：
+            	<code>
+            		&lt;framework&gt;
+            			&lt;modules&gt;
+            				......
+            				&lt;module name="mail" type="HTB.DevFx.Utils.Mail.MailModule, HTB.DevFx" configName="mail" /&gt;
+            				......
+            			&lt;/modules&gt;
+            		&lt;/framework&gt;
+            		......
+            		......
+            		&lt;mail&gt;
+            			&lt;smtpServer&gt;SMTP服务器地址&lt;/smtpServer&gt;
+            			&lt;serverPort&gt;服务器侦听端口&lt;/serverPort&gt;
+            			&lt;userName&gt;认证用户名&lt;/userName&gt;
+            			&lt;password&gt;认证用户密码&lt;/password&gt;
+            		&lt;/mail&gt;
+            	</code>
+            使用方法和 <see cref="T:System.Net.Mail.SmtpClient"/> 一样
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Utils.Mail.MailModule.OnInit(HTB.DevFx.Core.IFramework,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            模块的初始化（获取配置信息，仅为支持Framework）
+            </summary>
+            <param name="framework">依附的IFramework</param>
+            <param name="setting">配置节</param>
+        </member>
+    </members>
+</doc>

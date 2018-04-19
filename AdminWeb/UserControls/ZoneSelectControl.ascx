@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ZoneSelectControl.ascx.cs" Inherits="Games.NBall.AdminWeb.UserControls.ZoneSelectControl" %>
+<asp:DropDownList ID="SZone" runat="server"></asp:DropDownList>

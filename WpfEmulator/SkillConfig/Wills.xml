@@ -1,0 +1,827 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wills version="1.0.0.6">
+
+  <Will id="W102" name="蓝衣军团的命运" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="4" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-0.5" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="1" rate="-0.5" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="15" rate="-0.5" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="2" rate="-0.5" last="90" gradient="0" target="4" targetPosition="4" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W104" name="The Blues" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="1" isSuccess="1" state="DiveBallState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="0.5" last="90" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="1" rate="0.5" last="90" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="15" rate="0.5" last="90" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="2" rate="0.5" last="90" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="9" rate="0.5" last="90" gradient="0" target="3" targetPosition="3" />
+      <PropertyChange property="10" rate="0.5" last="90" gradient="0" target="3" targetPosition="3" />
+      <PropertyChange property="11" rate="0.5" last="90" gradient="0" target="3" targetPosition="3" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W106" name="枪手" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="3" area="1" side="1" position="0" condition="1" num="4" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="5" last="0" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="1" rate="5" last="0" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="15" rate="5" last="0" gradient="0" target="3" targetPosition="4" />
+      <PropertyChange property="2" rate="5" last="0" gradient="0" target="3" targetPosition="4" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W109" name="链式防守" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="1" state="InterruptionState,SlideTackleState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="1" rate="-2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="15" rate="-2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="2" rate="-2" last="90" gradient="0" target="1" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W111" name="慕尼黑攻势" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="4" rate="3" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="4" rate="10" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W112" name="球王衣钵" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="4" targetPosition="0" isSuccess="1" state="InterruptionState,SlideTackleState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="1" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="15" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="2" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W113" name="蓝色禁锢" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="1" state="LongPassState,ShortPassState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="1" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="2" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="3" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="4" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="5" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="6" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="7" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="8" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="9" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="10" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="11" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="12" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="13" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="14" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+      <PropertyChange property="15" rate="5" last="5" gradient="0" target="5" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W114" name="白色旗帜" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="7" rate="3" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W115" name="圣西罗铁闸" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="2" target="3" targetPosition="3" area="0" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="5" last="0" gradient="0" target="3" targetPosition="3" />
+      <PropertyChange property="7" rate="5" last="0" gradient="0" target="3" targetPosition="3" />
+      <PropertyChange property="8" rate="5" last="0" gradient="0" target="3" targetPosition="3" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W117" name="红魔忠魂" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="4" side="1" condition="2" num="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="1" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="2" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="3" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="4" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="5" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="6" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="7" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="8" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="9" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="10" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="11" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="12" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="13" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="14" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="15" rate="-5" last="90" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W118" name="桑巴旋舞" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="4" rate="-10" last="90" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W120" name="德甲王子" skillLevel="1" last="0"  cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="1" isSuccess="1" state="DiveBallState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="1" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="2" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="3" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="4" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="5" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="6" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="7" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="8" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="9" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="10" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="11" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="12" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="13" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="14" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="15" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W122" name="红黑军魂" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="4" targetPosition="0" isSuccess="0" state="LongPassState,ShortPassState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="1" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="2" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="3" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="4" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="5" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="6" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="7" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="8" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="9" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="10" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="11" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="12" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="13" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="14" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="15" rate="-0.3" last="90" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W124" name="德国三驾马车" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="4" targetPosition="0" isSuccess="1" state="InterruptionState,SlideTackleState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="1" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="15" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="2" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="3" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="4" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+      <PropertyChange property="5" rate="2" last="90" gradient="0" target="1" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W128" name="狼蛛" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="12" rate="2" last="90" gradient="0" target="3" targetPosition="1" />
+      <PropertyChange property="13" rate="2" last="90" gradient="0" target="3" targetPosition="1" />
+      <PropertyChange property="14" rate="2" last="90" gradient="0" target="3" targetPosition="1" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W131" name="潘帕斯雄鹰" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="1" state="BreakThroughState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="1" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="15" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="2" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="9" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="10" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+      <PropertyChange property="11" rate="2" last="90" gradient="0" target="0" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+
+  <!--越南-->
+  <Will id="W151" name="圣女" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-1" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="1" rate="-1" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="2" rate="-1" last="90" gradient="0" target="4" targetPosition="4" />
+    </PropertyChanges>
+  </Will>
+
+  <!--欧冠意志-->
+  <Will id="W181" name="神圣壁垒" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="17" target="4" targetPosition="0" isSuccess="1" num="1"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-8" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="1" rate="-8" last="90" gradient="0" target="4" targetPosition="4" />
+      <PropertyChange property="2" rate="-8" last="90" gradient="0" target="4" targetPosition="4" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W182" name="百兽之怒" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="17" target="3" targetPosition="0" isSuccess="1" num="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="3" rate="-10" last="90" gradient="0" target="4" targetPosition="2" />
+      <PropertyChange property="4" rate="-10" last="90" gradient="0" target="4" targetPosition="2" />
+      <PropertyChange property="5" rate="-10" last="90" gradient="0" target="4" targetPosition="2" />
+      <PropertyChange property="3" rate="-10" last="90" gradient="0" target="4" targetPosition="1" />
+      <PropertyChange property="4" rate="-10" last="90" gradient="0" target="4" targetPosition="1" />
+      <PropertyChange property="5" rate="-10" last="90" gradient="0" target="4" targetPosition="1" />
+      <PropertyChange property="12" rate="-5" last="90" gradient="0" target="4" targetPosition="1" />
+      <PropertyChange property="13" rate="-5" last="90" gradient="0" target="4" targetPosition="1" />
+      <PropertyChange property="14" rate="-5" last="90" gradient="0" target="4" targetPosition="1" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W184" name="梦寐技术" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="1" state="LongPassState,ShortPassState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="3" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="4" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="5" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="6" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="7" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="8" rate="-1" last="20" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W185" name="二次元控制" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="4" rate="-3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="7" rate="-3" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="4" rate="1" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="7" rate="1" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="W186" name="合金防御" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="17" target="4" targetPosition="0" isSuccess="1" num="1" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-10" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="1" rate="-10" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="2" rate="-10" last="90" gradient="0" target="4" targetPosition="0" />
+      <PropertyChange property="6" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="7" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="8" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+
+
+
+  <Will id="E502" name="巨星套装5件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="0" targetPosition="0" isSuccess="1" state="InterruptionState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="1" rate="-2" last="90" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+
+  <Will id="E702" name="7件套5件属性" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="0.5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="1" rate="0.5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="15" rate="0.5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="2" rate="0.5" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="E703" name="7件套7件属性" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="1" state="ShortPassState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-30" last="15" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+
+  <Will id="E511" name="防守套装一期3件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="2" rate="-1" probability="20" />
+    </Immunity>
+  </Will>
+  <Will id="E512" name="防守套装一期5件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="8"  probability="30" />
+    </Immunity>
+  </Will>
+
+  <Will id="E521" name="防守套装二期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <SkillUpgrades>
+      <SkillUpgrade type="3" triggerType="1"  skillType="1" target="3" targetPosition="0" targetSkillProperty="1" rate="-10" fixType="1" />
+    </SkillUpgrades>
+  </Will>
+  <Will id="E522" name="防守套装二期5件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <SkillUpgrades>
+      <SkillUpgrade type="3" triggerType="1"  skillType="0" target="3" targetPosition="0" targetSkillProperty="0" targetDebuff="3" rate="30" fixType="1" />
+    </SkillUpgrades>
+  </Will>
+
+  <Will id="E531" name="防守套装三期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <SkillUpgrades>
+      <SkillUpgrade type="3" triggerType="1"  skillType="1" target="3" targetPosition="0" targetSkillProperty="6" rate="5" fixType="1" />
+    </SkillUpgrades>
+  </Will>
+  <Will id="E532" name="防守套装三期5件套" skillLevel="1" last="0" cd="45" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Debuffs>
+      <Debuff type="7" level="1" target="4" targetPosition="0" distance="8" probability="50" skillId="E532"></Debuff>
+    </Debuffs>
+  </Will>
+
+  <Will id="E571" name="攻守套装一期3件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="5" rate="0" targetDebuff="0" probability="20" />
+    </Immunity>
+  </Will>
+  <Will id="E572" name="攻守套装一期5件套" skillLevel="1" last="0" cd="90" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="6" dribbleTime="35"/>
+    </Triggers>
+    <ChangeActionState>
+      <State target="3" targetPosition="0" Orginal="HoldBallState" Change="DefaultShootState" skillId="E572"/>
+    </ChangeActionState>
+  </Will>
+
+  <Will id="E581" name="攻守套装二期3件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="1"  probability="10" />
+    </Immunity>
+  </Will>
+  <Will id="E582" name="攻守套装二期5件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <SkillUpgrades>
+      <SkillUpgrade type="3" triggerType="1" skillType="*" target="4" targetPosition="0" targetSkillProperty="1" rate="20" fixType="1" />
+    </SkillUpgrades>
+  </Will>
+
+  <Will id="E591" name="攻守套装三期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="3" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="4" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="5" rate="5" last="90" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="E592" name="攻守套装三期5件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="7" targetDebuff="8"  probability="0" />
+    </Immunity>
+  </Will>
+
+
+  <Will id="E541" name="攻势套装一期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <SkillUpgrades>
+      <SkillUpgrade type="3" triggerType="1" skillType="0" target="3" targetPosition="0" targetSkillProperty="1" rate="-20" fixType="1" />
+    </SkillUpgrades>
+  </Will>
+  <Will id="E542" name="攻势套装一期5件套" skillLevel="1" last="90" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <Immunity>
+      <Immunity type="9"  distance="45"  targetDebuff="1" probability="100" />
+    </Immunity>
+  </Will>
+
+  <Will id="E551" name="攻势套装二期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="3" rate="30" last="0" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="E552" name="攻势套装二期5件套" skillLevel="1" last="0" cd="90" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <Debuffs>
+      <Debuff type="6" level="3" target="4" targetPosition="0" probability="75"></Debuff>
+    </Debuffs>
+  </Will>
+
+  <Will id="E561" name="攻势套装三期3件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="14" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="1" rate="15" last="90" gradient="0" target="3" targetPosition="4" />
+    </PropertyChanges>
+  </Will>
+  <Will id="E562" name="攻势套装三期5件套" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="5" matchTime="75" score="-1"/>
+    </Triggers>
+    <ChangeActionState>
+      <State target="3" targetPosition="1" Orginal="GKHoldBallState" Change="DefaultShootState" skillId="E562"/>
+    </ChangeActionState>
+  </Will>
+
+  <Will id="E715" name="恐怖威胁者套装7件套5件属性" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="0" target="3" targetPosition="0" isSuccess="0" state="DefaultShootState,VolleyShootState,FreekickShootState" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="1" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="2" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="3" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="4" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="5" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="6" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="7" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="8" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="9" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="10" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="11" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="12" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="13" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="14" rate="-0.5" last="90" gradient="0" target="4" targetPosition="0"/>
+    </PropertyChanges>
+  </Will>
+  <Will id="E717" name="恐怖威胁者套装7件套7件属性" skillLevel="1" last="0" cd="65" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="50"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="1" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="2" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="3" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="4" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="5" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="6" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="7" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="8" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="9" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="10" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="11" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="12" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="13" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="14" rate="-15" last="10" gradient="0" target="4" targetPosition="0"/>
+    </PropertyChanges>
+  </Will>
+
+  <!--教练技能-->
+  <Will id="CH001_1" name="教授"  skillLevel="1" last="0" cd="45" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="8" times="4" />
+    </Triggers>
+    <Debuffs>
+      <Debuff type="6" level="3" target="4" targetPosition="0" probability="100"></Debuff>
+    </Debuffs>
+  </Will>
+
+  <Will id="CH002_1" name="圣盾"  skillLevel="1" last="0" cd="30" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="5" matchTime="0" score="1"  />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="100" last="25" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="7" rate="100" last="25" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="8" rate="100" last="25" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="12" rate="100 " last="25" gradient="0" target="3" targetPosition="1" />
+      <PropertyChange property="13" rate="100 " last="25" gradient="0" target="3" targetPosition="1" />
+      <PropertyChange property="14" rate="100 " last="25" gradient="0" target="3" targetPosition="1" />
+      <PropertyChange property="0" rate="-50" last="25" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="1" rate="-50" last="25" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="2" rate="-50" last="25" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+    <Models>
+      <Model mid="64" last="25" target="3" targetPosition="0" />
+    </Models>
+  </Will>
+
+  <Will id="CH003_1" name="潜能"  skillLevel="1" last="0" cd="45" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="5" matchTime="0" score="-1"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="1" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="2" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="3" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="4" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="5" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="6" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="7" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="8" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="9" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="10" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="11" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="12" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="13" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="14" rate="150" last="0" gradient="0" target="3" targetPosition="0"/>
+    </PropertyChanges>
+    <Models>
+      <Model mid="67" last="15" target="3" targetPosition="0" />
+    </Models>
+  </Will>
+
+  <Will id="CH004_1" name="六冠王"  skillLevel="1" last="0" cd="35" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="9" SingleAttackDribbleMin="2"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="-100" last="6" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="7" rate="-100" last="6" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="8" rate="-100" last="6" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="12" rate="-100" last="6" gradient="0" target="4" targetPosition="1"/>
+      <PropertyChange property="13" rate="-100" last="6" gradient="0" target="4" targetPosition="1"/>
+      <PropertyChange property="14" rate="-100" last="6" gradient="0" target="4" targetPosition="1"/>
+    </PropertyChanges>
+    <Models>
+      <Model mid="65" last="6" target="4" targetPosition="0" />
+    </Models>
+  </Will>
+  <Will id="CH005_1" name="帽子戏法" skillLevel="1" last="0" cd="45" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="10" goal="1"/>
+    </Triggers>
+    <ChangeActionState>
+      <State target="3" targetPosition="0" Orginal="HoldBallState" Change="DefaultShootState" skillId="CH005_1" />
+    </ChangeActionState>
+    <Models>
+      <Model mid="66" last="0" target="3" targetPosition="0" />
+    </Models>
+  </Will>
+  <Will id="CH006_1" name="稳固" skillLevel="1" last="0" cd="20" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="20" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="7" rate="20" last="0" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="8" rate="20" last="0" gradient="0" target="3" targetPosition="0"/>
+    </PropertyChanges>
+    <SkillBuffs>
+      <SkillBuff type="1" probability="80" skillId="CH006_1"></SkillBuff>
+    </SkillBuffs>
+    <Models>
+      <Model mid="68" last="0" target="1" targetPosition="0" />
+    </Models>
+  </Will>
+  <Will id="CH007_1" name="铁三角" skillLevel="1" last="0" cd="0" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="11" passSuccessTimes="1"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="1" rate="1" last="90" gradient="0" target="3" targetPosition="4"/>
+      <PropertyChange property="12" rate="-1" last="90" gradient="0" target="4" targetPosition="1"/>
+      <PropertyChange property="13" rate="-1" last="90" gradient="0" target="4" targetPosition="1"/>
+      <PropertyChange property="14" rate="-1" last="90" gradient="0" target="4" targetPosition="1"/>
+    </PropertyChanges>
+  </Will>
+  <Will id="CH008_1" name="临危受命" skillLevel="1" last="0" cd="45" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="1"/>
+    </Triggers>
+    <Debuffs>
+      <Debuff type="7" level="1" target="4" targetPosition="0" defenderNum="2" probability="80" skillId="CH008_1"></Debuff>
+    </Debuffs>
+  </Will>
+  <Will id="CH009_1" name="移形换影" skillLevel="1" last="0" cd="45" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="12" shootTimes="4" probability="100"/>
+    </Triggers>
+    <SpecialEffects>
+      <SpecialEffect name="ChangeShootGoalEffector" value="0,14|0,122|4" skillId="CH009_1" />
+    </SpecialEffects>
+  </Will>
+  <Will id="CH010_1" name="激射" skillLevel="1" last="0" cd="50" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="13" succDiveTimes="1" side="1"/>
+    </Triggers>
+    <ChangeActionState>
+      <State target="3" targetPosition="4" Orginal="HoldBallState" Change="DefaultShootState" skillId="CH010_1" />
+    </ChangeActionState>
+  </Will>
+  <Will id="CH011_1" name="吹风机" skillLevel="1" last="0" cd="30" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="12" shootTimes="2" probability="30"/>
+    </Triggers>
+    <Debuffs>
+      <Debuff type="2" level="5" target="3" targetPosition="0" probability="100"></Debuff>
+    </Debuffs>
+  </Will>
+
+  <Will id="CH012_1" name="狂人" skillLevel="1" last="10" cd="25" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="15" repeatGoal="1"  repeatSteal="1"/>
+      <Trigger type="7" probability="50"/>
+    </Triggers>
+    <SkillBuffs>
+      <SkillBuff type="2" probability="30" skillId="CH012_1"></SkillBuff>
+    </SkillBuffs>
+  </Will>
+  <Will id="CH013_1" name="烟雾" skillLevel="1" last="8" cd="25" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <SkillBuffs>
+      <SkillBuff type="3" probability="30" skillId="CH013_1"></SkillBuff>
+    </SkillBuffs>
+  </Will>
+  <Will id="CH014_1" name="暴击" skillLevel="1" last="0" cd="40" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <SkillBuffs>
+      <SkillBuff type="4" probability="30" skillId="CH014_1"></SkillBuff>
+    </SkillBuffs>
+  </Will>
+  <Will id="CH015_1" name="银狐" skillLevel="1" last="8" cd="30" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="16" stealTimes="1"/>
+      <Trigger type="7" probability="80"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="5" rate="-100" last="5" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="8" rate="-100" last="5" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="9" rate="-100" last="5" gradient="0" target="4" targetPosition="0"/>
+      <PropertyChange property="0" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="1" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="2" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="3" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="4" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="5" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="6" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="7" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="8" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="9" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="10" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="11" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="12" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="13" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="14" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="15" rate="50" last="5" gradient="0" target="3" targetPosition="0" />
+    </PropertyChanges>
+  </Will>
+  <Will id="CH016_1" name="希腊神话" skillLevel="1" last="0" cd="35" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="5" matchTime="0" score="-1"/>
+      <Trigger type="7" probability="90"/>
+    </Triggers>
+    <SkillBuffs>
+      <SkillBuff type="6" probability="50" skillId="CH016_1"></SkillBuff>
+    </SkillBuffs>
+  </Will>
+  <Will id="CH017_1" name="神奇" skillLevel="1" last="0" cd="40" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="20" last="5" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="7" rate="20" last="5" gradient="0" target="3" targetPosition="0"/>
+      <PropertyChange property="8" rate="20" last="5" gradient="0" target="3" targetPosition="0"/>
+    </PropertyChanges>
+    <SkillBuffs>
+      <SkillBuff type="1" probability="100" skillId="CH017_1"></SkillBuff>
+    </SkillBuffs>
+  </Will>
+
+  <Will id="CH018_1" name="孙子兵法" skillLevel="1" last="0" cd="45" type="0" isAnimation="0">
+    <Triggers>
+      <Trigger type="18" probability="100"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="12" rate="50" last="0" gradient="0" target="3" targetPosition="1"/>
+      <PropertyChange property="13" rate="50" last="0" gradient="0" target="3" targetPosition="1"/>
+      <PropertyChange property="14" rate="50" last="0" gradient="0" target="3" targetPosition="1"/>
+    </PropertyChanges>
+    <ShootSkills>
+      <ShootSkill type="1"  coolDown="45" target="4" shootDistance="35"  actionProcRate="40" skillProcRate="100" skillId="CH018_1"></ShootSkill>
+    </ShootSkills>
+  </Will>
+  
+  <Will id="CH019_1" name="全攻全守" skillLevel="1" last="0" cd="45" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="19" />
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="6" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="7" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="8" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="9" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="10" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="11" rate="60" last="6" gradient="0" target="3" targetPosition="0" />
+      <PropertyChange property="6" rate="-60" last="6" gradient="0" target="4" targetPosition="0" />
+    </PropertyChanges>
+    <ActionTriggers>
+      <ActionTrigger  type="1"></ActionTrigger>
+    </ActionTriggers>
+    <SkillCoolDowns>
+      <SkillCoolDown  coolDown="45" skillType="0,1,2,3,4" last="6" skillId="CH019_1"></SkillCoolDown>
+    </SkillCoolDowns>
+  </Will>
+
+  <Will id="CH020_1" name="桑巴狼" skillLevel="1" last="0" cd="45" type="0" isAnimation="1">
+    <Triggers>
+      <Trigger type="7" probability="100"/>
+    </Triggers>
+    <PropertyChanges>
+      <PropertyChange property="0" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="1" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="2" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="3" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="4" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="5" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="6" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="7" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="8" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="9" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="10" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="11" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="12" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="13" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="14" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+      <PropertyChange property="15" rate="60" last="5" gradient="0" target="3" targetPosition="2" />
+
+      <PropertyChange property="0" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+      <PropertyChange property="1" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+      <PropertyChange property="2" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+      <PropertyChange property="9" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+      <PropertyChange property="10" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+      <PropertyChange property="11" rate="30" last="5" gradient="0" target="3" targetPosition="1,3,4" />
+    </PropertyChanges>
+    <SkillBuffs>
+      <SkillBuff type="7" probability="100" skillId="CH020_1"></SkillBuff>
+    </SkillBuffs>
+    <Models>
+      <Model mid="90" last="5" target="3" targetPosition="2" />
+    </Models>
+  </Will>
+
+</Wills>

@@ -1,0 +1,3779 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HTB.DevFx.Security</name>
+    </assembly>
+    <members>
+        <member name="T:HTB.DevFx.Security.Authentication">
+            <summary>
+            认证类
+            </summary>
+            <remarks>
+            提供对用户认证的一些接口，实现<see cref="T:System.Security.Principal.IPrincipal"/>接口，应用程序中可以使用线程属性<see cref="P:System.Threading.Thread.CurrentPrincipal"/>来获得本类的实例<br/>
+            本类是多例模式，每个线程一个实例<br/>
+            配置文件格式和说明：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;--认证配置，cacheName表示用户缓存器名，依赖Cache的配置--&gt;
+            			&lt;authentication cacheName="security"&gt;
+            				&lt;--FORM认证方式配置，name表示发送到客户端的Cookie名称，path为Cookie的有效路径，loginUrl是登录页面地址，timeout表示用户过期时间（秒）--&gt;
+            				&lt;forms name=".devfxauth" loginUrl="~/frame/login.aspx" timeout="1200"&gt;
+            					&lt;--匿名用户配置，enabled表示允许匿名登录与否，name表示匿名用户名，role表示匿名用户隶属的角色--&gt;
+            					&lt;anonymous enabled="true" name="guest" role="guest" /&gt;
+            					&lt;--跳过认证的页面配置--&gt;
+            					&lt;skips&gt;
+            						&lt;page url="~/frame/error.aspx" /&gt;
+            					&lt;/skips&gt;
+            				&lt;/forms&gt;
+            			&lt;/authentication&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            </remarks>
+            <example>
+            在WEB应用程序中，可以这么获得本类实例：
+            	<code>
+            		private void Page_Load(object sender, EventArgs e) {
+            			Authentication auth = this.User as Authentication;
+            			if(auth != null) {
+            				///your code here......
+            			}
+            		}
+            	</code>
+            当然，也可以直接这么获取本类的实例：<c>Securitor.Authentication</c>
+            </example>
+        </member>
+        <member name="F:HTB.DevFx.Security.Authentication.ReturnUrlName">
+            <summary>
+            登录成功后返回的URL地址参数名
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.#ctor(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            构造方法（由<see cref="T:HTB.DevFx.Security.ISecurityManager"/>的实例调用）
+            </summary>
+            <param name="securityManager">ISecurityManager的实例</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.Authenticate(System.String,System.String)">
+            <summary>
+            用户登录认证
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <returns>是否认证成功</returns>
+            <example>
+            这里摘录管理页面登录部分代码：
+            	<code>
+            		private void btnLogin_Click(object sender, EventArgs e) {
+            			if(!this.IsValid) {
+            				this.lblMessage.Text = "请输入用户名和密码";
+            				return;
+            			}
+            			Authentication authentication = this.User as Authentication;
+            			if(authentication == null) {
+            				this.lblMessage.Text = "配置错误";
+            				return;
+            			}
+            			if(!authentication.Authenticate(this.txtUserName.Text, this.txtPassword.Text)) {
+            				this.lblMessage.Text = "登录失败";
+            				return;
+            			}
+            
+            			this.Response.AppendCookie(authentication.GetAuthCookie());
+            			this.Response.Redirect(authentication.GetRedirectUrl(this.Request));
+            		}
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.Authenticate(System.String,System.String,System.Object[])">
+            <summary>
+            用户登录认证（允许传入其他参数认证，比如动态令牌等）
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="infos">其他附件信息</param>
+            <returns>认证处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetAuthCookie">
+            <summary>
+            用户认证成功后获取认证的Cookie，由WEB应用系统发到客户端（此方法仅限于WEB系统）
+            </summary>
+            <returns>认证的Cookie实例，如果没有认证，此Cookie是无效的</returns>
+            <example>
+            	示例请参见<see cref="M:HTB.DevFx.Security.Authentication.Authenticate(System.String,System.String)"/>的说明
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetSignoutAuthCookie">
+            <summary>
+            用户退出后的Cookie（用于用户退出登录），同时权限模块将清除此用户的缓存
+            </summary>
+            <returns>HttpCookie实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetAuthCookiePath">
+            <summary>
+            获取Cookie的路径信息
+            </summary>
+            <returns>Cookie的路径信息</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetLoginUrl">
+            <summary>
+            获得配置的登录页面Url
+            </summary>
+            <returns>登录页面Url</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.ExtractTokenFromCookie(System.Web.HttpRequest)">
+            <summary>
+            从用户请求中获取用户的Token信息
+            </summary>
+            <param name="req">用户请求HttpRequest实例</param>
+            <returns>用户的Token</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetRedirectUrl(System.Web.HttpRequest)">
+            <summary>
+            获得登录成功后转向的页面Url（以“/”打头的Url）
+            </summary>
+            <param name="req">用户请求HttpRequest实例</param>
+            <returns>转向的页面Url</returns>
+            <example>
+            	示例请参见<see cref="M:HTB.DevFx.Security.Authentication.Authenticate(System.String,System.String)"/>的说明
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.GetEmptyAuthCookie">
+            <summary>
+            获取空的认证Cookie，用于清空客户端Cookie信息（用户登出）
+            </summary>
+            <returns>HttpCookie实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.IsSkipUrl(System.Web.HttpRequest)">
+            <summary>
+            判断当前的用户请求是否是跳过认证
+            </summary>
+            <param name="req">用户请求HttpRequest实例</param>
+            <returns>是/否</returns>
+            <remarks>
+            依赖于配置文件的配置节，如下：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;authentication cacheName="security"&gt;
+            				&lt;forms name=".devfxauth" loginUrl="~/frame/login.aspx" timeout="1200"&gt;
+            					&lt;anonymous enabled="true" name="guest" role="guest" /&gt;
+            					&lt;skips&gt;
+            						&lt;page url="~/frame/error.aspx" /&gt;
+            					&lt;/skips&gt;
+            				&lt;/forms&gt;
+            			&lt;/authentication&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            由<c>&lt;skips&gt;</c>配置节指定哪些页面是需要跳过的
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.IsLoginUrl(System.Web.HttpRequest)">
+            <summary>
+            判断当前请求是否为配置的登录页面
+            </summary>
+            <param name="req">用户请求HttpRequest实例</param>
+            <returns>是/否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authentication.LoginAsAnonymous">
+            <summary>
+            作为匿名用户登录系统
+            </summary>
+            <returns>登录成功与否</returns>
+            <remarks>
+            依赖于配置文件的配置节，如下：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;authentication cacheName="security"&gt;
+            				&lt;forms name=".devfxauth" loginUrl="~/frame/login.aspx" timeout="1200"&gt;
+            					&lt;anonymous enabled="true" name="guest" role="guest" /&gt;
+            					&lt;skips&gt;
+            						&lt;page url="~/frame/error.aspx" /&gt;
+            					&lt;/skips&gt;
+            				&lt;/forms&gt;
+            			&lt;/authentication&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            由配置节<c>&lt;anonymous enabled="true" name="guest" role="guest" /&gt;</c>决定<br />
+            其中<br />
+            <c>enabled="true"</c>表示系统是否允许匿名登录<br />
+            <c>name="guest"</c>表示匿名用户模拟的用户名<br />
+            <c>role="guest"</c>表示匿名用户隶属的角色（不支持多角色）<br />
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.IsAnonymous">
+            <summary>
+            当前用户是否为匿名用户
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.IsAuthenticated">
+            <summary>
+            当前用户是否已认证
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.CurrentRoles">
+            <summary>
+            当前用户的角色列表（角色编号数组）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.CurrentRoleEntities">
+            <summary>
+            当前用户的角色列表（角色实体数组）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.CurrentRelations">
+            <summary>
+            当前用户的授权关系列表
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Authentication.Identity">
+            <summary>
+            获取当前用户标识
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Authenticator">
+            <summary>
+            认证者，实现<see cref="T:HTB.DevFx.Security.IAuthenticator"/>接口
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.IAuthenticator">
+            <summary>
+            认证者接口（用于认证系统和用户体系的解耦）
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;authenticator type="认证者接口实现类型" /&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.Init(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="securityManager">ISecurityManager</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.Init(HTB.DevFx.Security.ISecurityManager,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="securityManager">ISecurityManager</param>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.GetInstance">
+            <summary>
+            获取认证者实例
+            </summary>
+            <returns>IAuthenticator实现实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.UserLogin(System.String,System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <returns>登录成功已否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.UserLogin(System.String,System.String,System.Object[])">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="infos">其他附加信息</param>
+            <returns>登录处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.UserLogout(System.String)">
+            <summary>
+            用户登出
+            </summary>
+            <param name="userName">用户名</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.UserLogout(System.String,System.Object[])">
+            <summary>
+            用户登出
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="infos">其他附加信息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.GetUserRoles(System.String)">
+            <summary>
+            获得用户的角色（角色编号数组）
+            </summary>
+            <param name="userName">用户名</param>
+            <returns>角色编号数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.AddUserRole(System.String,System.String)">
+            <summary>
+            添加用户到角色中
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IAuthenticator.RemoveUserRole(System.String,System.String)">
+            <summary>
+            从角色中移除用户
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Authenticator.securityManager">
+            <summary>
+            安全管理实例
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Authenticator.userManager">
+            <summary>
+            用户管理实例
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Authenticator.setting">
+            <summary>
+            配置节
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Authenticator.isInit">
+            <summary>
+            验证器是否被初始
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.Init(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="securityManager">ISecurityManager</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.Init(HTB.DevFx.Security.ISecurityManager,HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="securityManager">ISecurityManager</param>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.GetInstance">
+            <summary>
+            获取认证者实例
+            </summary>
+            <returns>IAuthenticator实现实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.UserLogin(System.String,System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <returns>登录成功已否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.UserLogin(System.String,System.String,System.Object[])">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="infos">其他附加信息</param>
+            <returns>登录处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.UserLogout(System.String)">
+            <summary>
+            用户登出
+            </summary>
+            <param name="userName">用户名</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.UserLogout(System.String,System.Object[])">
+            <summary>
+            用户登出
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="infos">其他附加信息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.GetUserRoles(System.String)">
+            <summary>
+            获得用户的角色（角色编号数组）
+            </summary>
+            <param name="userName">用户名</param>
+            <returns>角色编号数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.AddUserRole(System.String,System.String)">
+            <summary>
+            添加用户到角色中
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authenticator.RemoveUserRole(System.String,System.String)">
+            <summary>
+            从角色中移除用户
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Security.Authorization">
+            <summary>
+            授权判断类
+            </summary>
+            <remarks>
+            本类在整个权限模块中是单例模式
+            </remarks>
+            <example>
+            在应用程序中，可以这么获得本类实例：<c>Securitor.Authorization</c><br />
+            本类为各种验证用户是否有权限提供了各种重载方法，以期简化权限判断<br />
+            下面示例演示一种权限判断的方法：
+            	<code>
+            		private void Page_Load(object sender, EventArgs e) {
+            			if(Securitor.Authorization.Authorize(Const.CanDoSomething).IsSuccess) {
+            				//access accepted
+            			} else {//access denied
+            				this.lblMessage.Text = "您没有权限";
+            				return;
+            			}
+            		}
+            	</code>
+            还可以这样：
+            	<code>
+            		private void Page_Load(object sender, EventArgs e) {
+            			Securitor.Authorization.Authorize(Const.CanDoSomething).ThrowErrorOnFailed();
+            			//access accepted
+            		}
+            	</code>
+            或者是这样：
+            	<code>
+            		[Permission(Const.CanDoSomething), PrincipalPermission(SecurityAction.Demand, Role=PermissionAttribute.PermissionRole)]
+            		private void Page_Load(object sender, EventArgs e) {
+            			//access accepted
+            		}
+            	</code>
+            或者是这样：
+            	<code>
+            		[Permission(Const.CanDoSomething)]
+            		private void Page_Load(object sender, EventArgs e) {
+            			Securitor.Authorization.Authorize().ThrowErrorOnFailed();
+            			//access accepted
+            		}
+            	</code>
+            具有权限范围的可以这样判断：
+            	<code>
+            		private void Page_Load(object sender, EventArgs e) {
+            			if(Securitor.Authorization.Authorize(Const.CanDoSomething, SomethingNo).IsSuccess) {
+            				//access accepted
+            			} else {//access denied
+            				this.lblMessage.Text = "您没有权限";
+            				return;
+            			}
+            		}
+            	</code>
+            其中<c>SomethingNo</c>就是权限范围的编码，比如论坛发帖的功能中，就是版面的编码（或ID），<br />
+            当然了，<c>Const.CanDoSomething</c>设置的时候应该对应有权限范围的（比如这里是版面）
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.#ctor(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            构造方法（由<see cref="T:HTB.DevFx.Security.ISecurityManager"/>的实例调用）
+            </summary>
+            <param name="securityManager">ISecurityManager的实例</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize">
+            <summary>
+            权限判断
+            </summary>
+            <returns>处理结果</returns>
+            <remarks>
+            通过调用方设置了属性来判断
+            </remarks>
+            <example>
+            	<code>
+            		[Permission(Const.CanDoSomething)]
+            		private void Page_Load(object sender, EventArgs e) {
+            			Securitor.Authorization.Authorize().ThrowErrorOnFailed();
+            			//access accepted
+            		}
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(System.Web.HttpRequest)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="req">HttpRequest</param>
+            <returns>处理结果</returns>
+            <remarks>
+            URL访问认证，由权限模块自动调用
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(System.String,System.String)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <param name="resNo">权限范围编号</param>
+            <returns>处理结果</returns>
+            <example>
+            	<code>
+            		private void Page_Load(object sender, EventArgs e) {
+            			if(Securitor.Authorization.Authorize(Const.CanDoSomething, SomethingNo).IsSuccess) {
+            				//access accepted
+            			} else {//access denied
+            				this.lblMessage.Text = "您没有权限";
+            				return;
+            			}
+            		}
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(System.String[])">
+            <summary>
+            权限判断
+            </summary>
+            <param name="permissionNos">权限编号列表</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(HTB.DevFx.Security.RelationCollection,System.String[])">
+            <summary>
+            权限判断
+            </summary>
+            <param name="relations">授权关系集合</param>
+            <param name="permissionNos">权限编号</param>
+            <returns>处理结果</returns>
+            <remarks>
+            在指定的授权集合中<paramref name="relations" />进行权限判断
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(System.String,System.String,HTB.DevFx.Security.RelationStatusFlags)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <param name="resNo">权限范围编号</param>
+            <param name="statusFlags">授权属性（比如判断是否可列出、可赋予、可执行等）</param>
+            <returns>处理结果</returns>
+            <remarks>
+            使用指定的授权属性<paramref name="statusFlags" />来进行权限判断
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(HTB.DevFx.Security.RelationCollection,System.String,System.String,HTB.DevFx.Security.RelationStatusFlags)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="relations">授权关系集合</param>
+            <param name="permissionNo">权限编号</param>
+            <param name="resNo">权限范围编号</param>
+            <param name="statusFlags">授权属性（比如判断是否可列出、可赋予、可执行等）</param>
+            <returns>处理结果</returns>
+            <remarks>
+            使用指定的授权关系集合<paramref name="relations" />和属性<paramref name="statusFlags" />来进行权限判断
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Authorization.Authorize(System.String,HTB.DevFx.Security.RelationStatusFlags)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <param name="statusFlags">授权属性（比如判断是否可列出、可赋予、可执行等）</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Security.Const">
+            <summary>
+            权限模块内置的一些权限编码列表
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.System_Permission">
+            <summary>
+            系统菜单
+            </summary>
+            <remarks>
+            系统菜单入口<br />
+            （也是系统权限的根，建议其他权限都从这里派生）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.System_LoginUrl">
+            <summary>
+            登录系统
+            </summary>
+            <remarks>
+            系统登录页面的入口地址<br />
+            （~/frame/login.aspx?ReturnUrl=~/）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.System_AllowVisitPage">
+            <summary>
+            允许用户访问页面
+            </summary>
+            <remarks>
+            允许用户访问系统中的页面
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.System_LogoutUrl">
+            <summary>
+            退出系统
+            </summary>
+            <remarks>
+            退出登录的页面地址<br />
+            （~/frame/logout.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permision_System">
+            <summary>
+            系统设置
+            </summary>
+            <remarks>
+            系统设置菜单入口（对权限系统进行授权设置等）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_Permission">
+            <summary>
+            权限管理
+            </summary>
+            <remarks>
+            权限管理的入口菜单地址（对权限本身的管理）<br />
+            （~/security/permission.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_PermissionAdd">
+            <summary>
+            新建权限
+            </summary>
+            <remarks>
+            允许用户建立新的权限
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_PermissionDelete">
+            <summary>
+            删除权限
+            </summary>
+            <remarks>
+            允许用户删除系统中的权限
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_PermissionUpdate">
+            <summary>
+            更新权限
+            </summary>
+            <remarks>
+            允许用户更新权限信息
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_PermissionListAll">
+            <summary>
+            列出系统中所有权限
+            </summary>
+            <remarks>
+            允许用户列出系统中所有权限（无权限限制）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_Role">
+            <summary>
+            角色管理
+            </summary>
+            <remarks>
+            进行角色管理的菜单入口地址<br />
+            （对角色进行一系列的管理操作）
+            （~/security/role.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RoleAdd">
+            <summary>
+            新建角色
+            </summary>
+            <remarks>
+            允许用户建立新的角色
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RoleDelete">
+            <summary>
+            删除角色
+            </summary>
+            <remarks>
+            允许用户删除系统中的角色
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RoleUpdate">
+            <summary>
+            更新角色
+            </summary>
+            <remarks>
+            允许用户更新角色信息
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RoleListAll">
+            <summary>
+            列出系统中所有角色
+            </summary>
+            <remarks>
+            允许用户列出系统中所有角色（无权限限制）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_Relation">
+            <summary>
+            授权管理
+            </summary>
+            <remarks>
+            授权管理的菜单地址<br />
+            （对角色和权限之间的关系进行一系列的管理操作）
+            （~/security/relation.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationAdd">
+            <summary>
+            新建授权关系
+            </summary>
+            <remarks>
+            允许用户新建角色和权限、权限范围之间的关系
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationDelete">
+            <summary>
+            删除授权关系
+            </summary>
+            <remarks>
+            允许用户删除角色和权限、权限范围之间的关系
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationUpdate">
+            <summary>
+            更新授权关系
+            </summary>
+            <remarks>
+            允许用户更新授权关系，比如优先级等
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationListAll">
+            <summary>
+            列出系统所有的授权关系
+            </summary>
+            <remarks>
+            允许用户列出系统所有的授权关系（无权限限制）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_AddPermissionToRole">
+            <summary>
+            添加权限到角色
+            </summary>
+            <remarks>
+            允许用户添加权限到角色中
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RemovePermissionFromRole">
+            <summary>
+            从角色中移除权限
+            </summary>
+            <remarks>
+            允许用户从角色中移除权限
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationPriorityUpdate">
+            <summary>
+            更新授权优先级
+            </summary>
+            <remarks>
+            允许用户更新授权优先级（Priority）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Permission_RelationStatusUpdate">
+            <summary>
+            更新授权属性
+            </summary>
+            <remarks>
+            允许用户更新授权属性（StatusFlags）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_User">
+            <summary>
+            用户管理
+            </summary>
+            <remarks>
+            进行用户管理的菜单入口地址（对系统的用户进行管理）
+            （~/security/user.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserAdd">
+            <summary>
+            新建用户
+            </summary>
+            <remarks>
+            允许用户建立新的用户
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserDelete">
+            <summary>
+            删除用户
+            </summary>
+            <remarks>
+            允许用户删除系统中的用户
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserUpdate">
+            <summary>
+            更新用户
+            </summary>
+            <remarks>
+            允许用户更新用户信息（比如用户名等）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserListAll">
+            <summary>
+            列出系统中所有用户
+            </summary>
+            <remarks>
+            允许用户列出系统中所有用户（无权限限制）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_ChangePassword">
+            <summary>
+            修改用户密码
+            </summary>
+            <remarks>
+            允许用户修改登录密码
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_AddUserToRole">
+            <summary>
+            添加用户到角色
+            </summary>
+            <remarks>
+            允许用户添加用户到角色
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_RemoveUserFromRole">
+            <summary>
+            从角色中移除用户
+            </summary>
+            <remarks>
+            允许用户从角色中移除用户
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserLoginByProxy">
+            <summary>
+            用户代理登录
+            </summary>
+            <remarks>
+            允许用户登录系统，以自己的身份登录系统后切换用户时的权限
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_UserLogin">
+            <summary>
+            允许用户登录系统
+            </summary>
+            <remarks>
+            允许用户登录系统
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_Group">
+            <summary>
+            组管理
+            </summary>
+            <remarks>
+            进行组管理的菜单入口地址（组的一系列管理操作）<br />
+            （~/security/group.aspx）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_GroupAdd">
+            <summary>
+            新建组
+            </summary>
+            <remarks>
+            允许用户建立新的组
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_GroupDelete">
+            <summary>
+            删除组
+            </summary>
+            <remarks>
+            允许用户删除组
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_GroupUpdate">
+            <summary>
+            更新组
+            </summary>
+            <remarks>
+            允许用户更新组信息
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_GroupListAll">
+            <summary>
+            列出系统中所有组
+            </summary>
+            <remarks>
+            允许用户列出系统中所有组（无权限限制）
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_AddUserToGroup">
+            <summary>
+            添加用户到组
+            </summary>
+            <remarks>
+            允许用户添加用户到组
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.User_RemoveUserFromGroup">
+            <summary>
+            从组中移除用户
+            </summary>
+            <remarks>
+            允许用户从组中移除用户
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Group_AddGroupToRole">
+            <summary>
+            添加角色到组中
+            </summary>
+            <remarks>
+            允许用户添加角色到组
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Group_RemoveGroupFromRole">
+            <summary>
+            从组中移除角色
+            </summary>
+            <remarks>
+            允许用户从组中移除角色
+            </remarks>
+        </member>
+        <member name="F:HTB.DevFx.Security.Const.Group_DenyUserGroupRole">
+            <summary>
+            禁止用户继承所属组的角色
+            </summary>
+            <remarks>
+            默认情况下，组拥有的角色，此组下面用户也继承地拥有 <br />
+            赋予用户此权限，将改变此规则，即用户只能拥有自己直接隶属的角色
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.DataProvider">
+            <summary>
+            数据提供者接口 <see cref="T:HTB.DevFx.Security.Data.IDataProvider"/> 的基础抽象类，封装了各数据库公共操作
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.IDataProvider">
+            <summary>
+            权限模块的数据提供者接口
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;dataProvider type="数据提供者实现类型" /&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.LoadSchema(HTB.DevFx.Security.Data.ProviderDataType)">
+            <summary>
+            获取权限模块数据的Schema
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <returns>含有Schema的DataTable实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.LoadData(HTB.DevFx.Security.Data.ProviderDataType)">
+            <summary>
+            载入数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <returns>含有Schema和数据的DataTable实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.SaveItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataTable)">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemData">含有需要保存数据的DataTable实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.SaveItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要保存数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataTable)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemData">含有需要删除数据的DataTable实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要删除数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.IDataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Object[])">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="parameters">需要删除的数据关键字段值（根据数据类型不同而不同）</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.IDataProvider.ProviderName">
+            <summary>
+            数据提供者名称
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.DataProvider.dataSet">
+            <summary>
+            数据集
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.DataProvider.isInit">
+            <summary>
+            是否已初始化
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.DataProvider.connectionStringSettings">
+            <summary>
+            数据库链接字符串配置节
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.InitData">
+            <summary>
+            初始化数据
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.InitConnectionString(System.String)">
+            <summary>
+            初始化ConnectionString
+            </summary>
+            <param name="connectionName">ConnectionString在配置节中的名称</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.FillSchema(System.Data.DataSet)">
+            <summary>
+            填充DataSet的Schema
+            </summary>
+            <param name="dataSet">数据集</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.FillDataSet(System.Data.DataSet)">
+            <summary>
+            从数据库获取数据并填入<paramref name="dataSet"/>
+            </summary>
+            <param name="dataSet">数据集</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.SaveItemInternal(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            保存数据（抽象）
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要保存数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由权限模块调用
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.LoadSchema(HTB.DevFx.Security.Data.ProviderDataType)">
+            <summary>
+            获取权限模块数据的Schema
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <returns>含有Schema的DataTable实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.LoadData(HTB.DevFx.Security.Data.ProviderDataType)">
+            <summary>
+            载入数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <returns>含有Schema和数据的DataTable实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.SaveItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataTable)">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemData">含有需要保存数据的DataTable实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.SaveItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要保存数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataTable)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemData">含有需要删除数据的DataTable实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要删除数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.DataProvider.DeleteItem(HTB.DevFx.Security.Data.ProviderDataType,System.Object[])">
+            <summary>
+            删除数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="parameters">需要删除的数据关键字段值（根据数据类型不同而不同）</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.DataProvider.ProviderName">
+            <summary>
+            数据提供者名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.ProviderDataType">
+            <summary>
+            数据类型枚举
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.Permission">
+            <summary>
+            权限数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.Role">
+            <summary>
+            角色数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.Relation">
+            <summary>
+            授权关系数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.User">
+            <summary>
+            用户数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.Group">
+            <summary>
+            组数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.UserGroup">
+            <summary>
+            用户和组关系的数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.UserRole">
+            <summary>
+            用户和角色关系的数据
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Data.ProviderDataType.GroupRole">
+            <summary>
+            组和角色关系的数据
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.BaseDataProvider">
+            <summary>
+            使用纯SQL语句来实现数据提供者接口：<see cref="T:HTB.DevFx.Security.Data.IDataProvider"/>
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.CreateParameter(System.String,System.Data.DbType,System.Nullable{System.Int32},System.Object)">
+            <summary>
+            创建 <see cref="T:System.Data.Common.DbParameter"/>
+            </summary>
+            <param name="parameterName">参数名</param>
+            <param name="dbType">参数类型</param>
+            <param name="size">参数大小</param>
+            <param name="value">参数值</param>
+            <returns><see cref="T:System.Data.Common.DbParameter"/></returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.GetParameterName(System.String)">
+            <summary>
+            获取参数名
+            </summary>
+            <param name="parameterName">默认的参数名</param>
+            <returns>特定参数名</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.FormatSqlString(System.String)">
+            <summary>
+            针对特定数据库进行SQL语句的格式化
+            </summary>
+            <param name="sql">原始SQL语句</param>
+            <returns>格式化后的SQL语句</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.GetRelationID(System.Data.Common.DbTransaction)">
+            <summary>
+            获取Relation表的自增ID（Oracle不直接支持自增字段，需在此重写）
+            </summary>
+            <param name="trans">当前事务</param>
+            <returns>支持自增字段直接返回<c>null</c>，不支持者则返回下一个RelationID的值</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.ExecuteCommand(HTB.DevFx.Security.Data.ProviderDataType,System.Data.StatementType,System.Data.Common.DbCommand,System.Data.DataRow)">
+            <summary>
+            执行已准备好的<see cref="T:System.Data.Common.DbCommand"/>
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="statement">当前进行的操作</param>
+            <param name="command"><see cref="T:System.Data.Common.DbCommand"/></param>
+            <param name="row">需更新的<see cref="T:System.Data.DataRow"/></param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.FillDataSet(System.Data.DataSet)">
+            <summary>
+            从数据库获取数据并填入<paramref name="dataSet"/>
+            </summary>
+            <param name="dataSet">数据集</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveItemInternal(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要保存数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SavePermissionData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存Permission数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveGroupRoleData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存GroupRole数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveUserRoleData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存UserRole数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveUserGroupData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存UserGroup数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveGroupData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存Group数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveUserData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存User数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveRelationData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存Relation数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.BaseDataProvider.SaveRoleData(System.Data.Common.DbTransaction,System.Data.DataRow)">
+            <summary>
+            保存Role数据
+            </summary>
+            <param name="trans">当前事务</param>
+            <param name="row">需保存的纪录</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.BaseDataProvider.ProviderFactory">
+            <summary>
+            数据提供者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.BaseDataProvider.ParameterNamePrefix">
+            <summary>
+            SQL命名参数前缀
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.OleDbDataProvider">
+            <summary>
+            使用OleDb来实现数据提供者接口：<see cref="T:HTB.DevFx.Security.Data.IDataProvider"/>
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.OleDbDataProvider.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.OleDbDataProvider.InitConnectionString(System.String)">
+            <summary>
+            初始化ConnectionString
+            </summary>
+            <param name="connectionName">ConnectionString在配置节中的名称</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.OleDbDataProvider.ProviderFactory">
+            <summary>
+            数据提供者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.OleDbDataProvider.ProviderName">
+            <summary>
+            数据提供者名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.OracleDataProvider">
+            <summary>
+            使用Oracle来实现数据提供者接口：<see cref="T:HTB.DevFx.Security.Data.IDataProvider"/>
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.OracleDataProvider.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.OracleDataProvider.FormatSqlString(System.String)">
+            <summary>
+            针对Oracle数据库进行SQL语句的格式化
+            </summary>
+            <param name="sql">原始SQL语句</param>
+            <returns>格式化后的SQL语句</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.OracleDataProvider.GetRelationID(System.Data.Common.DbTransaction)">
+            <summary>
+            获取Relation表的自增ID
+            </summary>
+            <param name="trans">当前事务</param>
+            <returns>返回下一个RelationID的值</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.OracleDataProvider.ProviderName">
+            <summary>
+            数据提供者名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.OracleDataProvider.ProviderFactory">
+            <summary>
+            数据提供者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.OracleDataProvider.ParameterNamePrefix">
+            <summary>
+            SQL命名参数前缀
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Data.SqlDataProvider">
+            <summary>
+            使用MSSQL来实现数据提供者接口：<see cref="T:HTB.DevFx.Security.Data.IDataProvider"/>
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.SqlDataProvider.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.SqlDataProvider.BuildCommands(HTB.DevFx.Security.Data.ProviderDataType,System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlCommand@,System.Data.SqlClient.SqlCommand@,System.Data.SqlClient.SqlCommand@)">
+            <summary>
+            构建<see cref="T:System.Data.Common.DbCommand"/>
+            </summary>
+            <param name="dataType">数据类型 <see cref="T:HTB.DevFx.Security.Data.ProviderDataType"/></param>
+            <param name="connection">当前的数据库链接对象</param>
+            <param name="insertCommand">InserCommand</param>
+            <param name="deleteCommand">DeleteCommand</param>
+            <param name="updateCommand">UpdateCommand</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.SqlDataProvider.FillDataSet(System.Data.DataSet)">
+            <summary>
+            从数据库获取数据并填入<paramref name="dataSet"/>
+            </summary>
+            <param name="dataSet">数据集</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Data.SqlDataProvider.SaveItemInternal(HTB.DevFx.Security.Data.ProviderDataType,System.Data.DataRow[])">
+            <summary>
+            保存数据
+            </summary>
+            <param name="dataType">数据类型（比如 <see cref="F:HTB.DevFx.Security.Data.ProviderDataType.Permission"/> 等）</param>
+            <param name="itemsData">含有需要保存数据的DataRow数组实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Data.SqlDataProvider.ProviderName">
+            <summary>
+            数据提供者名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Entity">
+            <summary>
+            实体接口的抽象实现
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.IEntity">
+            <summary>
+            实体接口
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.IEntity.Save">
+            <summary>
+            保存实体
+            </summary>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IEntity.Delete">
+            <summary>
+            删除实体
+            </summary>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IEntity.Reset">
+            <summary>
+            恢复实体的原始值
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.IEntity.Item(System.String)">
+            <summary>
+            获取实体的扩展属性
+            </summary>
+            <param name="extName">扩展属性名</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.IEntity.Item(System.String,System.Boolean)">
+            <summary>
+            获取实体的扩展属性
+            </summary>
+            <param name="extName">扩展属性名</param>
+            <param name="throwOnError">发生错误时是否抛出异常</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.IEntity.IsDirty">
+            <summary>
+            实体是否已被修改
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.IEntity.IsNew">
+            <summary>
+            实体是否是新建立的
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.IEntity.IsDeleted">
+            <summary>
+            实体是否已被删除
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.#ctor(HTB.DevFx.Security.IManager,System.Data.DataRow)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="manager">管理此实体的管理接口实现实例</param>
+            <param name="dr">此实体内含的数据DataRow</param>
+        </member>
+        <member name="F:HTB.DevFx.Security.Entity.manager">
+            <summary>
+            管理实例
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.Entity.dr">
+            <summary>
+            内部数据
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.SafelyGetValue(System.String,System.Object)">
+            <summary>
+            安全获取属性值（用于DataRow数据的读取）
+            </summary>
+            <param name="propertyName">属性名</param>
+            <param name="defaultValue">缺省值</param>
+            <returns>获取的属性值</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.SafelyGetValue``1(System.String,``0)">
+            <summary>
+            安全获取属性值（用于DataRow数据的读取）
+            </summary>
+            <typeparam name="T">预期的数据类型</typeparam>
+            <param name="propertyName">属性名</param>
+            <param name="defaultValue">缺省值</param>
+            <returns>获取的属性值</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.SafelyGetValue``1(System.String)">
+            <summary>
+            安全获取属性值（用于DataRow数据的读取）
+            </summary>
+            <typeparam name="T">预期的数据类型</typeparam>
+            <param name="propertyName">属性名</param>
+            <returns>获取的属性值</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.SetValue(System.String,System.Object)">
+            <summary>
+            设置属性值
+            </summary>
+            <param name="propertyName">属性名</param>
+            <param name="value">属性值</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.GetDataRow">
+            <summary>
+            获得此实体的内部数据
+            </summary>
+            <returns>DataRow</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.AcceptChanges">
+            <summary>
+            接受外部的更改
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.RejectChanges">
+            <summary>
+            拒绝外部的更改
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.Save">
+            <summary>
+            保存实体
+            </summary>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.Delete">
+            <summary>
+            删除实体
+            </summary>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Entity.Reset">
+            <summary>
+            恢复实体的原始值
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Entity.Item(System.String)">
+            <summary>
+            获取实体的扩展属性
+            </summary>
+            <param name="extName">扩展属性名</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.Entity.Item(System.String,System.Boolean)">
+            <summary>
+            获取实体的扩展属性
+            </summary>
+            <param name="extName">扩展属性名</param>
+            <param name="throwOnError">发生错误时是否抛出异常</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.Entity.IsDirty">
+            <summary>
+            实体是否已被修改
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Entity.IsNew">
+            <summary>
+            实体是否是新建立的
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Entity.IsDeleted">
+            <summary>
+            实体是否已被删除
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Group">
+            <summary>
+            组实体类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Group.CreateChildGroup">
+            <summary>
+            创建子组
+            </summary>
+            <returns>子组实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Group.AddUser(System.String)">
+            <summary>
+            添加用户到本组
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Group.RemoveUser(System.String)">
+            <summary>
+            移除用户
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Group.ToString">
+            <summary>
+            转换成字符串格式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.GroupNo">
+            <summary>
+            组编号
+            </summary>
+            <remarks>
+            在新建立的组实体中才允许赋值
+            </remarks>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.Title">
+            <summary>
+            组名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.Description">
+            <summary>
+            组描述
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.ParentNo">
+            <summary>
+            上级组的编号（树形结构）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.LayerIndex">
+            <summary>
+            在树形结构中所处的层次（约定根为0）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.ChildCount">
+            <summary>
+            下一级组的个数
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.IsAvailable">
+            <summary>
+            是否有效
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.IsInnerGroup">
+            <summary>
+            是否内置组，内置组意味着不能删除
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.Children">
+            <summary>
+            获取本组下面的一级子组
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.ParentGroup">
+            <summary>
+            获取上级组（如存在则返回空）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.IndentTitle">
+            <summary>
+            缩进方式的名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.IndentChar">
+            <summary>
+            缩进名称所使用的缩进字符，默认为中文空格
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Group.IndentNum">
+            <summary>
+            缩进名称所使用的缩进个数，默认为1
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.GroupManager">
+            <summary>
+            组管理类
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.IManager">
+            <summary>
+            管理类接口
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.IManager.CreateItem">
+            <summary>
+            创建实体
+            </summary>
+            <returns>IEntity实现实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IManager.SaveItem(HTB.DevFx.Security.IEntity)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="item">IEntity实现实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IManager.DeleteItem(HTB.DevFx.Security.IEntity)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="item">IEntity实现实例</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.#ctor(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            构造方法（由<see cref="T:HTB.DevFx.Security.ISecurityManager"/>的实例调用）
+            </summary>
+            <param name="securityManager">ISecurityManager的实例</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.CreateItem">
+            <summary>
+            创建新组
+            </summary>
+            <returns>组实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.CreateItem(System.String)">
+            <summary>
+            创建新子组
+            </summary>
+            <param name="parentNo">上级组编号</param>
+            <returns>组实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.Contains(System.String)">
+            <summary>
+            系统中是否包含指定的组编号
+            </summary>
+            <param name="groupNo">组编号</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetItem(System.String)">
+            <summary>
+            获取组实体
+            </summary>
+            <param name="groupNo">组编号</param>
+            <returns>组实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.SaveItem(HTB.DevFx.Security.Group)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="group">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.DeleteItem(HTB.DevFx.Security.Group)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="group">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.DeleteItem(System.String)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="groupNo">实体编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.ListItem">
+            <summary>
+            列出组（有权限控制）
+            </summary>
+            <returns>组的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetAllItem">
+            <summary>
+            获取系统中所有的组（无权限限制）
+            </summary>
+            <returns>组的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetChildGroups(System.String)">
+            <summary>
+            获得子组
+            </summary>
+            <param name="parentNo">上级组编号</param>
+            <returns>组的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetGroupUsers(System.String)">
+            <summary>
+            获得组里的用户
+            </summary>
+            <param name="groupNo">组编号</param>
+            <returns>用户数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetUserGroups(System.String)">
+            <summary>
+            获取用户隶属的组
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>组的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.AddUserToGroup(System.String,System.String)">
+            <summary>
+            添加用户到组
+            </summary>
+            <param name="userNo">用户编号</param>
+            <param name="groupNo">组编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.RemoveUserFromGroup(System.String,System.String)">
+            <summary>
+            从组中移除用户
+            </summary>
+            <param name="userNo">用户编号</param>
+            <param name="groupNo">组编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetRoleGroups(System.String)">
+            <summary>
+            获取某角色下的所有组
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>组列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.GetGroupRoles(System.String)">
+            <summary>
+            获得组附属的角色
+            </summary>
+            <param name="groupNo">组编号</param>
+            <returns>角色编号列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.AddGroupToRole(System.String,System.String)">
+            <summary>
+            添加角色到组
+            </summary>
+            <param name="groupNo">组编号</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupManager.RemoveGroupFromRole(System.String,System.String)">
+            <summary>
+            从组中移除角色
+            </summary>
+            <param name="groupNo">组编号</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="T:HTB.DevFx.Security.GroupResType">
+            <summary>
+            组资源
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.IResType">
+            <summary>
+            资源接口（用于权限范围）
+            </summary>
+            <remarks>
+            配置文件格式和说明：
+            	<code>
+            		......
+            		&lt;security type="HTB.DevFx.Security.SecurityManager, HTB.DevFx.Security"&gt;
+            			......
+            			&lt;resManager&gt;
+            				&lt;permissionResTypes&gt;
+            					&lt;resType name="Null" title="(N/A)" type="HTB.DevFx.Security.NullResType, HTB.DevFx.Security" /&gt;
+            					&lt;resType name="Role" title="角色" type="HTB.DevFx.Security.RoleResType, HTB.DevFx.Security" /&gt;
+            					&lt;resType name="Group" title="用户组" type="HTB.DevFx.Security.GroupResType, HTB.DevFx.Security" /&gt;
+            					......
+            				&lt;/permissionResTypes&gt;
+            			&lt;/resManager&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.IResType.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由<see cref="T:HTB.DevFx.Security.ResManager"/>调用
+            </summary>
+            <param name="setting">配直节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.IResType.Contains(System.String)">
+            <summary>
+            判断是否包含指定资源的编码（无权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IResType.Contains(System.String,HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            判断是否包含指定资源的编码（有权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <param name="securityManager">安全管理对象</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IResType.ListItem">
+            <summary>
+            列出所有的资源（无权限限制）
+            </summary>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.IResType.ListItem(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            列出所有的资源（有权限限制）
+            </summary>
+            <param name="securityManager">安全管理对象</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.IResType.ResType">
+            <summary>
+            资源类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.IResType.Title">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由<see cref="T:HTB.DevFx.Security.ResManager"/>调用
+            </summary>
+            <param name="setting">配直节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.Contains(System.String)">
+            <summary>
+            判断是否包含指定资源的编码（无权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.Contains(System.String,HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            判断是否包含指定资源的编码（有权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <param name="securityManager">安全管理对象</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.ListItem">
+            <summary>
+            列出所有的资源（无权限限制）
+            </summary>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.GroupResType.ListItem(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            列出所有的资源（有权限限制）
+            </summary>
+            <param name="securityManager">安全管理对象</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.GroupResType.ResType">
+            <summary>
+            资源类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.GroupResType.Title">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Identity">
+            <summary>
+            用户标识类
+            </summary>
+            <remarks>
+            实现了<see cref="T:System.Security.Principal.IIdentity"/>接口
+            </remarks>
+            <example>
+            示例请参见<see cref="T:HTB.DevFx.Security.Authentication"/>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Identity.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.IsAnonymous">
+            <summary>
+            是否为匿名用户
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.Token">
+            <summary>
+            获取用户的Token
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.Roles">
+            <summary>
+            获得用户的角色编号列表
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.IsAuthenticated">
+            <summary>
+            用户是否已认证
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.Name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Identity.AuthenticationType">
+            <summary>
+            认证方式
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.ISecurityManager">
+            <summary>
+            权限认证管理接口（起到桥梁协调作用）
+            </summary>
+            <remarks>
+            配置格式：
+            	<code>
+            		......
+            		&lt;security type="权限认证管理接口实现类型"&gt;
+            			......
+            		&lt;/security&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.ISecurityManager.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由框架调用
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.Setting">
+            <summary>
+            权限模块的配置节
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.DataProvider">
+            <summary>
+            数据提供者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.ResManager">
+            <summary>
+            资源管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.PermissionManager">
+            <summary>
+            权限管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.RoleManager">
+            <summary>
+            角色管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.RelationManager">
+            <summary>
+            授权关系管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.Authorization">
+            <summary>
+            授权认证管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.Authenticator">
+            <summary>
+            认证者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.Authentication">
+            <summary>
+            用户认证管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.UserManager">
+            <summary>
+            用户管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.ISecurityManager.GroupManager">
+            <summary>
+            组管理者
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Manager">
+            <summary>
+            管理接口的抽象实现
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Manager.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.NullResType">
+            <summary>
+            空资源
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由<see cref="T:HTB.DevFx.Security.ResManager"/>调用
+            </summary>
+            <param name="setting">配直节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.Contains(System.String)">
+            <summary>
+            判断是否包含指定资源的编码（无权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.Contains(System.String,HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            判断是否包含指定资源的编码（有权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <param name="securityManager">安全管理对象</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.ListItem">
+            <summary>
+            列出所有的资源（无权限限制）
+            </summary>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.NullResType.ListItem(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            列出所有的资源（有权限限制）
+            </summary>
+            <param name="securityManager">安全管理对象</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.NullResType.ResType">
+            <summary>
+            资源类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.NullResType.Title">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Permission">
+            <summary>
+            权限实体
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Permission.CreateChildPermission">
+            <summary>
+            创建子权限
+            </summary>
+            <returns>权限实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Permission.ToString">
+            <summary>
+            把实体转换成字符串格式
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.PermissionNo">
+            <summary>
+            权限编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.Title">
+            <summary>
+            权限名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.Description">
+            <summary>
+            权限描述
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.ResType">
+            <summary>
+            权限范围类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.Res1">
+            <summary>
+            权限资源1（可以是URL）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.Res2">
+            <summary>
+            权限资源2（可以是图片URL等）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.DispIndex">
+            <summary>
+            显示顺序
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.ParentNo">
+            <summary>
+            上级权限编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.IsView">
+            <summary>
+            权限是否可见（指菜单）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.IsAvailable">
+            <summary>
+            是否有效
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.LayerIndex">
+            <summary>
+            在权限树形结构中所处的层
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.ChildCount">
+            <summary>
+            子一级权限数
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.Children">
+            <summary>
+            获得子权限
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.ParentPermission">
+            <summary>
+            获得父权限（有权限限制）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.IndentTitle">
+            <summary>
+            缩进方式的名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.IndentChar">
+            <summary>
+            缩进名称所使用的缩进字符，默认为中文空格
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Permission.IndentNum">
+            <summary>
+            缩进名称所使用的缩进个数，默认为1
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.PermissionAttribute">
+            <summary>
+            权限属性
+            </summary>
+            <remarks>
+            用于需要权限判断的地方
+            </remarks>
+            <example>
+            示例参见<see cref="T:HTB.DevFx.Security.Authorization"/>
+            </example>
+        </member>
+        <member name="F:HTB.DevFx.Security.PermissionAttribute.PermissionRole">
+            <summary>
+            用于权限判断拦截
+            </summary>
+            <example>
+            	<code>
+            		[Permission(Const.CanDoSomething), PrincipalPermission(SecurityAction.Demand, Role=PermissionAttribute.PermissionRole)]
+            		private void Page_Load(object sender, EventArgs e) {
+            			//access accepted
+            		}
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionAttribute.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="permissionNo">权限编号</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.PermissionAttribute.PermissionNo">
+            <summary>
+            获取/设置权限编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.PermissionAttribute.Title">
+            <summary>
+            获取/设置权限名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.PermissionManager">
+            <summary>
+            权限实体管理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.CreateItem">
+            <summary>
+            创建新实体
+            </summary>
+            <returns>权限实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.CreateItem(HTB.DevFx.Security.Permission)">
+            <summary>
+            创建子权限
+            </summary>
+            <param name="parentPermission">上级权限实体</param>
+            <returns>权限实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.CreateItem(System.String)">
+            <summary>
+            创建子权限
+            </summary>
+            <param name="parentNo">上级权限编号</param>
+            <returns>权限实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.Contains(System.String)">
+            <summary>
+            系统中是否包含指定的权限编号
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.GetItem(System.String)">
+            <summary>
+            获取权限实体
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <returns>权限实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.SaveItem(HTB.DevFx.Security.Permission)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="permission">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.DeleteItem(HTB.DevFx.Security.Permission)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="permission">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.DeleteItem(System.String)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="permissionNo">实体编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.ListItem">
+            <summary>
+            列出权限实体（有权限控制）
+            </summary>
+            <returns>权限实体的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.GetAllItem">
+            <summary>
+            获取系统中所有的权限实体（无权限限制）
+            </summary>
+            <returns>权限实体的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.SortPermissions(HTB.DevFx.Security.Permission[],System.String,System.Boolean)">
+            <summary>
+            对权限数组进行排序
+            </summary>
+            <param name="permissions">权限数组</param>
+            <param name="sortBy">排序方式，有"dispIndex"，"permissionNo"两种</param>
+            <param name="desc">是否逆序排序</param>
+            <returns>排序好的权限数组</returns>
+        </member>
+        <member name="T:HTB.DevFx.Security.PermissionManager.PermissionComparer">
+            <summary>
+            排序判断类，实现<see cref="T:System.Collections.IComparer"/>，用于对权限数组的排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.PermissionManager.PermissionComparer.CompareByDispIndex">
+            <summary>
+            按DispIndex属性排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.PermissionManager.PermissionComparer.CompareByPermissionNo">
+            <summary>
+            按PermissionNo属性排序
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.PermissionManager.PermissionComparer.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="compareField">被排序的属性名称</param>
+            <param name="desc">是否逆序排序</param>
+        </member>
+        <member name="T:HTB.DevFx.Security.Relation">
+            <summary>
+            授权关系实体类
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.RelationID">
+            <summary>
+            关系ID
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.RoleNo">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.PermissionNo">
+            <summary>
+            权限编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.ResNo">
+            <summary>
+            资源编号（权限范围编号）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.StatusFlags">
+            <summary>
+            授权属性
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.Permission">
+            <summary>
+            权限实体
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Relation.Role">
+            <summary>
+            角色实体
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RelationCollection">
+            <summary>
+            授权关系集合类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.#ctor(HTB.DevFx.Security.Relation[])">
+            <summary>
+            构造方法（使用<see cref="T:HTB.DevFx.Security.Relation"/>数组来构造，以期利用<see cref="T:HTB.DevFx.Security.RelationCollection"/>丰富的方法）
+            </summary>
+            <param name="relations"><see cref="T:HTB.DevFx.Security.Relation"/>数组</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRelationID(System.Int32[])">
+            <summary>
+            使用关系ID查询
+            </summary>
+            <param name="relationIds">关系ID列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRoleNo(System.String[])">
+            <summary>
+            使用角色编号查询
+            </summary>
+            <param name="roleNos">角色编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRoleNo(System.Boolean,System.String[])">
+            <summary>
+            使用角色编号查询
+            </summary>
+            <param name="filterByAvailable">是否过滤无效的角色</param>
+            <param name="roleNos">角色编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionNo(System.String[])">
+            <summary>
+            使用权限编号查询
+            </summary>
+            <param name="permissionNos">权限编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByResNo(System.String[])">
+            <summary>
+            使用权限范围编号查询
+            </summary>
+            <param name="resNos">权限范围编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionResType(System.String[])">
+            <summary>
+            使用权限范围类型查询
+            </summary>
+            <param name="resTypes">权限范围类型列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionViewState(System.Boolean)">
+            <summary>
+            使用权限可视状态查询
+            </summary>
+            <param name="isView">权限可视状态</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionLayerIndex(System.Int32)">
+            <summary>
+            使用权限层次查询
+            </summary>
+            <param name="layerIndex">权限层次</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionParentNo(System.String)">
+            <summary>
+            使用上级权限编号查询
+            </summary>
+            <param name="parentNo">上级权限编号</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRelationStatusFlags(HTB.DevFx.Security.RelationStatusFlags)">
+            <summary>
+            使用授权属性查询
+            </summary>
+            <param name="statusFlags">授权属性</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPriority(System.Boolean)">
+            <summary>
+            使用优先级排序
+            </summary>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPermissionDispIndex(System.Boolean)">
+            <summary>
+            使用权限显示顺序排序
+            </summary>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPermissionNo(System.Boolean)">
+            <summary>
+            使用权限编号排序
+            </summary>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByPermission(System.Boolean)">
+            <summary>
+            去除重复的权限编号（按优先级保留）
+            </summary>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByRole(System.Boolean)">
+            <summary>
+            去除重复的角色编号（按优先级保留）
+            </summary>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByResNo(System.Boolean)">
+            <summary>
+            去除重复的资源编号（按优先级保留）
+            </summary>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Reverse">
+            <summary>
+            对授权关系集合倒序
+            </summary>
+            <returns>倒序好后的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToArray">
+            <summary>
+            转换成授权关系数组形式
+            </summary>
+            <returns>授权关系数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToPermissionArray">
+            <summary>
+            转换成权限数组形式
+            </summary>
+            <returns>权限数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToRoleArray">
+            <summary>
+            转换成角色数组形式
+            </summary>
+            <returns>角色数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToStringArray(System.String)">
+            <summary>
+            转换成字符串数组形式
+            </summary>
+            <param name="arrayType">数组类型，有"RoleNo"，"PermissionNo"，"ResNo"</param>
+            <returns></returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Clone">
+            <summary>
+            克隆授权关系集合（浅克隆）
+            </summary>
+            <returns>克隆后的授权关系集合类</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Contains(System.String,System.String,System.String)">
+            <summary>
+            判断当前集合是否包含某授权关系
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <param name="permissionNo">权限编号</param>
+            <param name="resNo">权限范围编号</param>
+            <returns>是/否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Contains(System.String)">
+            <summary>
+            判断当前集合是否包含某权限编号
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <returns>是/否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRelationID(HTB.DevFx.Security.RelationCollection,System.Int32[])">
+            <summary>
+            使用关系ID查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="relationIds">关系ID列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRoleNo(HTB.DevFx.Security.RelationCollection,System.String[])">
+            <summary>
+            使用角色编号查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="roleNos">角色编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRoleNo(HTB.DevFx.Security.RelationCollection,System.Boolean,System.String[])">
+            <summary>
+            使用角色编号查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="filterByAvailable">是否过滤无效的角色</param>
+            <param name="roleNos">角色编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionNo(HTB.DevFx.Security.RelationCollection,System.String[])">
+            <summary>
+            使用权限编号查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="permissionNos">权限编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByResNo(HTB.DevFx.Security.RelationCollection,System.String[])">
+            <summary>
+            使用权限范围编号查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="resNos">权限范围编号列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionResType(HTB.DevFx.Security.RelationCollection,System.String[])">
+            <summary>
+            使用权限范围类型查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="resTypes">权限范围类型列表</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionViewState(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            使用权限可视状态查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="isView">权限可视状态</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionLayerIndex(HTB.DevFx.Security.RelationCollection,System.Int32)">
+            <summary>
+            使用权限层次查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="layerIndex">权限层次</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByPermissionParentNo(HTB.DevFx.Security.RelationCollection,System.String)">
+            <summary>
+            使用上级权限编号查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="parentNo">上级权限编号</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SelectByRelationStatusFlags(HTB.DevFx.Security.RelationCollection,HTB.DevFx.Security.RelationStatusFlags)">
+            <summary>
+            使用授权属性查询
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="statusFlags">授权属性</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPriority(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            使用优先级排序
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPermissionDispIndex(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            使用权限显示顺序排序
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.SortByPermissionNo(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            使用权限编号排序
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="desc">是否逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByPermission(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            去除重复的权限编号（按优先级保留）
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByRole(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            去除重复的角色编号（按优先级保留）
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.DistinctByResNo(HTB.DevFx.Security.RelationCollection,System.Boolean)">
+            <summary>
+            去除重复的资源编号（按优先级保留）
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="priorityDesc">是否按优先级逆序</param>
+            <returns>满足条件的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Reverse(HTB.DevFx.Security.RelationCollection)">
+            <summary>
+            对授权关系集合倒序
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <returns>倒序好后的授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToArray(HTB.DevFx.Security.RelationCollection)">
+            <summary>
+            转换成授权关系数组形式
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <returns>授权关系数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToPermissionArray(HTB.DevFx.Security.RelationCollection)">
+            <summary>
+            转换成权限数组形式
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <returns>权限数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToRoleArray(HTB.DevFx.Security.RelationCollection)">
+            <summary>
+            转换成角色数组形式
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <returns>角色数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.ToStringArray(HTB.DevFx.Security.RelationCollection,System.String)">
+            <summary>
+            转换成字符串数组形式
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <param name="arrayType">数组类型，有"RoleNo"，"PermissionNo"，"ResNo"</param>
+            <returns></returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.FromRelationArray(HTB.DevFx.Security.Relation[])">
+            <summary>
+            使用<see cref="T:HTB.DevFx.Security.Relation"/>数组来构造<see cref="T:HTB.DevFx.Security.RelationCollection"/>，以期利用<see cref="T:HTB.DevFx.Security.RelationCollection"/>丰富的方法
+            </summary>
+            <param name="relations"><see cref="T:HTB.DevFx.Security.Relation"/>数组</param>
+            <returns><see cref="T:HTB.DevFx.Security.RelationCollection"/></returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.Clone(HTB.DevFx.Security.RelationCollection)">
+            <summary>
+            克隆授权关系集合（浅克隆）
+            </summary>
+            <param name="relations">授权关系集合类</param>
+            <returns>克隆后的授权关系集合类</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.RelationCollection.Item(System.Int32)">
+            <summary>
+            按索引方式获取授权关系
+            </summary>
+            <param name="index">索引</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.RelationCollection.Count">
+            <summary>
+            集合包含的元素个数
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RelationCollection.RelationComparer">
+            <summary>
+            排序判断类，实现<see cref="T:System.Collections.IComparer"/>，用于对授权关系数组的排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationCollection.RelationComparer.CompareByPriority">
+            <summary>
+            按Priority属性排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationCollection.RelationComparer.CompareByDispIndex">
+            <summary>
+            按DispIndex属性排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationCollection.RelationComparer.CompareByRelationID">
+            <summary>
+            按RelationID属性排序
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationCollection.RelationComparer.CompareByPermissionNo">
+            <summary>
+            按PermissionNo属性排序
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.RelationComparer.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.RelationComparer.#ctor(System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="desc">是否逆序排序</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationCollection.RelationComparer.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="compareField">被排序的属性名称</param>
+            <param name="desc">是否逆序排序</param>
+        </member>
+        <member name="T:HTB.DevFx.Security.RelationManager">
+            <summary>
+            授权关系管理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.GetRelationsByRole(System.String[])">
+            <summary>
+            获取角色包含的授权关系
+            </summary>
+            <param name="roleNos">角色编号列表</param>
+            <returns>授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.GetRelationsByRole(System.Boolean,System.String[])">
+            <summary>
+            获取角色包含的授权关系（过滤无效的项）
+            </summary>
+            <param name="filterByAvailable">是否过滤无效的项</param>
+            <param name="roleNos">角色编号列表</param>
+            <returns>授权关系集合</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.CreateItem">
+            <summary>
+            创建新的授权关系
+            </summary>
+            <returns>授权关系实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.SaveItem(HTB.DevFx.Security.Relation)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="relation">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.DeleteItem(HTB.DevFx.Security.Relation)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="relation">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.DeleteItem(System.Int32)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="relationId">实体ID</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RelationManager.ListRelations">
+            <summary>
+            列出授权关系（有权限控制）
+            </summary>
+            <returns>授权关系集合</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.RelationManager.Relations">
+            <summary>
+            当前系统中所有的授权关系（无权限限制）
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RelationStatusFlags">
+            <summary>
+            授权关系属性
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationStatusFlags.Execute">
+            <summary>
+            权限是否可被执行
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationStatusFlags.List">
+            <summary>
+            权限是否可被列出
+            </summary>
+        </member>
+        <member name="F:HTB.DevFx.Security.RelationStatusFlags.Grant">
+            <summary>
+            权限是否可被赋予
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.ResManager">
+            <summary>
+            资源管理类（权限范围类型）
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.#ctor(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            构造方法（由<see cref="T:HTB.DevFx.Security.ISecurityManager"/>的实例调用）
+            </summary>
+            <param name="securityManager">ISecurityManager的实例</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.Contains(System.String)">
+            <summary>
+            检查系统中是否配置了指定的资源类型
+            </summary>
+            <param name="resType">资源类型</param>
+            <returns>是/否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.Contains(System.String,System.String)">
+            <summary>
+            判断系统中是否存在指定的资源
+            </summary>
+            <param name="resType">资源类型</param>
+            <param name="resNo">资源编号</param>
+            <returns>是/否</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.GetResType(System.String)">
+            <summary>
+            获取系统配置中的资源类型实例
+            </summary>
+            <param name="resType">资源类型</param>
+            <returns>资源类型实例</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.ListResTypes">
+            <summary>
+            列出配置的所有资源类型实例
+            </summary>
+            <returns>资源类型实例数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.ResManager.ListItem(System.String)">
+            <summary>
+            列出指定资源类型的所有资源
+            </summary>
+            <param name="resType">资源类型</param>
+            <returns>资源数组</returns>
+        </member>
+        <member name="T:HTB.DevFx.Security.Resource">
+            <summary>
+            资源实体
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Resource.#ctor(System.String,System.String,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="resType">资源类型</param>
+            <param name="resNo">资源编号</param>
+            <param name="resName">资源名称</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.Resource.ResType">
+            <summary>
+            资源类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Resource.ResNo">
+            <summary>
+            资源编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Resource.ResName">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Role">
+            <summary>
+            角色实体
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Role.ToString">
+            <summary>
+            把角色转换成字符串形式
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Role.RoleNo">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Role.Title">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Role.Description">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Role.IsAvailable">
+            <summary>
+            是否有效
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Role.IsInnerRole">
+            <summary>
+            是否内置角色
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RoleEventArgs">
+            <summary>
+            角色事件参数类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleEventArgs.#ctor(System.String,System.String,HTB.DevFx.Security.Role,System.Boolean)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="action">事件动作（DELETE：删除）</param>
+            <param name="roleNo">角色编号</param>
+            <param name="role">发生动作时的角色</param>
+            <param name="isReady">是否真的要执行动作</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleEventArgs.Action">
+            <summary>
+            事件动作（DELETE：删除）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleEventArgs.RoleNo">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleEventArgs.Role">
+            <summary>
+            发生动作时的角色
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleEventArgs.IsReady">
+            <summary>
+            是否真的要执行动作
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RoleEvent">
+            <summary>
+            角色事件委托
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RoleManager">
+            <summary>
+            角色管理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.OnEvent(HTB.DevFx.Security.RoleEventArgs)">
+            <summary>
+            角色事件发生处理
+            </summary>
+            <param name="e">角色事件参数</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.CreateItem">
+            <summary>
+            创建新角色
+            </summary>
+            <returns>角色实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.Contains(System.String)">
+            <summary>
+            系统中是否包含指定的角色编号
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.GetItem(System.String)">
+            <summary>
+            获取角色实体
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>角色实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.GetItem(System.String[])">
+            <summary>
+            获取角色实体
+            </summary>
+            <param name="roleNos">角色编号列表</param>
+            <returns>角色实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.SaveItem(HTB.DevFx.Security.Role)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="role">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.DeleteItem(HTB.DevFx.Security.Role)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="role">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.DeleteItem(System.String)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="roleNo">实体编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.ListItem">
+            <summary>
+            列出角色（有权限控制）
+            </summary>
+            <returns>角色的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleManager.GetAllItem">
+            <summary>
+            获取系统中所有的角色（无权限限制）
+            </summary>
+            <returns>角色的数组</returns>
+        </member>
+        <member name="E:HTB.DevFx.Security.RoleManager.RoleEvent">
+            <summary>
+            角色事件
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.RoleResType">
+            <summary>
+            角色资源
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由<see cref="T:HTB.DevFx.Security.ResManager"/>调用
+            </summary>
+            <param name="setting">配直节</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.Contains(System.String)">
+            <summary>
+            判断是否包含指定资源的编码（无权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.Contains(System.String,HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            判断是否包含指定资源的编码（有权限限制）
+            </summary>
+            <param name="resNo">资源的编码（权限范围编号）</param>
+            <param name="securityManager">安全管理对象</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.ListItem">
+            <summary>
+            列出所有的资源（无权限限制）
+            </summary>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.RoleResType.ListItem(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            列出所有的资源（有权限限制）
+            </summary>
+            <param name="securityManager">安全管理对象</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleResType.ResType">
+            <summary>
+            资源类型
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.RoleResType.Title">
+            <summary>
+            资源名称
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Securitor">
+            <summary>
+            整个框架的权限管理器
+            </summary>
+            <remarks>
+            与框架的配合配置格式：
+            	<code>
+            		&lt;htb.devfx&gt;
+            			&lt;framework&gt;
+            				&lt;modules&gt;
+            					......
+            					&lt;!--权限管理模块--&gt;
+            					&lt;module name="security" type="HTB.DevFx.Security.Securitor, HTB.DevFx.Security" configName="security" /&gt;
+            					......
+            				&lt;/modules&gt;
+            			&lt;/framework&gt;
+            				
+            			......
+            		&lt;/htb.devfx&gt;
+            	</code>
+            </remarks>
+            <example>
+            	<code>
+            		......
+            		Securitor.Authorize(Const.CanDoSomething).ThrowErrorOnFailed();
+            		......
+            	</code>
+            </example>
+        </member>
+        <member name="M:HTB.DevFx.Security.Securitor.GetInstance">
+            <summary>
+            获取本模块的事例（可以是单例模式也可以是多例模式）
+            </summary>
+            <returns>IModule</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.Securitor.Authorize(System.String,System.String,System.Boolean)">
+            <summary>
+            权限判断
+            </summary>
+            <param name="permissionNo">权限编号</param>
+            <param name="resNo">权限范围编号</param>
+            <param name="throwError">如果没有被授权，是否抛出异常</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.Instance">
+            <summary>
+            日志管理器的唯一实例（单件模式）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.RoleManager">
+            <summary>
+            角色管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.RelationManager">
+            <summary>
+            授权关系管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.PermissionManager">
+            <summary>
+            权限管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.Authentication">
+            <summary>
+            用户认证管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.UserManager">
+            <summary>
+            用户管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.GroupManager">
+            <summary>
+            组管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.ResManager">
+            <summary>
+            资源管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.Securitor.Authenticator">
+            <summary>
+            认证者
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.SecurityAuditException">
+            <summary>
+            权限认证失败的异常类
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.SecurityException">
+            <summary>
+            权限模块异常
+            </summary>
+            <remarks>
+            在权限模块里面，能发现的异常都会包装成此类的实例
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityException.#ctor(System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.Int32,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.Int32,System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.Int32,System.String,System.Boolean,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorNo">异常编号</param>
+            <param name="message">异常消息</param>
+            <param name="redirectToLogin">是否重登录</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityAuditException.#ctor(System.String,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">异常消息</param>
+            <param name="redirectToLogin">是否重登录</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityAuditException.RedirectToLogin">
+            <summary>
+            是否重登录
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.SecurityExceptionHandler">
+            <summary>
+            权限模块异常处理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityExceptionHandler.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityExceptionHandler.Handle(System.Exception,System.Int32)">
+            <summary>
+            进行异常处理（由异常管理器调用）
+            </summary>
+            <param name="e">异常</param>
+            <param name="level">异常等级（传递给日志记录器处理）</param>
+            <returns>处理结果，将影响下面的处理器</returns>
+            <remarks>
+            异常管理器将根据返回的结果进行下一步的处理，约定：<br />
+            	返回的结果中，ResultNo值：
+            	<list type="bullet">
+            		<item><description>
+            			小于0：表示处理异常，管理器将立即退出异常处理
+            		</description></item>
+            		<item><description>
+            			0：处理正常
+            		</description></item>
+            		<item><description>
+            			1：已处理，需要下一个异常处理器进一步处理，<br />
+            			此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）
+            		</description></item>
+            		<item><description>
+            			2：已处理，需要重新轮询异常处理器进行处理<br />
+            				此时ResultAttachObject为返回的异常（可能与传入的异常是不一致的）<br />
+            				此时异常管理器将重新进行异常处理
+            		</description></item>
+            	</list>
+            </remarks>
+        </member>
+        <member name="T:HTB.DevFx.Security.SecurityManager">
+            <summary>
+            授权认证管理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityManager.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.SecurityManager.Init(HTB.DevFx.Config.IConfigSetting)">
+            <summary>
+            初始化，由框架调用
+            </summary>
+            <param name="setting">配置节</param>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.Setting">
+            <summary>
+            权限模块的配置节
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.DataProvider">
+            <summary>
+            数据提供者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.ResManager">
+            <summary>
+            资源管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.PermissionManager">
+            <summary>
+            权限管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.RoleManager">
+            <summary>
+            角色管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.RelationManager">
+            <summary>
+            授权关系管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.Authorization">
+            <summary>
+            授权认证管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.Authenticator">
+            <summary>
+            认证者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.Authentication">
+            <summary>
+            用户认证管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.UserManager">
+            <summary>
+            用户管理者
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.SecurityManager.GroupManager">
+            <summary>
+            组管理者
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.User">
+            <summary>
+            用户实体类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.User.#ctor(HTB.DevFx.Security.UserManager,System.Data.DataRow)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="userManager"><see cref="T:HTB.DevFx.Security.UserManager"/></param>
+            <param name="dr"><see cref="T:System.Data.DataRow"/></param>
+        </member>
+        <member name="F:HTB.DevFx.Security.User.userManager">
+            <summary>
+            <see cref="T:HTB.DevFx.Security.UserManager"/>
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.User.AddToRole(System.String)">
+            <summary>
+            添加用户到角色
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.User.RemoveFromRole(System.String)">
+            <summary>
+            移除角色
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.User.UserNo">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.User.UserName">
+            <summary>
+            用户名（登录名）
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.User.Password">
+            <summary>
+            用户登录密码
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.User.IsAvailable">
+            <summary>
+            是否有效
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.User.IsInnerUser">
+            <summary>
+            是否内置用户
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.UserManager">
+            <summary>
+            用户管理类
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.#ctor(HTB.DevFx.Security.ISecurityManager)">
+            <summary>
+            构造方法（由<see cref="T:HTB.DevFx.Security.ISecurityManager"/>的实例调用）
+            </summary>
+            <param name="securityManager">ISecurityManager的实例</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.CreateItem">
+            <summary>
+            创建新用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.Contains(System.String)">
+            <summary>
+            系统中是否包含指定的用户编号
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetUserNoByUserName(System.String)">
+            <summary>
+            由用户名获得用户的编号
+            </summary>
+            <param name="userName">用户名</param>
+            <returns>用户编号</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetItem(System.String)">
+            <summary>
+            获取用户实体
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>用户实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetItemByUserName(System.String)">
+            <summary>
+            获取用户实体
+            </summary>
+            <param name="userName">用户名</param>
+            <returns>用户实体</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.SaveItem(HTB.DevFx.Security.User)">
+            <summary>
+            保存实体
+            </summary>
+            <param name="user">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.DeleteItem(HTB.DevFx.Security.User)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="user">实体</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.DeleteItem(System.String)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="userNo">实体编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.ListItem">
+            <summary>
+            列出用户（有权限控制）
+            </summary>
+            <returns>用户的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetAllItem">
+            <summary>
+            获取系统中所有的用户（无权限限制）
+            </summary>
+            <returns>用户的数组</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.UserLogin(System.String,System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">登录密码（明码）</param>
+            <returns>登录处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.UserLogout(System.String)">
+            <summary>
+            用户登出
+            </summary>
+            <param name="userName">用户名</param>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            修改用户密码
+            </summary>
+            <param name="userNo">用户编号</param>
+            <param name="oldPassword">原密码</param>
+            <param name="newPassword">新密码</param>
+            <returns>修改结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetRoleUsers(System.String)">
+            <summary>
+            获取某角色下的所有用户
+            </summary>
+            <param name="roleNo">角色编号</param>
+            <returns>用户列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetUserRoles(System.String)">
+            <summary>
+            获得用户隶属的角色
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>角色编号列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.GetUserRolesToIdentity(System.String)">
+            <summary>
+            获得用户隶属的角色（包括隶属组的角色）
+            </summary>
+            <param name="userNo">用户编号</param>
+            <returns>角色编号列表</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.AddUserToRole(System.String,System.String)">
+            <summary>
+            添加用户到角色
+            </summary>
+            <param name="userNo">用户编号</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="M:HTB.DevFx.Security.UserManager.RemoveUserFromRole(System.String,System.String)">
+            <summary>
+            从角色中移除用户
+            </summary>
+            <param name="userNo">用户编号</param>
+            <param name="roleNo">角色编号</param>
+            <returns>处理结果</returns>
+        </member>
+        <member name="P:HTB.DevFx.Security.UserManager.PasswordEncryptFormat">
+            <summary>
+            用户密码加密格式
+            </summary>
+        </member>
+        <member name="P:HTB.DevFx.Security.UserManager.CurrentUser">
+            <summary>
+            获取当前登录用户
+            </summary>
+        </member>
+        <member name="T:HTB.DevFx.Security.Web.HttpAuthenticationModule">
+            <summary>
+            权限认证模块的 <see cref="T:System.Web.IHttpModule"/>
+            </summary>
+            <remarks>
+            在web.config中添加如下的配置：
+            	<code>
+            		&lt;system.web&gt;
+            			&lt;httpModules&gt;
+            				......
+            				&lt;add name="HttpAuthenticationModule" type="HTB.DevFx.Security.Web.HttpAuthenticationModule, HTB.DevFx.Security" /&gt;
+            				......
+            			&lt;/httpModules&gt;
+            			......
+            		&lt;/system.web&gt;
+            	</code>
+            </remarks>
+        </member>
+        <member name="M:HTB.DevFx.Security.Web.HttpAuthenticationModule.#ctor">
+            <summary>
+            保护构造方法
+            </summary>
+        </member>
+        <member name="M:HTB.DevFx.Security.Web.HttpAuthenticationModule.Init(System.Web.HttpApplication)">
+            <summary>
+            初始化模块
+            </summary>
+            <param name="context"><see cref="T:System.Web.HttpApplication"/> 实例</param>
+        </member>
+    </members>
+</doc>

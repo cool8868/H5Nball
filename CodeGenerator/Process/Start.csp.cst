@@ -1,0 +1,34 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpDatabaseTemplate" Description="Generates a very simple business object." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %> 
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<?xml version="1.0"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <propertySets>
+<% 
+ foreach(SchemaExplorer.TableSchema SourceTable in SourceDatabase.Tables) {
+	if(IsOutputTable(SourceTable.Name)) {
+%>
+	<propertySet output="Generator\<%=GetClassName(SourceTable.Name)%>.csp" template="..\CodeTemplate\Model_Process.csp.cst">
+	  <property name="ClassNameRule"><%=ClassNameRule%></property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix"><%=TablePrefix.Trim()==string.Empty?"\"\"":TablePrefix.Trim()%></property>	
+      <property name="SourceTable">
+        <connectionString><%=SourceTable.Database.ConnectionString%></connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name><%=SourceTable.Name%></name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+<% } } %>
+  </propertySets>
+</codeSmith>
+
+<script runat="template">
+
+</script>

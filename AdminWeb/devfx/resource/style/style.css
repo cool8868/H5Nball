@@ -1,0 +1,64 @@
+/* CSS Document */
+
+body, table, td, th, span, p, div, a, form, input, button, select, option, textarea {
+	font-family: simsun;
+	font-size: 12px;
+}
+a:link {
+	color: #0000ea;
+	text-decoration: none;
+}
+a:visited {
+	color: #006666;
+	text-decoration: none;
+}
+a:active {
+	color: #ff0000;
+	text-decoration: underline;
+}
+a:hover {
+	color: #ff0000;
+	text-decoration: underline;
+}
+.bottomLine {
+	border-bottom: 1px solid #000000;
+}
+.rightLine {
+	border-right: 1px solid #000000;
+}
+.ftGreen {
+	color: #008000;
+}
+.bgColor {
+	background-color: #78c7eb;
+}
+.bgColor1 {
+	background-color: #bce4f4;
+}
+.bgColor2 {
+	background-color: #66CCFF;
+}
+.bgDark {
+	background-color: #000000;
+}
+.bgGray {
+	background-color: #808080;
+}
+.bgLightGray {
+	background-color: #DDDDDD;
+}
+.bgLightBlue {
+	background-color: #add8e6;
+}
+.bgLightGreen {
+	background-color: #90ee90;
+}
+.bgWhite {
+	background-color: #FFFFFF;
+}
+.buttonWidth {
+	width: 100px;
+}
+.inputWidth {
+	width: 200px;
+}

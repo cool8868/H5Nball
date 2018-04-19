@@ -1,0 +1,1084 @@
+﻿<?xml version="1.0"?>
+<requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Modules>
+    <module name="Manager" description="经理相关">
+      <Actions>
+        <!--status:0,设计;1,开发中;2,完成.-->
+        <action name="Register" description="注册经理" status="2" response="NBManagerCreateResponse">
+          <Parameters>
+            <parameter name="name" description="经理名" />
+            <parameter name="areaid" description="所属赛区" />
+            <parameter name="logo" description="logo" />
+            <parameter name="ti" description="阵容模板id" />
+          </Parameters>
+        </action>
+        <action name="Managerinfo" description="获取经理信息" status="2" response="NBManagerListResponse" memo="code=22表示没有登录，跳登录提示；code=21表示没有注册，跳注册经理"/>
+        <action name="grs" description="获取随机阵容" status="2" response="TemplateRegisterResponse" />
+        <action name="rs" description="恢复体力，体力恢复倒计时到了即调用" status="2" response="ManagerStaminaResponse" />
+        <action name="hl" description="获取经理荣誉列表" status="1" response="ManagerHonorListResponse">
+          <Parameters>
+            <parameter name="m" description="经理Id" />
+          </Parameters>
+        </action>
+        <action name="md" description="获取经理详细信息" status="1" response="ManagerDetailInfoResponse">
+          <Parameters>
+            <parameter name="m" description="经理Id" />
+            <parameter name="siteid" description="区服Id" />
+          </Parameters>
+        </action>
+        <action name="ho" description="在线心跳" status="1" response="MessageCodeResponse">
+        </action>
+        <action name="gf" description="更新功能列表" status="1" response="FunctionListResponse">
+        </action>
+        <action name="vi" description="获取vip信息" status="1" response="VipDataResponse">
+        </action>
+        <action name="viat" description="每日vip签到" status="1" response="VipDataResponse">
+        </action>
+        <action name="ul" description="修改logo" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="l" description="logo" />
+          </Parameters>
+        </action>
+        <action name="un" description="修改经理名" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="n" description="用户名" />
+          </Parameters>
+        </action>
+        <action name="upl" description="修改防沉迷信息" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="n" description="真实姓名" />
+            <parameter name="c" description="身份证id" />
+          </Parameters>
+        </action>
+        <action name="gs" description="领取体力" status="1" response="ManagerStaminaResponse">
+        </action>
+        <action name="gai" description="获取签到信息" status="1" response="DailyAttendanceInfoResponse">
+        </action>
+        <action name="ap" description="签到" status="1" response="DailyAttendancePrizeResponse">
+        </action>
+        <action name="ga" description="获取经理所有功能" status="1" response="ManagerAllFunctionNumberResponse">
+        </action>
+
+        <action name="gur" description="获取用户登录记录" status="1" response="GetUserLoginRecordResponse">
+          <Parameters>
+            <parameter name="ac" description="用户名，openid" />
+            <parameter name="pf" description="pf 平台编码" />
+          </Parameters>
+        </action>
+        <action name="gpl" description="获取平台所有区信息" status="1" response="GetAllZoneListResponse">
+          <Parameters>
+            <parameter name="pf" description="pf 平台编码" />
+          </Parameters>
+        </action>
+
+        <action name="gac" description="获取公告" status="1" response="GetPlatformAnnouncementResponse">
+          <Parameters>
+            <parameter name="pf" description="pf 平台编码" />
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="Item" description="物品相关" status="2" >
+      <Actions>
+        <action name="getpackage" description="获取背包信息" status="1" response="ItemPackageDataResponse"/>
+        <action name="arrange" description="整理背包" status="2" response="ItemPackageDataResponse"/>
+        <action name="deleteitem" description="删除物品" status="2" response="ItemPackageDataResponse">
+          <Parameters>
+            <parameter name="i" description="物品id"></parameter>
+            <parameter name="c" description="删除数量，为0表示全删"></parameter>
+          </Parameters>
+        </action>
+        <action name="st" description="拆分物品" status="2" response="ItemPackageDataResponse">
+          <Parameters>
+            <parameter name="i" description="物品id"></parameter>
+            <parameter name="c" description="拆分数量"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="stpp" description="强化球员卡参数" status="2" response="StrengthParamResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="stp" description="强化球员卡" status="2" response="StrengthResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+            <parameter name="ip" description="是否保护"></parameter>
+            <parameter name="pi" description="保护物品ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="dp" description="分解球员卡" status="2" response="DecomposeResponse">
+          <Parameters>
+            <parameter name="is" description="物品id串"></parameter>
+          </Parameters>
+        </action>
+        <action name="stsp" description="球员卡合成参数" status="2" response="SynthesisParamResponse">
+          <Parameters>
+            <parameter name="itemId1" description="物品id1"></parameter>
+            <parameter name="itemId2" description="物品id2"></parameter>
+            <parameter name="itemId3" description="物品id3"></parameter>
+            <parameter name="itemId4" description="物品id4"></parameter>
+            <parameter name="itemId5" description="物品id5"></parameter>
+            <parameter name="ig" description="是否使用金卡配方"></parameter>
+          </Parameters>
+        </action>
+        <action name="sts" description="球员卡合成" status="3" response="SynthesisResponse">
+          <Parameters>
+            <parameter name="itemId1" description="物品id1"></parameter>
+            <parameter name="itemId2" description="物品id2"></parameter>
+            <parameter name="itemId3" description="物品id3"></parameter>
+            <parameter name="itemId4" description="物品id4"></parameter>
+            <parameter name="itemId5" description="物品id5"></parameter>
+            <parameter name="isProtect" description="是否使用保护，0：否，1：是"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+            <parameter name="li" description="幸运符物品id"></parameter>
+            <parameter name="gi" description="金卡配方物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="tcsp" description="合同页合成参数" status="2" response="SynthesisParamResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+            <parameter name="i3" description="物品id"></parameter>
+            <parameter name="i4" description="物品id"></parameter>
+            <parameter name="i5" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="tcs" description="合同页合成" status="2" response="SynthesisResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+            <parameter name="i3" description="物品id"></parameter>
+            <parameter name="i4" description="物品id"></parameter>
+            <parameter name="i5" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="eqsp" description="合成装备参数" status="2" response="EquipmentSynthesisParamResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+            <parameter name="i3" description="物品id"></parameter>
+            <parameter name="i4" description="物品id"></parameter>
+            <parameter name="i5" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="eqs" description="装备合成" status="2" response="SynthesisResponse">
+          <Parameters>
+            <parameter name="i1" description="物品id"></parameter>
+            <parameter name="i2" description="物品id"></parameter>
+            <parameter name="i3" description="物品id"></parameter>
+            <parameter name="i4" description="物品id"></parameter>
+            <parameter name="i5" description="物品id"></parameter>
+            <parameter name="ip" description="是否保护"></parameter>
+            <parameter name="pi" description="保护物品ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="eqse" description="装备出售" status="2" response="EquipmentSellResponse">
+          <Parameters>
+            <parameter name="id" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="pse" description="道具出售" status="2" response="EquipmentSellResponse">
+          <Parameters>
+            <parameter name="ids" description="物品id串，用‘,’分割一次最多10个"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="ptp" description="球员升星参数" status="2" response="PlayerUpgradeTheStarParam">
+          <Parameters>
+            <parameter name="id" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="pt" description="球员升星" status="2" response="UpgradeTheStarResponse">
+          <Parameters>
+            <parameter name="id" description="物品id"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="rpr" description="潜力重置参数" status="2" response="ResetPotentialParamResponse">
+          <Parameters>
+            <parameter name="id" description="物品id"></parameter>
+            <parameter name="ls" description="锁定情况 不锁定0,0,0 全部锁定 1,1,1"></parameter>
+          </Parameters>
+        </action>
+        <action name="rp" description="潜力重置" status="2" response="ResetPotentialResponse">
+          <Parameters>
+            <parameter name="id" description="物品id"></parameter>
+            <parameter name="ls" description="锁定情况 不锁定0,0,0 全部锁定 1,1,1"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="mskill" description="经理天赋/意志" status="2">
+      <Actions>
+        <action name="tlist" description="获取天赋列表" status="2" response="RootResponse`1[DTOTalentView]">
+        </action>
+        <action name="thit" description="选取天赋" status="3" response="RootResponse`1[DTOTalentView]">
+          <Parameters>
+            <parameter name="tid" description="天赋Code" eg="T001"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="tset" description="设置场上天赋" status="2" response="RootResponse`1[DTOTalentView]">
+          <Parameters>
+            <parameter name="tids" description="上下半场天赋(逗号分割,无则为空)" eg="T001,T002"></parameter>
+          </Parameters>
+        </action>
+        <action name="treset" description="重置天赋" status="2" response="RootResponse`1[DTOTalentView]">
+        </action>
+        <action name="wlist" description="获取意志列表" status="2" response="RootResponse`1[DTOWillView]">
+        </action>
+        <action name="wput" description="收集意志球员卡" status="2" response="RootResponse`1[DTOWillItem]">
+          <Parameters>
+            <parameter name="wid" description="意志Code" eg="W001"></parameter>
+            <parameter name="cid" description="插入的球员卡Id" eg="64F2C2E9-29DB-4780-B92F-4F456D7DA3EA"></parameter>
+          </Parameters>
+        </action>
+        <action name="wset" description="启用主动意志" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="wid" description="意志Code" eg="W101"></parameter>
+            <parameter name="flag" description="启用标记:=0停用;>0启用" eg="1"></parameter>
+          </Parameters>
+        </action>
+        <action name="stt" description="转职，设置天赋类型" status="2" response="ManagerTreeResponse">
+          <Parameters>
+            <parameter name="type" description="转职类型 2-4"></parameter>
+          </Parameters>
+        </action>
+        <action name="gt" description="获取经理天赋信息" status="2" response="ManagerTreeResponse"></action>
+        
+        <action name="ams" description="天赋加点" status="2" response="ManagerTreeResponse">
+          <Parameters>
+            <parameter name="sc" description="技能code" eg="MT001"></parameter>
+          </Parameters>
+        </action>
+        <action name="rs" description="重置天赋" status="2" response="ManagerTreeResponse"></action>
+        <action name="stodo" description="设置场上主动天赋" status="2" response="ManagerTreeResponse">
+          <Parameters>
+            <parameter name="tids" description="上下半场天赋(逗号分割,无则为空)" eg="MT001,MT002"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="MI" description="邮件" status="1">
+      <Actions>
+        <action name="gm" description="获取邮件列表" status="2" response="MailDataResponse">
+        </action>
+        <action name="dm" description="删除邮件" status="2" response="MailDataResponse">
+          <Parameters>
+            <parameter name="ri" description="邮件记录id"></parameter>
+          </Parameters>
+        </action>
+        <action name="ar" description="收取附件" status="2" response="MailAttachmentReceiveResponse">
+          <Parameters>
+            <parameter name="ri" description="邮件记录id"></parameter>
+          </Parameters>
+        </action>
+        <action name="rd" description="阅读邮件" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ri" description="记录id"></parameter>
+          </Parameters>
+        </action>
+        
+        <action name="info" description="获取信息，用于进行标识显示" status="2" response="InformationResponse"></action>
+        
+      </Actions>
+    </module>
+    <module name="PL" description="pk赛" status="1">
+      <Actions>
+        <action name="gi" description="获取pk赛信息" status="1" response="PlayerkillInfoResponse">
+        </action>
+        <action name="go" description="刷新对手或者搜索对手" status="1" response="PlayerKillOpponentResponse">
+        </action>
+        <action name="fi" description="挑战" status="1" response="MatchCreateResponse">
+          <Parameters>
+            <parameter name="ai" description="对手经理id"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="gr" description="获取比赛结果" status="1" response="PlayerkillMatchResponse">
+          <Parameters>
+            <parameter name="mi" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+        <action name="lr" description="抽奖" status="1" response="TourLotteryResponse">
+          <Parameters>
+            <parameter name="mi" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="Teammember" description="球员相关" status="2">
+      <Actions>
+        <action name="getsolution" description="获取整容和球员信息" status="2" response="NBSolutionInfoResponse">
+        </action>
+        <action name="transcard" description="替换球员" status="3" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="tid" description="要换的阵型ID"></parameter>
+            <parameter name="bytid" description="被换的阵型ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="getteammember" description="获取球员信息" status="2" response="TeammemberResponse">
+          <Parameters>
+            <parameter name="teammemberid" description="球员id"></parameter>
+          </Parameters>
+        </action>
+        <action name="fireteammember" description="解雇球员" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="teammemberid" description="球员id"></parameter>
+          </Parameters>
+        </action>
+        <action name="setequip" description="设置装备" status="3" response="TeammemberResponse">
+          <Parameters>
+            <parameter name="teammemberid" description="球员id"></parameter>
+            <parameter name="itemid" description="物品id"></parameter>
+          </Parameters>
+        </action>
+        <action name="removeequip" description="移除装备" status="2" response="TeammemberResponse">
+          <Parameters>
+            <parameter name="teammemberid" description="球员id"></parameter>
+            <parameter name="removetype" description="移除类型 1=装备"></parameter>
+          </Parameters>
+        </action>
+        <action name="getformationlist" description="获取阵型列表" status="2" response="FormationListResponse">
+        </action>
+        <action name="sf" description="设置阵型id" status="2" response="SetFormationResponse">
+          <Parameters>
+            <parameter name="f" description="阵型id"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="Scouting" description="球探" status="2">
+      <Actions>
+        <action name="scoutinginfo" description="获取球探信息" status="2" response="ScoutingInfoResponse">
+        </action>
+        <action name="lottery" description="球探抽卡" status="2" response="ScoutingLotteryResponse">
+          <Parameters>
+            <parameter name="scoutingId" description="球探id"></parameter>
+            <parameter name="c" description="数量，十连抽为10，默认可不传"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+            <parameter name="i" description="是否自动分解，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="gt" description="获取用户转盘信息" status="2" response="GetTurntableInfoResponse">
+        </action>
+        <action name="ld" description="转盘抽奖" status="2" response="TurntableLuckDrawResponse">
+        </action>
+        <action name="re" description="重置转盘" status="2" response="TurntableResetResponse">
+        </action>
+
+
+        <action name="getminfo" description="根据经理ID获取经理信息" status="2" response="RevelationGetManagerResponse"></action>
+        <action name="sm" description="开始一个大关卡" status="2" response="RevelationStartMarkResponse">
+          <Parameters>
+            <parameter name="mark" description="球星关卡ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="gmi" description="获取关卡信息" status="2" response="RevelationGetIsGeneralResponse"></action>
+        <action name="rthegame" description="打比赛" status="2" response="RevelationTheGameResponse"></action>
+        <action name="gdi" description="获取翻牌信息" status="2" response="RevelationDrawResponse">
+          <Parameters>
+            <parameter name="di" description="翻牌ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="dr" description="翻牌结果" status="2" response="RevelationDrawResultResponse">
+          <Parameters>
+            <parameter name="di" description="翻牌ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="addm" description="增加士气" status="2" response="RevelationAddChallengeResponse"></action>
+        <action name="rrm" description="重置关卡" status="2" response="MessageCodeResponse"></action>
+        <action name="rgsi" description="获取勇气商城信息" status="2" response="RevelationGetShopResponse"></action>
+        <action name="rexi" description="勇气商城兑换物品" status="2" response="RevelationPurchaseItemsResponse">
+          <Parameters>
+            <parameter name="idx" description="物品序号"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="revref" description="刷新勇气商城" status="2" response="RevelationGetShopResponse"></action>
+       
+        <action name="gcol" description="获取教练列表" status="2" response="CoachGetListResponse"></action>
+        <action name="acoach" description="激活教练" status="2" response="CoachGetInfoResponse">
+          <Parameters>
+            <parameter name="cid" description="教练ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="rcoach" description="替换启用的教练" status="2" response="CoachGetInfoResponse">
+          <Parameters>
+            <parameter name="cid" description="教练ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="ucoach" description="教练经验升级" status="2" response="CoachGetInfoResponse">
+          <Parameters>
+            <parameter name="cid" description="教练ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="sucoach" description="教练技能升级" status="2" response="CoachGetInfoResponse">
+          <Parameters>
+            <parameter name="cid" description="教练ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="stcoach" description="教练升星" status="2" response="CoachGetInfoResponse">
+          <Parameters>
+            <parameter name="cid" description="教练ID"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="League" description="联赛" status="2">
+    <Actions>
+      <action name="gl" description="获取联赛锁定状态" status="2" response="GetLeagueLockResponse">
+      </action>
+      <action name="gli" description="获取联赛情况" status="2" response="GetLeagueInfoResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+        </Parameters>
+      </action>
+      <action name="sl" description="开启一个联赛" status="2" response="GetLeagueInfoResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+        </Parameters>
+      </action>
+      <action name="rl" description="重置联赛" status="2" response="GetLeagueInfoResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+        </Parameters>
+      </action>
+      <action name="fm" description="打比赛" status="2" response="LeagueFightResultResponse">
+        <Parameters>
+          <parameter name="m" description="联赛id（1-8）"></parameter>
+        </Parameters>
+      </action>
+      
+      <action name="gapl" description="获取冠军奖励列表" status="2" response="LeagueAllPrizeInfoResponse">
+      </action>
+
+      <action name="grp" description="领取冠军奖励" status="2" response="LeaguePrizeResponse">
+        <Parameters>
+          <parameter name="lr" description="联赛记录id"></parameter>
+        </Parameters>
+      </action>
+      <action name="gr" description="获取排名信息" status="2" response="LeagueRankResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id(1-8)"></parameter>
+        </Parameters>
+      </action>
+
+      <action name="lmg" description="获取联赛积分商城信息" status="1" response="LaegueManagerinfoResponse"/>
+      <action name="lmr" description="联赛积分商城刷新" status="1" response="LaegueRefreshExchangeResponse"/>
+      <action name="lme" description="联赛积分商城兑换" status="1" response="LeagueExchangeResponse">
+        <Parameters>
+          <parameter name="k" description="兑换key，对应兑换列表中的【ExchangeId,ItemCode】组合"></parameter>
+        </Parameters>
+      </action>
+      
+      <action name="gwcpi" description="获取胜场奖励情况" status="2" response="LeagueWincountrecordResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+        </Parameters>
+      </action>
+
+      <action name="gwcp" description="领取胜场奖励" status="2" response="LeaguePrizeResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+          <parameter name="t" description="奖励类型（1-3）"></parameter>
+        </Parameters>
+      </action>
+      <action name="glf" description="获取联赛对阵记录" status="2" response="LeagueGetFightMapRecordResponse">
+        <Parameters>
+          <parameter name="l" description="联赛id（1-8）"></parameter>
+          <parameter name="r" description="回合数"></parameter>
+        </Parameters>
+      </action>
+      
+      
+    </Actions>
+    </module>
+    <module name="Mall" description="商城" status="2">
+      <Actions>
+        <action name="bufflist" description="获取Buff列表" status="2" response="RootResponse`1[DTOManagerBuffView]">
+        </action>
+        <action name="checkextraitem" description="购买道具-扩展前确认" status="2" response="MallCheckExtraResponse">
+          <Parameters>
+            <parameter name="extraType" description="1,扩展背包;2,重置精英巡回赛;3,加速训练;4,增加训练位;5,增加替补席;6,增加体力;"></parameter>
+          </Parameters>
+        </action>
+        <action name="buyextraitem" description="购买道具-扩展，主要用于虚拟道具" status="2" response="MallBuyItemResponse">
+          <Parameters>
+            <parameter name="extraType" description="1,扩展背包;2,重置精英巡回赛;3,加速训练;4,增加训练位;5,增加替补席;6,增加体力;"></parameter>
+          </Parameters>
+        </action>
+        <action name="getshowlist" description="获取显示列表" status="2" response="MallShowlistResponse">
+        </action>
+        <action name="buyitem" description="购买道具" status="2" response="MallBuyItemResponse">
+          <Parameters>
+            <parameter name="mallCode" description="商城道具编码"></parameter>
+            <parameter name="count" description="购买数量"></parameter>
+          </Parameters>
+        </action>
+        <action name="ui" description="使用道具" status="2" response="MallUseItemResponse">
+          <Parameters>
+            <parameter name="i" description="物品id"></parameter>
+            <parameter name="u" description="物品数量"></parameter>
+          </Parameters>
+        </action>
+        <action name="buypoint" description="购买钻石" status="2" response="MallBuyPointResponse">
+          <Parameters>
+            <parameter name="mallcode" description="70001-70008"></parameter>
+          </Parameters>
+        </action>
+        <action name="gbp" description="获取用户购买钻石信息" status="2" response="MallGetBuyPointResponse"></action>
+
+
+        <action name="buyparatx" description="获取腾讯充值信息" status="2" response="MallTxBuyPointResponse">
+          <Parameters>
+            <parameter name="mallcode" description="商城物品ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="buypointtx" description="腾讯充值" status="2" response="MallTxBuyPointResultResponse">
+          <Parameters>
+            <parameter name="mallcode" description="商城物品ID"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="Train" description="球员训练" status="2">
+      <Actions>
+        <action name="getteammemberlistfortrain" description="球员训练里的球员列表" status="2" response="TeammemberTrainListResponse">
+        </action>
+        
+        <action name="starttrain" description="开始训练" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ti" description="球员teammemberid;"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="stoptrain" description="结束训练" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ti" description="球员teammemberid;"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="gti" description="获取球员训练信息" status="2" response="TeammemberTrainResponse">
+          <Parameters>
+            <parameter name="ti" description="球员teammemberid;"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="ust" description="使用经验药水" status="2" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ti" description="球员teammemberid;"></parameter>
+            <parameter name="t" description="经验药水级别1初级 2中级 3高级 4超级"></parameter>
+          </Parameters>
+        </action>
+        <action name="ght" description="获取好友训练列表" status="2" response="TeammemberTrainHelpResponse">
+          <Parameters>
+            <parameter name="f" description="好友记录Idx"></parameter>
+          </Parameters>
+        </action>
+        <action name="ht" description="帮助好友训练" status="3" response="TeammemberTrainActionResponse">
+          <Parameters>
+            <parameter name="f" description="好友记录Idx"></parameter>
+            <parameter name="t" description="要帮助训练的球员id"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="otb" description="开启好友训练宝箱" status="2" response="TeammemberTrainOpenBoxResponse">
+          <Parameters>
+            <parameter name="f" description="好友记录Idx"></parameter>
+          </Parameters>
+        </action>
+        
+        
+      </Actions>
+    </module>  
+    <module name="Ladder" description="天梯赛">
+      <Actions>
+        <action name="getmanagerinfo" description="获取天梯赛信息" status="1" response="LadderManagerResponse"/>
+        <action name="attend" description="报名天梯赛" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+            <parameter name="ig" description="是否是引导，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="leave" description="离开天梯赛" status="1" response="MessageCodeResponse"/>
+        <action name="heart" description="天梯赛心跳" status="1" response="Ladder_HeartResponse" memo="code=0且matchid不为空 表示天梯赛进入倒计时."/>
+        <action name="getmatchlist" description="获取最近几场天梯赛" status="1" response="LadderMatchEntityListResponse"/>
+        <action name="getmatch" description="获取一场天梯赛" status="3" response="LadderMatchEntityResponse">
+          <Parameters>
+            <parameter name="matchid" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+        <action name="r" description="获取天梯排行榜" status="1" response="LadderRankResponse">
+          <Parameters>
+            <parameter name="p" description="分页索引，从1开始"></parameter>
+            <parameter name="ps" description="每页显示数量"></parameter>
+          </Parameters>
+        </action>
+        <action name="e" description="天梯荣誉兑换" status="1" response="LadderExchangeResponse">
+          <Parameters>
+            <parameter name="k" description="兑换key，对应兑换列表中的【ExchangeId,ItemCode】组合"></parameter>
+          </Parameters>
+        </action>
+        <action name="mq" description="获取天梯战报滚动" status="2" response="LadderMatchMarqueeResponse">
+        </action>
+        <action name="re" description="刷新兑换列表" status="2" response="LadderRefreshExchangeResponse">
+        </action>
+        <action name="hi" description="获取挂机信息" status="2" response="LadderHookInfoResponse">
+        </action>
+        <action name="hst" description="开始挂机" status="2" response="LadderHookInfoResponse">
+          <Parameters>
+            <parameter name="mt" description="比赛次数"></parameter>
+            <parameter name="mins" description="最低积分"></parameter>
+            <parameter name="maxs" description="最高积分"></parameter>
+            <parameter name="wt" description="胜利次数"></parameter>
+          </Parameters>
+        </action>
+        <action name="hsp" description="结束挂机" status="2" response="MessageCodeResponse">
+        </action>
+        <action name="clearcd" description="天梯赛清除CD" status="2" response="LadderClearCDResponse">
+        </action>
+        <action name="clarecdp" description="天梯赛清除CD参数" status="2" response="LadderClearCDParaResponse">
+        </action>
+      </Actions>
+    </module>
+    <module name="Dailycup" description="杯赛" status="1">
+      <Actions>
+        <action name="getdailycupdata" description="获取杯赛数据" status="1" response="DailycupFullDataResponse">
+          <Parameters>
+            <parameter name="dailycupId" description="杯赛id，为0表示当天的"></parameter>
+          </Parameters>
+        </action>
+        <action name="attend" description="报名杯赛" status="3" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="attendgambletask" description="杯赛竞猜任务，仅需打开" status="3" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="attendgamble" description="竞猜杯赛" status="3" response="DailycupAttendGambleResponse">
+          <Parameters>
+            <parameter name="gamblePoint" description="竞猜金额"></parameter>
+            <parameter name="gambleResult" description="竞猜结果：1，主队胜；2，客队胜"></parameter>
+            <parameter name="matchId" description="竞猜的比赛guid"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="getmydailycupmatch" description="获取我的杯赛历程" status="1" response="MyDailycupMatchResponse">
+        </action>
+      </Actions>
+    </module>
+    <module name="MatchData" description="比赛数据相关" status="2">
+      <Actions>
+        <action name="fightinfo" description="获取对阵信息" status="2" response="Match_FightinfoResponse">
+          <Parameters>
+            <parameter name="awayid" description="对手id"></parameter>
+            <parameter name="siteid" description="区服Id" eg="wyxs1"/>
+            <parameter name="side" description="是否主场，0是1否" eg="0"/>
+          </Parameters>
+        </action>
+        <action name="ladderfightinfo" description="获取天梯对阵信息" status="2" response="Match_FightinfoResponse">
+          <Parameters>
+            <parameter name="matchid" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+        <action name="leaguefightinfo" description="获取联赛对阵信息" status="2" response="Match_FightinfoResponse">
+          <Parameters>
+            <parameter name="matchid" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+        <action name="getprocess" description="获取战报" status="2" memo="这个接口需特殊处理，成功时返回的是二进制战报，失败时返回的是code，获取时需判断response.ContentLength小于40时按字符串读，否则按二进制读">
+          <Parameters>
+            <parameter name="matchid" description="比赛id"></parameter>
+            <parameter name="matchtype" description="比赛类型"></parameter>
+          </Parameters>
+        </action>
+        <action name="afight" description="获取竞技场对阵信息" status="2" response="Match_FightinfoResponse">
+          <Parameters>
+            <parameter name="matchid" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="skillcard" description="技能卡" status="2">
+      <Actions>
+        <action name="upskill" description="技能升级" status="2" response="RootResponse`1[DTOSkillSetView]">
+          <Parameters>
+            <parameter name="cid" description="要升级的的技能卡牌Id" eg="24231552050b2iFPGMgc3BGS51mK5saA"></parameter>
+          </Parameters>
+        </action>
+        <action name="setinfo" description="获取技能装备信息" status="2" response="RootResponse`1[DTOSkillSetView]">
+        </action>
+        <action name="set" description="技能装备" status="3" response="RootResponse`1[DTOSkillSetView]">
+          <Parameters>
+            <parameter name="cids" description="技能卡Id串(6个逗号分割，无则为空）" eg=",24231552050b2iFPGMgc3BGS51mK5saA,,,,,"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="savenew" description="存储新学技能" status="2" response="ManagerskillNewResponse">
+          <Parameters>
+            <parameter name="skills" description="新技能id串（逗号分割）"></parameter>
+          </Parameters>
+        </action>
+        <action name="getnew" description="获取新学技能" status="2" response="ManagerskillNewResponse">
+        </action>
+
+      </Actions>
+    </module>
+     <module name="RK" description="排行榜系统" status="1">
+      <Actions>
+        <action name="r" description="获取排行榜" status="1" response="RankResponse">
+          <Parameters>
+            <parameter name="rt" description="排行榜类型：1,等级；2，综合实力；3，冠军杯积分；4，天梯赛"></parameter>
+            <parameter name="pi" description="分页索引，从1开始"></parameter>
+            <parameter name="ps" description="每页显示数量"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+      <module name="FR" description="好友系统" status="1">
+      <Actions>
+        <action name="af" description="添加好友" status="3" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="n" description="好友名称"></parameter>
+            <parameter name="ht" description="是否有对应任务，0：否，1：是"></parameter>
+          </Parameters>
+        </action>
+        <action name="gf" description="获取我的好友列表" status="1" response="MyFriendsResponse">
+          <Parameters>
+            <parameter name="pi" description="页码，从1开始"></parameter>
+            <parameter name="ps" description="每页行数"></parameter>
+          </Parameters>
+        </action>
+        <action name="gif" description="获取被邀请列表" status="1" response="FriendsAddInfoResponse">
+        </action>
+        <action name="iaf" description="忽略好友邀请" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="f" description="好友ID"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="fi" description="友谊赛" status="1" response="MatchCreateResponse">
+          <Parameters>
+            <parameter name="a" description="客队经理id"></parameter>
+          </Parameters>
+        </action>
+        <action name="fir" description="获取友谊赛结果" status="1" response="FriendMatchResponse">
+          <Parameters>
+            <parameter name="m" description="比赛id"></parameter>
+          </Parameters>
+        </action>
+        <action name="df" description="删除好友" status="1" response="MyFriendsResponse">
+          <Parameters>
+            <parameter name="f" description="好友记录Idx"></parameter>
+            <parameter name="pi" description="页码，从1开始"></parameter>
+            <parameter name="ps" description="每页行数"></parameter>
+          </Parameters>
+        </action>
+        <action name="sc" description="统计点击" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="type" description="点击类型"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="gfi" description="好友邀请可获得奖励" status="1" response="PriendInvitePrizeListResponse">
+        </action>
+        <action name="sfi" description="领取好友邀请奖励" status="1" response="InvitePrizeResponse">
+          <Parameters>
+            <parameter name="f" description="邀请奖励配置人数"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="TK" description="任务" status="1">
+      <Actions>
+        <action name="ctl" description="获取已完成任务列表" status="2" response="TaskListResponse">
+        </action>
+        <action name="gtl" description="获取任务列表" status="2" response="TaskListResponse">
+        </action>
+        <action name="st" description="提交任务" status="2" response="SubmitTaskResponse">
+          <Parameters>
+            <parameter name="ri" description="任务记录id"></parameter>
+          </Parameters>
+        </action>
+        <action name="sdt" description="提交每日任务" status="2" response="SubmitDailyTaskResponse">
+          <Parameters>
+            <parameter name="t" description="任务taskid"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+    </module>
+    <module name="AC" description="活动系统" status="1">
+      <Actions>
+        <action name="ga" description="获取活动信息" status="1" response="ActivityRecordResponse">
+          <Parameters>
+            <parameter name="ai" description="活动id:1，登录奖励；2，在线奖励"></parameter>
+          </Parameters>
+        </action>
+        <action name="gr" description="领取奖励" status="1" response="ActivityRecordResponse">
+          <Parameters>
+            <parameter name="ai" description="活动id"></parameter>
+            <parameter name="as" description="活动步骤"></parameter>
+          </Parameters>
+        </action>
+        <action name="gae" description="获取精彩活动列表" status="1" response="ActivityExListResponse">
+        </action>
+        <action name="guae" description="获取用户活动信息" status="1" response="ActivityExRecordListResponse">
+          <Parameters>
+            <parameter name="ai" description="精彩活动id"></parameter>
+          </Parameters>
+        </action>
+        <action name="gre" description="领取精彩活动奖励" status="1" response="ActivityExReceivePrizeResponse">
+          <Parameters>
+            <parameter name="ei" description="用户活动信息记录id"></parameter>
+          </Parameters>
+        </action>
+        <action name="mp" description="获取VIP礼包购买权限" status="1" response="NBManagerVipPackageResponse"> 
+        </action>
+        <action name="bmp" description="购买VIP礼包" status="1" response="BuyVipPackageResponse">
+          <Parameters>
+            <parameter name="pid" description="礼包ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="gsg" description="获取用户分享信息" status="1" response="ShareGetResponse">
+          <Parameters>
+            <parameter name="shareType" description="分享类型 1	第一套机制  2第二套机制  3第三套机制"></parameter>
+          </Parameters>
+        </action>
+        <action name="sg" description="分享后调用" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="shareType" description="分享类型 1	第一套机制  2第二套机制  3第三套机制"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="gon" description="获取奥运金牌数量" status="1" response="OlympicGetInfoResponse">
+        </action>
+        <action name="oex" description="兑换奥运奖励" status="1" response="OlympicExchangeResponse">
+          <Parameters>
+            <parameter name="et" description="奖励ID 1，2，3，4，5"></parameter>
+          </Parameters>
+        </action>
+        <!--<action name="tr" description="领取指定球员奖励" status="1" response="ActivityExReceivePrizeResponse">
+          <Parameters>
+            <parameter name="ei" description="用户活动信息记录id"></parameter>
+            <parameter name="ti" description="指定的球员Guid"></parameter>
+          </Parameters>
+        </action>-->
+      </Actions>
+    </module>
+    <module name="Gamble" description="竞猜欧洲杯" status="1">
+      <Actions>
+        <action name="gml" description="获取比赛列表" status="1" response="GetEuropeMatchListResponse">
+          <Parameters>
+            <parameter name="m" description="月"></parameter>
+            <parameter name="d" description="日"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="gm" description="竞猜一场比赛" status="1" response="EuropeGambleMatchResponse">
+          <Parameters>
+            <parameter name="mid" description="比赛ID 比赛列表接口里的Idx"></parameter>
+            <parameter name="gt" description="1 主胜 2平 3 客胜"></parameter>
+            <parameter name="pt" description="1=20点，2=50点，3=100点"></parameter>
+          </Parameters>
+        </action>
+        <action name="gmg" description="获取我的竞猜列表" status="1" response="GetMyEuropeGambleResponse">
+        </action>
+        <action name="gma" description="获取我的竞猜活动信息" status="1" response="EuropeGambleResponse">
+        </action>
+        <action name="dp" description="领取活动奖励" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="sp" description="活动步骤 1-5"></parameter>
+          </Parameters>
+        </action>
+       </Actions>
+    </module>
+    
+    <module name="AR" description="竞技场" status="1">
+      <Actions>
+        <action name="gs" description="获取阵型数据" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="at" description="竞技场类型"></parameter>
+            <parameter name="zn" description="zoneName"></parameter>
+          </Parameters>
+        </action>
+        <action name="uf" description="球员上阵（不是替换）" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="at" description="竞技场类型"></parameter>
+            <parameter name="bi" description="球员位置 1-7"></parameter>
+            <parameter name="ii" description="物品ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="rp" description="替换上场" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="at" description="竞技场类型"></parameter>
+            <parameter name="t1" description="阵容ID1"></parameter>
+            <parameter name="t2" description="阵容ID2"></parameter>
+           </Parameters>
+        </action>
+        <action name="ss" description="设置阵型" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="at" description="竞技场类型"></parameter>
+            <parameter name="fid" description="阵型ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="gsp" description="获取竞技场商城" status="1" response="GetArenaShopResponse"> </action>
+        <action name="rsp" description="刷新竞技场商城" status="1" response="GetArenaShopResponse"> </action>
+        <action name="esp" description="商城兑换" status="1" response="ArenaExChangeResponse">
+          <Parameters>
+            <parameter name="id" description="物品位置"></parameter>
+          </Parameters>
+        </action>
+        <action name="xz" description="竞技场球员一键下阵" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="at" description="竞技场类型"></parameter>
+          </Parameters>
+        </action>
+
+        <action name="pr" description="获取排名列表" status="1" response="PenaltyKickRankResponse"> </action>
+        <action name="pgi" description="获取用户信息" status="1" response="GetPenaltyKickInfoResponse"> </action>
+        <action name="join" description="开始游戏" status="1" response="GetPenaltyKickInfoResponse"> </action>
+        <action name="shoot" description="开始射门" status="1" response="PenaltyKickShootResponse"> </action>
+        <action name="pex" description="点球积分兑换" status="1" response="PenaltyKickExChangeResponse">
+          <Parameters>
+            <parameter name="ic" description="物品code"></parameter>
+          </Parameters>
+        </action>
+        <action name="prex" description="刷新点球兑换" status="1" response="PenaltyKickExChangeResponse"> </action>
+        <action name="ap" description="点球活动提示接口" status="1" response="PenaltyKickGetActivityInfoResponse"> </action>
+      </Actions>
+    </module>
+
+    <module name="CAR" description="跨服竞技场" status="1">
+      <Actions>
+        <action name="gar" description="获取竞技场信息" status="1" response="ArenaGetInfoResponse"> </action>
+        <action name="go" description="获取对手" status="1" response="ArenaGetOpponentResponse"> </action>
+        <action name="bsp" description="购买通行证参数" status="1" response="ArenaBuyStaminaParaResponse"> </action>
+        <action name="bs" description="购买通行证" status="1" response="ArenaBuyStaminaResponse"> </action>
+        <action name="fh" description="打比赛" status="1" response="ArenaFightResponse">
+          <Parameters>
+            <parameter name="oid" description="对手ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="gs" description="获取竞技场体力" status="1" response="ArenaStaminaResponse"> </action>
+
+        <action name="ga" description="获取玩家阵型" status="1" response="NBSolutionInfoResponse">
+          <Parameters>
+            <parameter name="mid" description="玩家经理ID"></parameter>
+            <parameter name="zn" description="玩家区ID"></parameter>
+          </Parameters>
+        </action>
+      </Actions>
+     
+    </module>
+    <module name="CC" description="跨服群雄" status="1">
+      <Actions>
+        <action name="gci" description="获取竞技场信息" status="1" response="CrosscrowdInfoResponse"> </action>
+        <action name="gmi" description="获取经理信息" status="1" response="CrosscrowdManagerResponse"> </action>
+        <action name="at" description="参加比赛" status="1" response="MessageCodeResponse"> </action>
+        <action name="lv" description="离开比赛" status="1" response="MessageCodeResponse"> </action>
+        <action name="ht" description="轮询获取比赛id" status="1" response="CrowdHeartResponse"></action>
+        <action name="gmh" description="获取比赛" status="1" response="CrosscrowdMatchResponse">
+          <Parameters>
+            <parameter name="mi" description="比赛ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="cl" description="清除比赛cd" status="1" response="CrosscrowdManagerResponse"> </action>
+        <action name="re" description="复活" status="1" response="CrosscrowdManagerResponse"> </action>
+        <action name="stb" description="启用机器人" status="1" response="RobotResponse">
+          <Parameters>
+            <parameter name="hookMatchType" description="比赛类型"></parameter>
+          </Parameters>
+        </action>
+        <action name="spb" description="停止机器人" status="1" response="RobotResponse">
+          <Parameters>
+            <parameter name="hookMatchType" description="比赛类型"></parameter>
+          </Parameters>
+        </action>
+        <action name="rbi" description="机器人信息" status="1" response="RobotResponse">
+        </action>
+      </Actions>
+     
+    </module>
+    <module name="CL" description="跨服天梯" status="1">
+      <Actions>
+        <action name="gmi" description="获取天梯赛信息" status="1" response="CrossladderManagerResponse"> </action>
+        <action name="at" description="参加比赛" status="1" response="MessageCodeResponse"> </action>
+        <action name="lv" description="离开比赛" status="1" response="MessageCodeResponse"> </action>
+        <action name="ht" description="轮询获取比赛id" status="1" response="CrossLadderHeartResponse"></action>
+        <action name="getmatchlist" description="获取比赛列表" status="1" response="LadderMatchEntityListResponse"> </action>
+        <action name="getmatch" description="获取比赛" status="1" response="CrossladderMatchResponse">
+          <Parameters>
+            <parameter name="matchid" description="比赛ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="e" description="荣誉兑换" status="1" response="LadderExchangeResponse">
+          <Parameters>
+            <parameter name="ei" description="奖励key"></parameter>
+          </Parameters>
+        </action>
+        <action name="mq" description="比赛Marquee" status="1" response="LadderMatchMarqueeResponse"> </action>
+        <action name="bm" description="购买耐力" status="1" response="MessageCodeResponse"> </action>
+        <action name="hi" description="获取挂机信息" status="2" response="LadderHookInfoResponse">
+        </action>
+        <action name="hst" description="开始挂机" status="2" response="LadderHookInfoResponse">
+          <Parameters>
+            <parameter name="mt" description="比赛次数"></parameter>
+            <parameter name="mins" description="最低积分"></parameter>
+            <parameter name="maxs" description="最高积分"></parameter>
+            <parameter name="wt" description="胜利次数"></parameter>
+          </Parameters>
+        </action>
+        <action name="hsp" description="结束挂机" status="2" response="MessageCodeResponse">
+        </action>
+      </Actions>
+
+    </module>
+
+    <module name="TF" description="转会市场" status="1">
+      <Actions>
+        <action name="ai" description="挂牌拍卖" status="1" response="AuctionItemResponse">
+          <Parameters>
+            <parameter name="ii" description="物品ID"></parameter>
+            <parameter name="p" description="挂牌价格"></parameter>
+          </Parameters>
+        </action>
+          <action name="gml" description="获取我的拍卖列表" status="1" response="AuctionItemResponse">
+         
+        </action>
+        <action name="gtl" description="获取拍卖列表" status="1" response="AuctionItemResponse"> 
+          <Parameters>
+            <parameter name="r" description="排序类型 1 默认 时间倒序 2 价格正序 3价格倒序"></parameter>
+            <parameter name="in" description="按物品名称搜索"></parameter>
+            <parameter name="ps" description="页大小"></parameter>
+            <parameter name="pi" description="页码"></parameter>
+          </Parameters>
+        </action>
+        <action name="gi" description="获取拍卖物品详情" status="1" response="TransferMainResponse">
+          <Parameters>
+            <parameter name="ti" description="拍卖ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="a" description="竞拍" status="1" response="AuctionResponse">
+          <Parameters>
+            <parameter name="ti" description="拍卖ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="so" description="下架" status="1" response="MessageCodeResponse">
+          <Parameters>
+            <parameter name="ti" description="拍卖ID"></parameter>
+          </Parameters>
+        </action>
+        <action name="ga" description="感恩回馈获取信息" status="1" response="CrossActivityInfoResponse"></action>
+        <action name="pr" description="感恩回馈抽奖" status="1" response="CrossActivityPrizeResponse"></action>
+      </Actions>
+
+    </module>
+  </Modules>
+</requests>

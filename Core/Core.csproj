@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07941B18-280E-4D0A-85AB-00A2E9C54592}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Games.NBall.Core</RootNamespace>
+    <AssemblyName>Games.NBall.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Games.NB.Match.Base, Version=1.0.5016.35972, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Match2\Games.NB.Match.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MsEntLibWrapper">
+      <HintPath>..\Lib\MsEntLib\MsEntLibWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartThreadPool">
+      <HintPath>..\Lib\SmartThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activity\ActivityCore.cs" />
+    <Compile Include="Activity\ActivityExHandler.cs" />
+    <Compile Include="Activity\ActivityExThread.cs" />
+    <Compile Include="Activity\DailyAttendance.cs" />
+    <Compile Include="Activity\DailyEventThread.cs" />
+    <Compile Include="Activity\InvestCore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Activity\ShareCore.cs" />
+    <Compile Include="Admin\AdminCore.cs" />
+    <Compile Include="Coach\CoachCore.cs" />
+    <Compile Include="Match\MatchReportCache.cs" />
+    <Compile Include="Match\MatchRewardRules.cs" />
+    <Compile Include="PenaltyKick\PenaltyKickCore.cs" />
+    <Compile Include="Arena\ArenaThread.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdCore.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdManager.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdMessage.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdPairThread.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdProcess.cs" />
+    <Compile Include="CrossCrowd\CrossCrowdThread.cs" />
+    <Compile Include="CrossLadder\CrossLadderCore.cs" />
+    <Compile Include="CrossLadder\CrossLadderManager.cs" />
+    <Compile Include="CrossLadder\CrossLadderProcess.cs" />
+    <Compile Include="CrossLadder\CrossLadderThread.cs" />
+    <Compile Include="CrossLadder\CrossLadderThread.Pair.cs" />
+    <Compile Include="CrossLadder\CrossLadderThread.Schedule.cs" />
+    <Compile Include="Arena\ArenaTeammemberCore.cs" />
+    <Compile Include="Arena\ArenaCore.cs" />
+    <Compile Include="Gamble\EuropeCore.cs" />
+    <Compile Include="Gamble\GambleCore.cs" />
+    <Compile Include="Gamble\EuropeConfig.cs" />
+    <Compile Include="League\LeagueFightMapFrame.cs" />
+    <Compile Include="Mall\CrossMallDirectFrame.cs" />
+    <Compile Include="Rank\CrossRankThread.cs" />
+    <Compile Include="Revelation\RevelationHistoryFrame.cs" />
+    <Compile Include="Revelation\RevelationCheckpointCore.cs" />
+    <Compile Include="Revelation\RevelationCore.cs" />
+    <Compile Include="Revelation\RevelationNewCore.cs" />
+    <Compile Include="Robot\RobotCore.cs" />
+    <Compile Include="Robot\RobotThread.cs" />
+    <Compile Include="Statistic\StatisticCore.cs" />
+    <Compile Include="Statistic\StatisticThread.cs" />
+    <Compile Include="Transfer\TransferCore.cs" />
+    <Compile Include="Transfer\TransferThread.cs" />
+    <Compile Include="Turntable\TurntableCore.cs" />
+    <Compile Include="Turntable\TurntableFrame.cs" />
+    <Compile Include="Turntable\OlympicCore.cs" />
+    <Compile Include="UerCrossPara\AnnouncementCore.cs" />
+    <Compile Include="Constellation\ConstellationPackbager.cs" />
+    <Compile Include="Dailycup\DailycupAssociation.cs" />
+    <Compile Include="Dailycup\DailycupCore.cs" />
+    <Compile Include="Dailycup\DailycupGambleOpen.cs" />
+    <Compile Include="Dailycup\DailycupProcess.cs" />
+    <Compile Include="FriendShip\PlayerKillCore.cs" />
+    <Compile Include="Friend\FriendCore.cs" />
+    <Compile Include="Information\InformationCore.cs" />
+    <Compile Include="Information\InformationHelper.cs" />
+    <Compile Include="Item\ExchangeCore.cs" />
+    <Compile Include="Item\ItemCore.cs" />
+    <Compile Include="Item\ItemPackageFrame.cs" />
+    <Compile Include="Item\PandoraCore.cs" />
+    <Compile Include="Ladder\LadderCore.cs" />
+    <Compile Include="Ladder\LadderDayPrize.cs" />
+    <Compile Include="Ladder\LadderMatchUtil.cs" />
+    <Compile Include="Ladder\LadderProcess.cs" />
+    <Compile Include="Ladder\LadderThread.cs" />
+    <Compile Include="League\LeagueProcess.cs" />
+    <Compile Include="League\LeagueConfig.cs" />
+    <Compile Include="League\LeagueCore.cs" />
+    <Compile Include="Mail\MailBuilder.cs" />
+    <Compile Include="Mail\MailCore.cs" />
+    <Compile Include="Mall\MallCore.cs" />
+    <Compile Include="Mall\MallDirectFrame.cs" />
+    <Compile Include="ManagerSkill\ManagerSkillConfig.cs" />
+    <Compile Include="ManagerSkill\ManagerSkillConvert.cs" />
+    <Compile Include="ManagerSkill\ManagerSkillRules.cs" />
+    <Compile Include="Manager\ManagerUtil.cs" />
+    <Compile Include="Manager\ManagerCore.cs" />
+    <Compile Include="Manager\PayCore.cs" />
+    <Compile Include="Match\MatchCdHandler.cs" />
+    <Compile Include="Match\KpiHandler.cs" />
+    <Compile Include="Match\MatchCore.cs" />
+    <Compile Include="Match\MatchDataCacheHelper.cs" />
+    <Compile Include="Match\MatchDataCore.cs" />
+    <Compile Include="Match\MatchThread.cs" />
+    <Compile Include="Online\CSDKinterface.cs" />
+    <Compile Include="Online\OnlineConfig.cs" />
+    <Compile Include="Online\OnlineCore.cs" />
+    <Compile Include="Online\OnlineThread.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rank\RankHandler.cs" />
+    <Compile Include="Rank\RankLadderThread.cs" />
+    <Compile Include="Rank\RankThread.cs" />
+    <Compile Include="Scouting\ScoutingCore.cs" />
+    <Compile Include="SkillCard\SkillCardConfig.cs" />
+    <Compile Include="SkillCard\SkillCardConvert.cs" />
+    <Compile Include="SkillCard\SkillCardRules.cs" />
+    <Compile Include="Task\TaskCore.cs" />
+    <Compile Include="Task\TaskHandler.cs" />
+    <Compile Include="Task\TaskThread.cs" />
+    <Compile Include="Task\AchievementTaskCore.cs" />
+    <Compile Include="Teammember\PlayerTrain.cs" />
+    <Compile Include="Teammember\TeammemberCore.cs" />
+    <Compile Include="Teammember\TeammemberCore.Grow.cs" />
+    <Compile Include="UerCrossPara\CrossActivityCore.cs" />
+    <Compile Include="UerCrossPara\CrossActivityThread.cs" />
+    <Compile Include="UerCrossPara\UserLoginCore.cs" />
+    <Compile Include="Vip\VipCore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bll\Bll.csproj">
+      <Project>{d04b667a-828b-46fd-9d7c-205fb604d2e0}</Project>
+      <Name>Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{836e0c0f-f9ff-4f58-9427-d6f0d6b793a5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{72485491-3be9-49e5-b184-36acc3f91647}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{bbfbba66-7d0d-491f-aae9-d992270c775e}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MatchFacade\MatchFacade.csproj">
+      <Project>{2da8ea1f-5da7-4110-b2a6-32bd1442c820}</Project>
+      <Name>MatchFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceClient\ServiceClient.csproj">
+      <Project>{377bc68c-0955-408e-8cfa-ff94f5da5fad}</Project>
+      <Name>ServiceClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceEngine\ServiceEngine.csproj">
+      <Project>{42f78003-ce71-469a-b532-2b15d58c4ed2}</Project>
+      <Name>ServiceEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceInterface\ServiceInterface.csproj">
+      <Project>{a9aa2f39-999e-4797-83cc-23e40f85156d}</Project>
+      <Name>ServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebClient\WebClient.csproj">
+      <Project>{932cb45a-b613-42ca-9a64-795fa2cc7add}</Project>
+      <Name>WebClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebServerFacade\WebServerFacade.csproj">
+      <Project>{9887128b-93fd-4175-a30d-8f8f38a6bd41}</Project>
+      <Name>WebServerFacade</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="A8csdk\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

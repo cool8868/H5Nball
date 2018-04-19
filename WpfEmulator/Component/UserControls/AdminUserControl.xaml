@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="Games.NBall.WpfEmulator.Component.UserControls.AdminUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="640" d:DesignWidth="1080" Loaded="UserControl_Loaded_1">
+    <Canvas>
+        <Label x:Name="lblMessage" Content="" Canvas.Left="10" Canvas.Top="12" Foreground="Red"></Label>
+            <GroupBox Header="加钱" Width="290" Canvas.Left="10" Canvas.Top="43" Height="49">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="225"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="金额：" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                    <TextBox x:Name="txtMoney" Text="1000" Grid.Column="1" Height="25" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center" Margin="2,1,76,1"/>
+                <Button x:Name="btnMondy" Content="提交" Grid.Column="1" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnMondy_Click" Margin="155,1,10,1"></Button>
+                </Grid>
+            </GroupBox>
+        <GroupBox Header="加物品" Width="825" Canvas.Left="10" Canvas.Top="166" Height="139">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="350"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Rectangle Fill="#FFD3CB2C" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2"></Rectangle>
+               
+                <Label Content="要添加的物品：" Grid.Column="2" Grid.Row="2" Margin="0,0,311,0"></Label>
+                <TextBox x:Name="txtResultItemName" Text=""  Height="25" Grid.Column="2" Grid.Row="2" Style="{DynamicResource SimpleTextBox}" Margin="46,3,0,4"/>
+                
+                <TextBox x:Name="txtItemStrength" Text="1" Grid.Column="2" Width="40" Height="25" Style="{DynamicResource SimpleTextBox}" Margin="204,3,0,3" HorizontalAlignment="Left" Grid.Row="3"/>
+                <Label Content="数量：" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBox x:Name="txtItemCount" Text="1" Grid.Column="2" Grid.Row="3" Width="80" Height="24" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="46,3,0,4"/>
+                <Label Content="强化级别：" Grid.Column="2" Grid.Row="3" Margin="131,2,204,-1"></Label>
+                
+                <Button x:Name="btnItem" Content="提交" Grid.Column="2" Style="{DynamicResource SimpleButton}" Grid.Row="2" Grid.RowSpan="2" Click="btnItem_Click" Margin="260,10,71,7"/>
+
+                
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="加阅历" Width="290" Canvas.Left="322" Canvas.Top="43" Height="49">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="225"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="阅历：" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtSophisticate" Text="1000" Grid.Column="1"  Margin="2,1,76,1" Height="25" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center"/>
+                <Button x:Name="btnSophisticate" Content="提交" Grid.Column="1" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnSophisticate_Click" Margin="155,1,10,1"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="加灵气" Width="290" Canvas.Left="642" Canvas.Top="43" Height="49">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="225"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="灵气：" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox x:Name="txtReiki" Text="1000" Grid.Column="1"  Margin="2,1,76,1" Height="25" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center"/>
+                <Button x:Name="btnReiki" Content="提交" Grid.Column="1" Width="60" Height="25" Style="{DynamicResource SimpleButton}" Click="btnReiki_Click" Margin="154,0,11,2"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="我要升级" Width="290" Canvas.Left="10" Canvas.Top="103" Height="58">
+            <Button x:Name="btnLevelup" Content="我要升级" Height="25" Style="{DynamicResource SimpleButton}" Margin="104,0,3,2" Click="btnLevelup_Click"/>
+        </GroupBox>
+        <GroupBox Header="清空背包" Width="290" Canvas.Left="322" Canvas.Top="103" Height="58">
+            <Button x:Name="btnClearPackage" Content="清空背包" Height="25" Style="{DynamicResource SimpleButton}" Margin="104,0,3,2" Click="btnClearPackage_Click"/>
+        </GroupBox>
+        <TextBox x:Name="txttime1" Text="" Height="25" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center" Canvas.Left="218" Canvas.Top="342" Width="147"/>
+        <Label Content="时间对比：" VerticalAlignment="Center" HorizontalAlignment="Right" Canvas.Left="130" Canvas.Top="342"/>
+        <TextBox x:Name="txttime3" Text="" Height="25" Style="{DynamicResource SimpleTextBox}" VerticalAlignment="Center" Canvas.Left="488" Canvas.Top="343" Width="147"/>
+       
+       
+        <Button x:Name="btntime1" Content="=" Style="{DynamicResource SimpleButton}" Click="btntime1_Click" Height="25" Canvas.Left="394" Canvas.Top="342" Width="58" RenderTransformOrigin="-0.854,6.38"/>
+
+    </Canvas>
+</UserControl>

@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{62CE44D6-6C6D-4CF6-97B9-7BBAE74C5E90}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Games.NBall.NB_Web</RootNamespace>
+    <AssemblyName>Games.NBall.NB_Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Enyim.Caching, Version=2.8.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSDK.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="crossdomain.xml" />
+    <Content Include="jquery-1.7.1.min.js" />
+    <Content Include="js\jquery-2.1.1.min.js" />
+    <Content Include="SelectZone.html" />
+    <Content Include="swfobject.js" />
+    <Content Include="Ua.aspx" />
+    <Content Include="Ub.aspx" />
+    <Content Include="Uc.aspx" />
+    <Content Include="Error.aspx" />
+    <Content Include="UM.aspx" />
+    <Content Include="US.aspx" />
+    <Content Include="Ut.aspx" />
+    <Content Include="WebForm1.aspx" />
+    <None Include="FilterText\FilterText.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Global.asax" />
+    <Content Include="Index.aspx" />
+    <Content Include="Ul.aspx" />
+    <Content Include="Passport.aspx" />
+    <Content Include="Test.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseCommon\BaseCommand.cs" />
+    <Compile Include="BaseCommon\BaseUser.cs" />
+    <Compile Include="BaseCommon\OnlineMgr.cs" />
+    <Compile Include="BaseCommon\UserAccountMgr.cs" />
+    <Compile Include="Command\ActivityCommand.cs" />
+    <Compile Include="Command\CrossCrowdCommand.cs" />
+    <Compile Include="Command\CrossLadderCommand.cs" />
+    <Compile Include="Command\DailycupCommand.cs" />
+    <Compile Include="Command\FriendCommand.cs" />
+    <Compile Include="Command\GambleCommand.cs" />
+    <Compile Include="Command\LadderCommand.cs" />
+    <Compile Include="Command\LeagueCommand.cs" />
+    <Compile Include="Command\MatchDataCommand.cs" />
+    <Compile Include="Command\PlayerKillCommand.cs" />
+    <Compile Include="Command\ManagerCommand.cs" />
+    <Compile Include="Command\ItemCommand.cs" />
+    <Compile Include="Command\MailCommand.cs" />
+    <Compile Include="Command\ManagerSkillCommand.cs" />
+    <Compile Include="Command\RankCommand.cs" />
+    <Compile Include="Command\RevelationCommand.cs" />
+    <Compile Include="Command\ScoutingCommand.cs" />
+    <Compile Include="Command\SkillCardCommand.cs" />
+    <Compile Include="Command\TaskCommand.cs" />
+    <Compile Include="Command\TeammemberCommand.cs" />
+    <Compile Include="Command\MallCommand.cs" />
+    <Compile Include="Command\TrainCommand.cs" />
+    <Compile Include="Command\ArenaCommand.cs" />
+    <Compile Include="Command\CrossArenaCommand.cs" />
+    <Compile Include="Command\TransferCommand.cs" />
+    <Compile Include="CSDK.aspx.cs">
+      <DependentUpon>CSDK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CSDK.aspx.designer.cs">
+      <DependentUpon>CSDK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ua.aspx.cs">
+      <DependentUpon>Ua.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ua.aspx.designer.cs">
+      <DependentUpon>Ua.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ub.aspx.cs">
+      <DependentUpon>Ub.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ub.aspx.designer.cs">
+      <DependentUpon>Ub.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Uc.aspx.cs">
+      <DependentUpon>Uc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uc.aspx.designer.cs">
+      <DependentUpon>Uc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CommandHandler.cs" />
+    <Compile Include="Helper\FilterHelper.cs" />
+    <Compile Include="Helper\OutputHelper.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ul.aspx.cs">
+      <DependentUpon>Ul.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ul.aspx.designer.cs">
+      <DependentUpon>Ul.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Passport.aspx.cs">
+      <DependentUpon>Passport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Passport.aspx.designer.cs">
+      <DependentUpon>Passport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UM.aspx.cs">
+      <DependentUpon>UM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UM.aspx.designer.cs">
+      <DependentUpon>UM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="US.aspx.cs">
+      <DependentUpon>US.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="US.aspx.designer.cs">
+      <DependentUpon>US.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ut.aspx.cs">
+      <DependentUpon>Ut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ut.aspx.designer.cs">
+      <DependentUpon>Ut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\1111.pubxml" />
+    <None Include="Properties\PublishProfiles\H5Ball_Web.pubxml" />
+    <None Include="Properties\PublishProfiles\ScanHome.pubxml" />
+    <None Include="Properties\PublishProfiles\ScanWeb.pubxml" />
+    <None Include="Properties\PublishProfiles\V1.3.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FacadeLogin\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bll\Bll.csproj">
+      <Project>{d04b667a-828b-46fd-9d7c-205fb604d2e0}</Project>
+      <Name>Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChattingFacade\ChattingFacade.csproj">
+      <Project>{8e3f1746-f60e-4a0a-9481-466c9dd670fd}</Project>
+      <Name>ChattingFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{836e0c0f-f9ff-4f58-9427-d6f0d6b793a5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{07941b18-280e-4d0a-85ab-00a2e9c54592}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{bbfbba66-7d0d-491f-aae9-d992270c775e}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceClient\ServiceClient.csproj">
+      <Project>{377bc68c-0955-408e-8cfa-ff94f5da5fad}</Project>
+      <Name>ServiceClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceEngine\ServiceEngine.csproj">
+      <Project>{42f78003-ce71-469a-b532-2b15d58c4ed2}</Project>
+      <Name>ServiceEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceInterface\ServiceInterface.csproj">
+      <Project>{a9aa2f39-999e-4797-83cc-23e40f85156d}</Project>
+      <Name>ServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UAFacade\UAFacade.csproj">
+      <Project>{28077d4e-5d3c-440a-924b-f6f45f559d03}</Project>
+      <Name>UAFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebClient\WebClient.csproj">
+      <Project>{932cb45a-b613-42ca-9a64-795fa2cc7add}</Project>
+      <Name>WebClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebServerFacade\WebServerFacade.csproj">
+      <Project>{9887128b-93fd-4175-a30d-8f8f38a6bd41}</Project>
+      <Name>WebServerFacade</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>18817</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8034/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

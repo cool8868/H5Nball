@@ -1,0 +1,36 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate"  Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+
+
+using System;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using ProtoBuf;
+namespace <%=Namespace.Trim()%>.Entity.Shadow
+{
+	public class Shadow<%=GetClassName(SourceTable.Name)%>Entity: BaseShadowEntity
+	{
+		#region Public Properties
+		
+		<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+        <% if (SourceTable.Columns[i].Name.ToLower()=="idx" || SourceTable.Columns[i].Name.ToLower()=="transactionid") continue; %>
+		///<summary>
+		///<%=SourceTable.Columns[i].Description=="" ? SourceTable.Columns[i].Name : DalCodeGen.FormatDescription(SourceTable.Columns[i].Description) %>
+		///</summary>
+		public <%=GetFixedSystemType(SourceTable.Columns[i])%> <%=SourceTable.Columns[i].Name %> {get ; set ;}
+		<% if (i < SourceTable.Columns.Count - 1) Response.Write("\r\n"); %>		
+		<% } %>
+		#endregion
+		
+	}
+}
+
+<script runat="template">
+
+</script>

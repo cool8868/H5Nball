@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RankingYesterdayDataSet" targetNamespace="http://tempuri.org/RankingYesterdayDataSet.xsd" xmlns:mstns="http://tempuri.org/RankingYesterdayDataSet.xsd" xmlns="http://tempuri.org/RankingYesterdayDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NBallConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NBallConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Games.NBall.Dal.Properties.Settings.GlobalReference.Default.NBallConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RankingYesterdayDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RankingYesterdayDataSet" msprop:Generator_UserDSName="RankingYesterdayDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Ranking_Yesterday" msprop:Generator_TableClassName="Ranking_YesterdayDataTable" msprop:Generator_TableVarName="tableRanking_Yesterday" msprop:Generator_TablePropName="Ranking_Yesterday" msprop:Generator_RowDeletingName="Ranking_YesterdayRowDeleting" msprop:Generator_RowChangingName="Ranking_YesterdayRowChanging" msprop:Generator_RowEvHandlerName="Ranking_YesterdayRowChangeEventHandler" msprop:Generator_RowDeletedName="Ranking_YesterdayRowDeleted" msprop:Generator_UserTableName="Ranking_Yesterday" msprop:Generator_RowChangedName="Ranking_YesterdayRowChanged" msprop:Generator_RowEvArgName="Ranking_YesterdayRowChangeEvent" msprop:Generator_RowClassName="Ranking_YesterdayRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Idx" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIdx" msprop:Generator_ColumnPropNameInRow="Idx" msprop:Generator_ColumnPropNameInTable="IdxColumn" msprop:Generator_UserColumnName="Idx" type="xs:int" />
+              <xs:element name="RankType" msprop:Generator_ColumnVarNameInTable="columnRankType" msprop:Generator_ColumnPropNameInRow="RankType" msprop:Generator_ColumnPropNameInTable="RankTypeColumn" msprop:Generator_UserColumnName="RankType" type="xs:int" />
+              <xs:element name="ManagerId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnManagerId" msprop:Generator_ColumnPropNameInRow="ManagerId" msprop:Generator_ColumnPropNameInTable="ManagerIdColumn" msprop:Generator_UserColumnName="ManagerId" type="xs:string" />
+              <xs:element name="Rank" msprop:Generator_ColumnVarNameInTable="columnRank" msprop:Generator_ColumnPropNameInRow="Rank" msprop:Generator_ColumnPropNameInTable="RankColumn" msprop:Generator_UserColumnName="Rank" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Ranking_Yesterday" />
+      <xs:field xpath="mstns:Idx" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

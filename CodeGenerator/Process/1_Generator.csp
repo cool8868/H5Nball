@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <propertySets>
+    <propertySet output="Generator\Matchprocess.csp" template="..\CodeTemplate\Model_Process.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.177.96;Initial Catalog=H5NB_Process;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>MatchProcess</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+  </propertySets>
+</codeSmith>
+

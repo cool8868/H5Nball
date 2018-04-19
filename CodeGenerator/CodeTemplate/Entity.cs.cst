@@ -1,0 +1,84 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate"  Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+
+
+using System;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using ProtoBuf;
+namespace <%=Namespace.Trim()%>.Entity
+{	
+    /// <summary>
+	/// 对Table <%=SourceTable%> 的数据映射.
+	/// </summary>
+	[DataContract]
+	[Serializable]
+    [ProtoContract]
+	public partial class <%=GetClassName(SourceTable.Name)%>Entity
+	{
+		
+		public <%=GetClassName(SourceTable.Name)%>Entity()
+		{
+		}
+
+		public <%=GetClassName(SourceTable.Name)%>Entity(
+		<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+		<%=GetFixedSystemType(SourceTable.Columns[i])%> <%=SourceTable.Columns[i].Name.ToLower() %>
+		<% if (i < SourceTable.Columns.Count - 1) Response.Write(","); %>
+		<% } %>)
+		{
+			<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+			this.<%=SourceTable.Columns[i].Name %> = <%=SourceTable.Columns[i].Name.ToLower() %>;
+			<% } %>
+		}
+		
+		#region Public Properties
+		
+		<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+		///<summary>
+		///<%=SourceTable.Columns[i].Description=="" ? SourceTable.Columns[i].Name : DalCodeGen.FormatDescription(SourceTable.Columns[i].Description) %>
+		///</summary>
+        [DataMember]
+        [ProtoMember(<%= i+1 %>)]
+        <% if(SourceTable.Columns[i].DataType ==DbType.DateTime || SourceTable.Columns[i].Name =="RowVersion" || SourceTable.Columns[i].DataType== DbType.Binary){%>
+        [JsonIgnore]
+        <%} %>
+		public <%=GetFixedSystemType(SourceTable.Columns[i])%> <%=SourceTable.Columns[i].Name %> {get ; set ;}
+		<% if (i < SourceTable.Columns.Count - 1) Response.Write("\r\n"); %>		
+		<% } %>
+		#endregion
+        
+        #region Clone
+        public <%=GetClassName(SourceTable.Name)%>Entity Clone()
+        {
+            <%=GetClassName(SourceTable.Name)%>Entity entity = new <%=GetClassName(SourceTable.Name)%>Entity();
+            <% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+			entity.<%=SourceTable.Columns[i].Name %> = this.<%=SourceTable.Columns[i].Name %>;
+			<% } %>
+            return entity;
+        }
+        #endregion
+		
+	}
+	
+	
+    /// <summary>
+	/// 对Table <%=SourceTable%> 的输出映射.
+	/// </summary>	
+    [DataContract]
+    [Serializable]
+    public partial class <%=GetClassName(SourceTable.Name)%>Response : BaseResponse<<%=GetClassName(SourceTable.Name)%>Entity>
+    {
+
+    }
+}
+
+<script runat="template">
+
+</script>

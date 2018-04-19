@@ -1,0 +1,35 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate" Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text.RegularExpressions" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+<% string []SingleRowReaderCommands=SingleRowReaderCommandNames.Split(',');
+    string []MultiRowReaderCommands=MultiRowReaderCommandNames.Split(',');
+    string []ScalarCommands=ScalarCommandNames.Split(',');
+    string []NoQueryCommands=NoQueryCommandNames.Split(',');
+ %>
+
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using <%=Namespace.Trim()%>.Entity;
+
+namespace <%=Namespace.Trim()%>.Dal
+{
+
+    public partial class <%=GetClassName(SourceTable.Name)%>Provider
+    {
+	}
+}
+
+<script runat="template">
+
+</script>

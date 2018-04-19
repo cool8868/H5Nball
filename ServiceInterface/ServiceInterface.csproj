@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9AA2F39-999E-4797-83CC-23E40F85156D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Games.NBall.ServiceContract.IService</RootNamespace>
+    <AssemblyName>Games.NBall.ServiceContract.IService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IService\IActivityService.cs" />
+    <Compile Include="IService\ICrossDataService.cs" />
+    <Compile Include="IService\IDailycupService.cs" />
+    <Compile Include="IService\IFriendService.cs" />
+    <Compile Include="IService\IGambleService.cs" />
+    <Compile Include="IService\ILadderService.cs" />
+    <Compile Include="IService\ILeagueService.cs" />
+    <Compile Include="IService\IMatchDataService.cs" />
+    <Compile Include="IService\IPlayerKillService.cs" />
+    <Compile Include="IService\IOnlineService.cs" />
+    <Compile Include="IService\IManagerService.cs" />
+    <Compile Include="IService\IAdminService.cs" />
+    <Compile Include="IService\IItemService.cs" />
+    <Compile Include="IService\IMailService.cs" />
+    <Compile Include="IService\IManagerSkillService.cs" />
+    <Compile Include="IService\IRankService.cs" />
+    <Compile Include="IService\IRevelationService.cs" />
+    <Compile Include="IService\IScoutingService.cs" />
+    <Compile Include="IService\ISkillCardService.cs" />
+    <Compile Include="IService\IStatisticService.cs" />
+    <Compile Include="IService\ITaskService.cs" />
+    <Compile Include="IService\ITeammemberService.cs" />
+    <Compile Include="IService\ITestService.cs" />
+    <Compile Include="IService\ITrainThreadService.cs" />
+    <Compile Include="IService\IMallService.cs" />
+    <Compile Include="IService\IArenaService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{836e0c0f-f9ff-4f58-9427-d6f0d6b793a5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{bbfbba66-7d0d-491f-aae9-d992270c775e}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

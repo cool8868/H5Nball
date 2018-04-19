@@ -1,0 +1,55 @@
+﻿    <UserControl x:Class="Games.NBall.WpfEmulator.Component.LeftTreeUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="640" d:DesignWidth="190">
+    <Grid>
+        <TreeView x:Name="TreeRequest" VerticalAlignment="Top" Height="640" Width="190" Grid.Row="0" Grid.Column="0" Style="{DynamicResource SimpleTreeView}" SelectedItemChanged="TreeRequest_SelectedItemChanged">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeViewItem Header="基本功能">
+                <TreeViewItem Header="发钱发卡" Tag="SendMoney"></TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="接口调试" Tag="ApiDebug"></TreeViewItem>
+            <TreeViewItem Header="我的球队">
+                <TreeViewItem Header="球员管理" Tag="Teammember"></TreeViewItem>
+                <TreeViewItem Header="球员成长" Tag="TeammemberGrow"></TreeViewItem>
+                <TreeViewItem Header="阵型升级" Tag="FormationLevelup"></TreeViewItem>
+                <TreeViewItem Header="球员训练" Tag="TeammemberTrain"></TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="球探" Tag="Scouting">
+            </TreeViewItem>
+            <TreeViewItem Header="物品相关">
+                <TreeViewItem Header="背包" Tag="Package"></TreeViewItem>
+                <TreeViewItem Header="星座背包" Tag="ConstellationPackage"></TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="比赛">
+                <TreeViewItem Header="巡回赛" Tag="Tour"></TreeViewItem>
+                <TreeViewItem Header="精英巡回赛" Tag="Elite"></TreeViewItem>
+                <TreeViewItem Header="天梯赛" Tag="Ladder"></TreeViewItem>
+                <TreeViewItem Header="杯赛" Tag="Dailycup"></TreeViewItem>
+                <TreeViewItem Header="联赛" Tag="League"></TreeViewItem>
+                <TreeViewItem Header="世界挑战赛" Tag="WCHRecord"></TreeViewItem>
+                <TreeViewItem Header="自动巡回赛" Tag="TourAuto"></TreeViewItem>
+                <TreeViewItem Header="群雄逐鹿" Tag="Crowd"></TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="商城" Tag="Mall">
+            </TreeViewItem>
+            <TreeViewItem Header="公会">
+            </TreeViewItem>
+            <TreeViewItem Header="拍卖行" Tag="Auction">
+            </TreeViewItem>
+            <TreeViewItem Header="任务" Tag="Task">
+            </TreeViewItem>
+            <TreeViewItem Header="邮件" Tag="Mail">
+            </TreeViewItem>
+            <TreeViewItem Header="聊天" Tag="Chat">
+            </TreeViewItem>
+        </TreeView>
+    </Grid>
+</UserControl>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MailinfoDataSet" targetNamespace="http://tempuri.org/MailinfoDataSet.xsd" xmlns:mstns="http://tempuri.org/MailinfoDataSet.xsd" xmlns="http://tempuri.org/MailinfoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NBallConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NBallConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Games.NBall.Dal.Properties.Settings.GlobalReference.Default.NBallConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MailinfoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MailinfoDataSet" msprop:Generator_UserDSName="MailinfoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Mail_Info" msprop:Generator_TableClassName="Mail_InfoDataTable" msprop:Generator_TableVarName="tableMail_Info" msprop:Generator_TablePropName="Mail_Info" msprop:Generator_RowDeletingName="Mail_InfoRowDeleting" msprop:Generator_RowChangingName="Mail_InfoRowChanging" msprop:Generator_RowEvHandlerName="Mail_InfoRowChangeEventHandler" msprop:Generator_RowDeletedName="Mail_InfoRowDeleted" msprop:Generator_UserTableName="Mail_Info" msprop:Generator_RowChangedName="Mail_InfoRowChanged" msprop:Generator_RowEvArgName="Mail_InfoRowChangeEvent" msprop:Generator_RowClassName="Mail_InfoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Idx" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIdx" msprop:Generator_ColumnPropNameInRow="Idx" msprop:Generator_ColumnPropNameInTable="IdxColumn" msprop:Generator_UserColumnName="Idx" type="xs:int" />
+              <xs:element name="ManagerId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnManagerId" msprop:Generator_ColumnPropNameInRow="ManagerId" msprop:Generator_ColumnPropNameInTable="ManagerIdColumn" msprop:Generator_UserColumnName="ManagerId" type="xs:string" />
+              <xs:element name="MailType" msprop:Generator_ColumnVarNameInTable="columnMailType" msprop:Generator_ColumnPropNameInRow="MailType" msprop:Generator_ColumnPropNameInTable="MailTypeColumn" msprop:Generator_UserColumnName="MailType" type="xs:int" />
+              <xs:element name="ContentString" msprop:Generator_ColumnVarNameInTable="columnContentString" msprop:Generator_ColumnPropNameInRow="ContentString" msprop:Generator_ColumnPropNameInTable="ContentStringColumn" msprop:Generator_UserColumnName="ContentString">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Attachment" msprop:Generator_ColumnVarNameInTable="columnAttachment" msprop:Generator_ColumnPropNameInRow="Attachment" msprop:Generator_ColumnPropNameInTable="AttachmentColumn" msprop:Generator_UserColumnName="Attachment" type="xs:base64Binary" />
+              <xs:element name="HasAttach" msprop:Generator_ColumnVarNameInTable="columnHasAttach" msprop:Generator_ColumnPropNameInRow="HasAttach" msprop:Generator_ColumnPropNameInTable="HasAttachColumn" msprop:Generator_UserColumnName="HasAttach" type="xs:boolean" />
+              <xs:element name="IsRead" msprop:Generator_ColumnVarNameInTable="columnIsRead" msprop:Generator_ColumnPropNameInRow="IsRead" msprop:Generator_ColumnPropNameInTable="IsReadColumn" msprop:Generator_UserColumnName="IsRead" type="xs:boolean" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:int" />
+              <xs:element name="RowTime" msprop:Generator_ColumnVarNameInTable="columnRowTime" msprop:Generator_ColumnPropNameInRow="RowTime" msprop:Generator_ColumnPropNameInTable="RowTimeColumn" msprop:Generator_UserColumnName="RowTime" type="xs:dateTime" />
+              <xs:element name="ExpiredTime" msprop:Generator_ColumnVarNameInTable="columnExpiredTime" msprop:Generator_ColumnPropNameInRow="ExpiredTime" msprop:Generator_ColumnPropNameInTable="ExpiredTimeColumn" msprop:Generator_UserColumnName="ExpiredTime" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Mail_Info" />
+      <xs:field xpath="mstns:Idx" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

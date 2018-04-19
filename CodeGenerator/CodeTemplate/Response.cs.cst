@@ -1,0 +1,46 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate"  Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+
+
+using System;
+using System.Runtime.Serialization;
+using Games.NBall.Entity.Enums;
+
+namespace <%=Namespace.Trim()%>.Entity
+{
+    /// <summary>
+	/// 对Table <%=SourceTable%> 的输出映射.
+	/// </summary>
+	[DataContract]
+	[Serializable]
+	public partial class <%=GetClassName(SourceTable.Name)%>Response:OutputEntity
+	{		
+		public <%=GetClassName(SourceTable.Name)%>Response(<%=GetClassName(SourceTable.Name)%>Entity entity,MessageCode code)
+            :this(entity,(int)code)
+		{
+		}
+
+        public <%=GetClassName(SourceTable.Name)%>Response(<%=GetClassName(SourceTable.Name)%>Entity entity,int code)
+		{
+            this.Code = code;
+            this.Data = entity;
+		}
+        
+        public <%=GetClassName(SourceTable.Name)%>Response(<%=GetClassName(SourceTable.Name)%>Entity entity)
+            :this(entity,0)
+		{
+		}
+        
+        public <%=GetClassName(SourceTable.Name)%>Entity Data{get;set;}
+	}
+}
+
+<script runat="template">
+
+</script>

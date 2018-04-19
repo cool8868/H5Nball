@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{377BC68C-0955-408E-8CFA-FF94F5DA5FAD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Games.NBall.ServiceContract.Client</RootNamespace>
+    <AssemblyName>Games.NBall.ServiceContract.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\ActivityClient.cs" />
+    <Compile Include="Client\CrossDataClient.cs" />
+    <Compile Include="Client\DailycupClient.cs" />
+    <Compile Include="Client\FriendClient.cs" />
+    <Compile Include="Client\GambleClient.cs" />
+    <Compile Include="Client\LadderClient.cs" />
+    <Compile Include="Client\LeagueClient.cs" />
+    <Compile Include="Client\MatchDataClient.cs" />
+    <Compile Include="Client\PlayerKillClient.cs" />
+    <Compile Include="Client\OnlineClient.cs" />
+    <Compile Include="Client\ManagerClient.cs" />
+    <Compile Include="Client\AdminClient.cs" />
+    <Compile Include="Client\ItemClient.cs" />
+    <Compile Include="Client\MailClient.cs" />
+    <Compile Include="Client\ManagerSkillClient.cs" />
+    <Compile Include="Client\RankClient.cs" />
+    <Compile Include="Client\RevelationClient.cs" />
+    <Compile Include="Client\ScoutingClient.cs" />
+    <Compile Include="Client\SkillCardClient.cs" />
+    <Compile Include="Client\StatisticClient.cs" />
+    <Compile Include="Client\TaskClient.cs" />
+    <Compile Include="Client\TeammemberClient.cs" />
+    <Compile Include="Client\MallClient.cs" />
+    <Compile Include="Client\TestClient.cs" />
+    <Compile Include="Client\TrainThreadClient.cs" />
+    <Compile Include="Client\ArenaClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bll\Bll.csproj">
+      <Project>{d04b667a-828b-46fd-9d7c-205fb604d2e0}</Project>
+      <Name>Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{bbfbba66-7d0d-491f-aae9-d992270c775e}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceEngine\ServiceEngine.csproj">
+      <Project>{42f78003-ce71-469a-b532-2b15d58c4ed2}</Project>
+      <Name>ServiceEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceInterface\ServiceInterface.csproj">
+      <Project>{a9aa2f39-999e-4797-83cc-23e40f85156d}</Project>
+      <Name>ServiceInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,127 @@
+﻿<%@ CodeTemplate Language="C#"  TargetLanguage="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseCSharpTableTemplate" Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema." ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text" %>
+<%@ Import Namespace="System.Text.RegularExpressions" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+
+<% 
+    string []SingleRowReaderCommands=SingleRowReaderCommandNames.Split(',');
+    string []MultiRowReaderCommands=MultiRowReaderCommandNames.Split(',');
+    string []ScalarCommands=ScalarCommandNames.Split(',');
+    string []NoQueryCommands=NoQueryCommandNames.Split(',');
+    string []SingleRowReaderPassCacheCommands=SingleRowReaderPassCacheCommandNames.Split(',');
+    string []MultiRowReaderPassCacheCommands=MultiRowReaderPassCacheCommandNames.Split(',');
+    string []FlushCacheCommands = FlushCacheCommandNames.Split(',');
+    %>
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Text;
+using <%=Namespace.Trim()%>.Entity;
+using <%=Namespace.Trim()%>.Dal;
+
+namespace <%=Namespace.Trim()%>.Bll
+{
+    /// <summary>
+    /// <%=GetClassName(SourceTable.Name)%>管理类
+    /// </summary>
+    public static partial class <%=GetClassManager(SourceTable.Name, ManagerPostfix)%>
+    {
+        
+		<%foreach(string cmdName in SingleRowReaderCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+        public static <%=GetClassName(SourceTable.Name)%>Entity <%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+            var provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+            return provider.<%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParam(cmd)%>);
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+		<%foreach(string cmdName in MultiRowReaderCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+        public static List<<%=GetClassName(SourceTable.Name)%>Entity> <%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+            var provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+            return provider.<%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParam(cmd)%>);            
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+        		<%foreach(string cmdName in ScalarCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+		public static <%=cmd.CommandResults[0].Columns[0].SystemType.Name%> <%=GetFuncName(cmd.Name)%> (<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%>)
+        {
+            var provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+            return provider.<%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParam(cmd)%>);
+        }
+		
+		#endregion		  
+		
+		<%}}%>
+        <%foreach(string cmdName in NoQueryCommands){
+				CommandSchema cmd = SourceTable.Database.Commands[cmdName];
+				if(cmd!=null) {
+			%>
+		#region  <%=GetFuncName(cmd.Name)%>
+		
+        public static bool <%=GetFuncName(cmd.Name)%> (<%=DalCodeGen.GetProcCallFuncParamDeclare(cmd)%><%if(!string.IsNullOrEmpty(DalCodeGen.GetProcCallFuncParamDeclare(cmd))){%>,<%}%>DbTransaction trans=null)
+        {
+            <%=GetClassName(SourceTable.Name)%>Provider provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+
+            return provider.<%=GetFuncName(cmd.Name)%>(<%=DalCodeGen.GetProcCallFuncParam(cmd)%><%if(!string.IsNullOrEmpty(DalCodeGen.GetProcCallFuncParamDeclare(cmd))){%>,<%}%>trans);
+            
+        }
+		
+		#endregion
+        
+        <%}}%>
+        
+		#region Insert
+
+        public static bool Insert(<%=GetClassName(SourceTable.Name)%>Entity <%=GetClassInstance(SourceTable.Name)%>Entity,DbTransaction trans=null)
+        {
+            var provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+            return provider.Insert(<%=GetClassInstance(SourceTable.Name)%>Entity,trans);
+        }
+		
+		#endregion
+		
+		#region Update
+
+        public static bool Update(<%=GetClassName(SourceTable.Name)%>Entity <%=GetClassInstance(SourceTable.Name)%>Entity,DbTransaction trans=null)
+        {
+            var provider = new <%=GetClassName(SourceTable.Name)%>Provider();
+            return provider.Update(<%=GetClassInstance(SourceTable.Name)%>Entity,trans);
+        }
+		
+		#endregion	
+		
+		
+	}
+}
+
+<script runat="template">
+
+</script>

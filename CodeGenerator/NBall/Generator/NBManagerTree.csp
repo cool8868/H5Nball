@@ -1,0 +1,131 @@
+﻿<?xml version="1.0"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <propertySets>	
+    <propertySet output="SqlScript\NBManagerTree.sql" template="..\..\CodeTemplate\SqlServerProcedure.cst" >
+      <property name="ClassNameRule">1</property>
+      <property name="IsAutoRun">True</property>
+      <property name="TablePrefix">""</property>
+      <property name="ProcedureTag">P_</property>
+      <property name="IncludeDrop">True</property>
+      <property name="IncludeInsert">True</property>
+      <property name="IncludeUpdate">True</property>
+      <property name="IncludeUpdateStatus">True</property>
+      <property name="IncludeUpdateStatusBatch">True</property>
+      <property name="IncludeDelete">True</property>
+      <property name="IncludeGet">True</property>
+      <property name="IncludeGetList">True</property>
+      <property name="IsolationLevel">ReadCommitted</property>
+      <property name="InsertPrefix">Insert</property>
+      <property name="UpdatePrefix">Update</property>
+      <property name="UpdateStatusPrefix">_UpdateStatus</property>
+      <property name="UpdateStatusBatchPrefix">_UpdateStatusBatch</property>
+      <property name="DeletePrefix">Delete</property>
+      <property name="SelectPrefix">Get</property>
+      <property name="SelectAllSuffix">List</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+    </propertySet> 
+
+    <propertySet output="..\..\..\Dal\NBall\Auto\NBManagerTreeProviderAuto.cs" template="..\..\CodeTemplate\SqlServerProvider.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+	  <property name="SingleRowReaderCommandNames">P_NBManagerTree_GetById</property>
+	  <property name="MultiRowReaderCommandNames">P_NBManagerTree_GetAll,C_NBManagerTree_GetByManagerId,C_NBManagerTree_InsertList</property>
+      <property name="ScalarCommandNames">""</property>
+      <property name="NoQueryCommandNames">P_NBManagerTree_Delete,C_NBManagerTree_DeleteManagerTree</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+    </propertySet>
+    <propertySet output="..\..\..\Bll\NBall\Auto\NBManagerTreeMgrAuto.cs" template="..\..\CodeTemplate\Managers.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+	  <property name="SingleRowReaderCommandNames">P_NBManagerTree_GetById</property>
+	  <property name="MultiRowReaderCommandNames">P_NBManagerTree_GetAll,C_NBManagerTree_GetByManagerId,C_NBManagerTree_InsertList</property>
+      <property name="ScalarCommandNames">""</property>
+      <property name="NoQueryCommandNames">P_NBManagerTree_Delete,C_NBManagerTree_DeleteManagerTree</property>
+      <property name="FlushCacheCommandNames">""</property>
+      <property name="SingleRowReaderPassCacheCommandNames">""</property>
+      <property name="MultiRowReaderPassCacheCommandNames">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+    </propertySet>
+    <propertySet output="..\..\..\Dal\NBall\Partial\NBManagerTreeProvider.cs" template="..\..\CodeTemplate\SqlServerProviderInit.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="..\..\..\Bll\NBall\Partial\NBManagerTreeMgr.cs" template="..\..\CodeTemplate\ManagersInit.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="..\..\..\Entity\NBall\Auto\NBManagerTreeEntityAuto.cs" template="..\..\CodeTemplate\Entity.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+    </propertySet>
+    <propertySet output="..\..\..\Entity\NBall\Partial\NBManagerTreeEntity.cs" template="..\..\CodeTemplate\EntityInit.cs.cst">
+	  <property name="ClassNameRule">1</property>
+	  <property name="Namespace">Games.NBall</property>
+	  <property name="TablePrefix">""</property>	
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=TextH5Nball;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>NB_ManagerTree</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    
+    
+  </propertySets>
+</codeSmith>
+

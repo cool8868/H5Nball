@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AccountPage.master.cs" Inherits="Games.NBall.AdminWeb.Account.AccountPage" %>
+
+<%@ Register Src="~/UserControls/AccountSelectControl.ascx" TagPrefix="uc1" TagName="AccountSelectControl" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../javascript/Public.js" charset="utf-8"></script>
+    <link href="../style/style.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table width="98%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellpadding="4" cellspacing="1" class="bgDark">
+                        <tr class="bgLightGray">
+                            <td align="left">
+                                <b><font color="#009900">【<%=PageTitle %>】</font></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bgWhite" style="font-weight: bolder">
+                                <uc1:AccountSelectControl ID="AccountSelectControl1" runat="server"></uc1:AccountSelectControl>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bgWhite" style="color: Red;">
+                                <div class="errorMessage" style="padding: 0px;">
+                                    <asp:Literal ID="ltlMessage" runat="server" EnableViewState="False"></asp:Literal>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

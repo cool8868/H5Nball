@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DailyCupCompetitorsDataSet" targetNamespace="http://tempuri.org/DailyCupCompetitorsDataSet.xsd" xmlns:mstns="http://tempuri.org/DailyCupCompetitorsDataSet.xsd" xmlns="http://tempuri.org/DailyCupCompetitorsDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NBallConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NBallConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Games.NBall.Dal.Properties.Settings.GlobalReference.Default.NBallConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DailyCupCompetitorsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DailyCupCompetitorsDataSet" msprop:Generator_UserDSName="DailyCupCompetitorsDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DailyCup_Competitors" msprop:Generator_TableClassName="DailyCup_CompetitorsDataTable" msprop:Generator_TableVarName="tableDailyCup_Competitors" msprop:Generator_RowChangedName="DailyCup_CompetitorsRowChanged" msprop:Generator_TablePropName="DailyCup_Competitors" msprop:Generator_RowDeletingName="DailyCup_CompetitorsRowDeleting" msprop:Generator_RowChangingName="DailyCup_CompetitorsRowChanging" msprop:Generator_RowEvHandlerName="DailyCup_CompetitorsRowChangeEventHandler" msprop:Generator_RowDeletedName="DailyCup_CompetitorsRowDeleted" msprop:Generator_RowClassName="DailyCup_CompetitorsRow" msprop:Generator_UserTableName="DailyCup_Competitors" msprop:Generator_RowEvArgName="DailyCup_CompetitorsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Idx" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIdx" msprop:Generator_ColumnPropNameInRow="Idx" msprop:Generator_ColumnPropNameInTable="IdxColumn" msprop:Generator_UserColumnName="Idx" type="xs:int" />
+              <xs:element name="DailyCupId" msprop:Generator_ColumnVarNameInTable="columnDailyCupId" msprop:Generator_ColumnPropNameInRow="DailyCupId" msprop:Generator_ColumnPropNameInTable="DailyCupIdColumn" msprop:Generator_UserColumnName="DailyCupId" type="xs:int" />
+              <xs:element name="ManagerId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnManagerId" msprop:Generator_ColumnPropNameInRow="ManagerId" msprop:Generator_ColumnPropNameInTable="ManagerIdColumn" msprop:Generator_UserColumnName="ManagerId" type="xs:string" />
+              <xs:element name="ManagerName" msprop:Generator_ColumnVarNameInTable="columnManagerName" msprop:Generator_ColumnPropNameInRow="ManagerName" msprop:Generator_ColumnPropNameInTable="ManagerNameColumn" msprop:Generator_UserColumnName="ManagerName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Logo" msprop:Generator_ColumnVarNameInTable="columnLogo" msprop:Generator_ColumnPropNameInRow="Logo" msprop:Generator_ColumnPropNameInTable="LogoColumn" msprop:Generator_UserColumnName="Logo" type="xs:string" />
+              <xs:element name="MaxRound" msprop:Generator_ColumnVarNameInTable="columnMaxRound" msprop:Generator_ColumnPropNameInRow="MaxRound" msprop:Generator_ColumnPropNameInTable="MaxRoundColumn" msprop:Generator_UserColumnName="MaxRound" type="xs:int" />
+              <xs:element name="WinCount" msprop:Generator_ColumnVarNameInTable="columnWinCount" msprop:Generator_ColumnPropNameInRow="WinCount" msprop:Generator_ColumnPropNameInTable="WinCountColumn" msprop:Generator_UserColumnName="WinCount" type="xs:int" />
+              <xs:element name="Rank" msprop:Generator_ColumnVarNameInTable="columnRank" msprop:Generator_ColumnPropNameInRow="Rank" msprop:Generator_ColumnPropNameInTable="RankColumn" msprop:Generator_UserColumnName="Rank" type="xs:int" />
+              <xs:element name="PrizeScore" msprop:Generator_ColumnVarNameInTable="columnPrizeScore" msprop:Generator_ColumnPropNameInRow="PrizeScore" msprop:Generator_ColumnPropNameInTable="PrizeScoreColumn" msprop:Generator_UserColumnName="PrizeScore" type="xs:int" />
+              <xs:element name="PrizeSophisticate" msprop:Generator_ColumnVarNameInTable="columnPrizeSophisticate" msprop:Generator_ColumnPropNameInRow="PrizeSophisticate" msprop:Generator_ColumnPropNameInTable="PrizeSophisticateColumn" msprop:Generator_UserColumnName="PrizeSophisticate" type="xs:int" />
+              <xs:element name="PrizeCoin" msprop:Generator_ColumnVarNameInTable="columnPrizeCoin" msprop:Generator_ColumnPropNameInRow="PrizeCoin" msprop:Generator_ColumnPropNameInTable="PrizeCoinColumn" msprop:Generator_UserColumnName="PrizeCoin" type="xs:int" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:int" />
+              <xs:element name="RowTime" msprop:Generator_ColumnVarNameInTable="columnRowTime" msprop:Generator_ColumnPropNameInRow="RowTime" msprop:Generator_ColumnPropNameInTable="RowTimeColumn" msprop:Generator_UserColumnName="RowTime" type="xs:dateTime" />
+              <xs:element name="PrizeItems" msprop:Generator_ColumnVarNameInTable="columnPrizeItems" msprop:Generator_ColumnPropNameInRow="PrizeItems" msprop:Generator_ColumnPropNameInTable="PrizeItemsColumn" msprop:Generator_UserColumnName="PrizeItems" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DailyCup_Competitors" />
+      <xs:field xpath="mstns:Idx" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

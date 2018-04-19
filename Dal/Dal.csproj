@@ -1,0 +1,898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72485491-3BE9-49E5-B184-36ACC3F91647}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Games.NBall.Dal</RootNamespace>
+    <AssemblyName>Games.NBall.Dal</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching">
+      <HintPath>..\Lib\MsEntLib\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\Lib\MsEntLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\Lib\MsEntLib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2">
+      <HintPath>..\Lib\MsEntLib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Lib\MsEntLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="MsEntLibWrapper">
+      <HintPath>..\Lib\MsEntLib\MsEntLibWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\Auto\AllAppProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllDatabaseProviderAuto.cs" />
+    <Compile Include="Config\Auto\AlllogfunctionProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllPlatMapProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllSiteMapProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllUaFactoryProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllUaPlatformProviderAuto.cs" />
+    <Compile Include="Config\Auto\AllzoneinfoProviderAuto.cs" />
+    <Compile Include="Config\Auto\All_CSDKProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigAppsettingProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigArenaDanGradingProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigArenaNpcLinkProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigArenaNpcOpponentProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigArenaPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigArenaShopProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigBuffEngineProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigBuffPoolProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCoachInfoProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCoachSkillProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCoachStarProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCoachUpgradeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCrossActivityPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCrossSiteProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigcrowdmoraleProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigcrowdprizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigCrowdRankPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigcrowdscoreProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigdailycupprizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigDailyEventTimeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigDaysAttendPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigdecomposeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEquipmentplusProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEquipmentPrecisionCastingProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEquipmentsynthesizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEquipmentUpgradeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEuropePrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigEverydayActivityLegendProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigFormationlevelProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigFriendInvitePrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigFunctionOpenProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigGambleIconProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigInvestProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLadderDayPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueFightMapProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueGoalsProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueMarkProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeaguePrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueStarProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLeagueWinCountPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigLotteryProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfiglotteryrelationProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigMallDirectProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigmallextraProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigMallGiftBagProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigManagerlevelProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigOlympicExchangerizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigOlympicTheGoldMedalProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPenaltyKickPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPlayerkillPointProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPlayerlevelProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPlayerTheStarProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPotentialCardProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPotentialProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigPrpoSellProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigReveationCheckAwaryProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationAwaryProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationCheckpointProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationDrawProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationNpcLinkProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationNpcTempProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationShopProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationSynthesizeionProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationTheBadgeAwaryProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationTheDifficultyProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigRevelationVIPProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigscheduleProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigScoutingProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigShareProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigSkillcardaskrankProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigSkillcardlevelProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigSkillTreePointProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigSkillUpgradeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigstrengthProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigSynthesisCardProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigsynthesisProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigTaskProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigTaskrequireProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigTurntablePrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigTurntableResetProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigTxChargeIdProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigviplevelProviderAuto.cs" />
+    <Compile Include="Config\Auto\ConfigVipPackageProviderAuto.cs" />
+    <Compile Include="Config\Auto\CSDKisRegistProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicActivityPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicActivityProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicActivityStepProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicArenaBagConfigProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicBallsoulProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicBuffProviderAuto.cs" />
+    <Compile Include="Config\Auto\DiccardlibraryProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicClubSkillProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicCrossLadderExchangeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicCrossLadderPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicEquipmentProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicEquipmentSuitProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicFormationdetailProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicFormationPointProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicFormationProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicGiftPackPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicGiftPackProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicGrowProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicGuildSkillProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicItemProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicItemtypeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicLadderExchangeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicLadderPrizeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicLeagueExchangeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicMailProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicmallitemProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicManagerTalentProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicManagerTalentTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicManagerWillPartTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicManagerWillProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicManagerWillTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicNameprefixProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicNamesuffixProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicNewPlayerPackProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicNpcProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicPlayercarddecProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicPlayerlinkProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicPlayerProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSKillBuffMatchProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSkillcardProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSkillCardTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSkillProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSkillsTreeDesDicProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSkillstreeProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicStarArousalSkillsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicStarSkillLevelTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicStarskillsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicStarSkillTipsProviderAuto.cs" />
+    <Compile Include="Config\Auto\DicSyntheticItemProviderAuto.cs" />
+    <Compile Include="Config\Auto\TemplateGiantsProviderAuto.cs" />
+    <Compile Include="Config\Auto\TemplateRegisterplayerProviderAuto.cs" />
+    <Compile Include="Config\Auto\TemplateRegisterProviderAuto.cs" />
+    <Compile Include="Config\Partial\AllAppProvider.cs" />
+    <Compile Include="Config\Partial\AllCSDKProvider.cs" />
+    <Compile Include="Config\Partial\AllDatabaseProvider.cs" />
+    <Compile Include="Config\Partial\AlllogfunctionProvider.cs" />
+    <Compile Include="Config\Partial\AllPlatMapProvider.cs" />
+    <Compile Include="Config\Partial\AllSiteMapProvider.cs" />
+    <Compile Include="Config\Partial\AllUaFactoryProvider.cs" />
+    <Compile Include="Config\Partial\AllUaPlatformProvider.cs" />
+    <Compile Include="Config\Partial\AllzoneinfoProvider.cs" />
+    <Compile Include="Config\Partial\ConfigAppsettingProvider.cs" />
+    <Compile Include="Config\Partial\ConfigArenaDanGradingProvider.cs" />
+    <Compile Include="Config\Partial\ConfigArenaNpcLinkProvider.cs" />
+    <Compile Include="Config\Partial\ConfigArenaNpcOpponentProvider.cs" />
+    <Compile Include="Config\Partial\ConfigArenaPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigArenaShopProvider.cs" />
+    <Compile Include="Config\Partial\ConfigBuffEngineProvider.cs" />
+    <Compile Include="Config\Partial\ConfigBuffPoolProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCoachInfoProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCoachSkillProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCoachStarProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCoachUpgradeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCrossActivityPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCrossSiteProvider.cs" />
+    <Compile Include="Config\Partial\ConfigcrowdmoraleProvider.cs" />
+    <Compile Include="Config\Partial\ConfigcrowdprizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigCrowdRankPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigcrowdscoreProvider.cs" />
+    <Compile Include="Config\Partial\ConfigdailycupprizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigDailyEventTimeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigDaysAttendPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigdecomposeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEquipmentplusProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEquipmentPrecisionCastingProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEquipmentsynthesizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEquipmentUpgradeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEuropePrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigEverydayActivityLegendProvider.cs" />
+    <Compile Include="Config\Partial\ConfigFormationlevelProvider.cs" />
+    <Compile Include="Config\Partial\ConfigFriendInvitePrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigFunctionOpenProvider.cs" />
+    <Compile Include="Config\Partial\ConfigGambleIconProvider.cs" />
+    <Compile Include="Config\Partial\ConfigInvestProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLadderDayPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueFightMapProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueGoalsProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueMarkProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeaguePrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueStarProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLeagueWinCountPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigLotteryProvider.cs" />
+    <Compile Include="Config\Partial\ConfiglotteryrelationProvider.cs" />
+    <Compile Include="Config\Partial\ConfigMallDirectProvider.cs" />
+    <Compile Include="Config\Partial\ConfigmallextraProvider.cs" />
+    <Compile Include="Config\Partial\ConfigMallGiftBagProvider.cs" />
+    <Compile Include="Config\Partial\ConfigManagerlevelProvider.cs" />
+    <Compile Include="Config\Partial\ConfigOlympicExchangerizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigOlympicTheGoldMedalProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPenaltyKickPrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPlayerkillPointProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPlayerlevelProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPlayerTheStarProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPotentialCardProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPotentialProvider.cs" />
+    <Compile Include="Config\Partial\ConfigPrpoSellProvider.cs" />
+    <Compile Include="Config\Partial\ConfigReveationCheckAwaryProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationAwaryProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationCheckpointProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationDrawProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationNpcLinkProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationNpcTempProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationShopProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationSynthesizeionProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationTheBadgeAwaryProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationTheDifficultyProvider.cs" />
+    <Compile Include="Config\Partial\ConfigRevelationVIPProvider.cs" />
+    <Compile Include="Config\Partial\ConfigscheduleProvider.cs" />
+    <Compile Include="Config\Partial\ConfigScoutingProvider.cs" />
+    <Compile Include="Config\Partial\ConfigShareProvider.cs" />
+    <Compile Include="Config\Partial\ConfigSkillcardaskrankProvider.cs" />
+    <Compile Include="Config\Partial\ConfigSkillcardlevelProvider.cs" />
+    <Compile Include="Config\Partial\ConfigSkillTreePointProvider.cs" />
+    <Compile Include="Config\Partial\ConfigSkillUpgradeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigstrengthProvider.cs" />
+    <Compile Include="Config\Partial\ConfigSynthesisCardProvider.cs" />
+    <Compile Include="Config\Partial\ConfigsynthesisProvider.cs" />
+    <Compile Include="Config\Partial\ConfigTaskProvider.cs" />
+    <Compile Include="Config\Partial\ConfigTaskrequireProvider.cs" />
+    <Compile Include="Config\Partial\ConfigTurntablePrizeProvider.cs" />
+    <Compile Include="Config\Partial\ConfigTurntableResetProvider.cs" />
+    <Compile Include="Config\Partial\ConfigTxChargeIdProvider.cs" />
+    <Compile Include="Config\Partial\ConfigviplevelProvider.cs" />
+    <Compile Include="Config\Partial\ConfigVipPackageProvider.cs" />
+    <Compile Include="Config\Partial\CSDKisRegistProvider.cs" />
+    <Compile Include="Config\Partial\DicActivityPrizeProvider.cs" />
+    <Compile Include="Config\Partial\DicActivityProvider.cs" />
+    <Compile Include="Config\Partial\DicActivityStepProvider.cs" />
+    <Compile Include="Config\Partial\DicArenaBagConfigProvider.cs" />
+    <Compile Include="Config\Partial\DicBallsoulProvider.cs" />
+    <Compile Include="Config\Partial\DicBuffProvider.cs" />
+    <Compile Include="Config\Partial\DiccardlibraryProvider.cs" />
+    <Compile Include="Config\Partial\DicClubSkillProvider.cs" />
+    <Compile Include="Config\Partial\DicCrossLadderExchangeProvider.cs" />
+    <Compile Include="Config\Partial\DicCrossLadderPrizeProvider.cs" />
+    <Compile Include="Config\Partial\DicEquipmentProvider.cs" />
+    <Compile Include="Config\Partial\DicEquipmentSuitProvider.cs" />
+    <Compile Include="Config\Partial\DicFormationdetailProvider.cs" />
+    <Compile Include="Config\Partial\DicFormationPointProvider.cs" />
+    <Compile Include="Config\Partial\DicFormationProvider.cs" />
+    <Compile Include="Config\Partial\DicGiftPackPrizeProvider.cs" />
+    <Compile Include="Config\Partial\DicGiftPackProvider.cs" />
+    <Compile Include="Config\Partial\DicGrowProvider.cs" />
+    <Compile Include="Config\Partial\DicGuildSkillProvider.cs" />
+    <Compile Include="Config\Partial\DicItemProvider.cs" />
+    <Compile Include="Config\Partial\DicItemtypeProvider.cs" />
+    <Compile Include="Config\Partial\DicLadderExchangeProvider.cs" />
+    <Compile Include="Config\Partial\DicLadderPrizeProvider.cs" />
+    <Compile Include="Config\Partial\DicLeagueExchangeProvider.cs" />
+    <Compile Include="Config\Partial\DicMailProvider.cs" />
+    <Compile Include="Config\Partial\DicmallitemProvider.cs" />
+    <Compile Include="Config\Partial\DicManagerTalentProvider.cs" />
+    <Compile Include="Config\Partial\DicManagerTalentTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicManagerWillPartTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicManagerWillProvider.cs" />
+    <Compile Include="Config\Partial\DicManagerWillTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicNameprefixProvider.cs" />
+    <Compile Include="Config\Partial\DicNamesuffixProvider.cs" />
+    <Compile Include="Config\Partial\DicNewPlayerPackProvider.cs" />
+    <Compile Include="Config\Partial\DicNpcProvider.cs" />
+    <Compile Include="Config\Partial\DicPlayercarddecProvider.cs" />
+    <Compile Include="Config\Partial\DicPlayerProvider.cs" />
+    <Compile Include="Config\Partial\DicSKillBuffMatchProvider.cs" />
+    <Compile Include="Config\Partial\DicSkillcardProvider.cs" />
+    <Compile Include="Config\Partial\DicSkillCardTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicSkillProvider.cs" />
+    <Compile Include="Config\Partial\DicSkillsTreeDesDicProvider.cs" />
+    <Compile Include="Config\Partial\DicSkillstreeProvider.cs" />
+    <Compile Include="Config\Partial\DicStarArousalSkillsProvider.cs" />
+    <Compile Include="Config\Partial\DicStarSkillLevelTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicStarskillsProvider.cs" />
+    <Compile Include="Config\Partial\DicStarSkillTipsProvider.cs" />
+    <Compile Include="Config\Partial\DicSyntheticItemProvider.cs" />
+    <Compile Include="Config\Partial\TemplateGiantsProvider.cs" />
+    <Compile Include="Config\Partial\TemplateRegisterplayerProvider.cs" />
+    <Compile Include="Config\Partial\TemplateRegisterProvider.cs" />
+    <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="NBall\ActivityDyProvider.cs" />
+    <Compile Include="NBall\Auto\A8csdkProviderAuto.cs" />
+    <Compile Include="NBall\Auto\A8csdkStartGameProviderAuto.cs" />
+    <Compile Include="NBall\Auto\A8csdkStateProviderAuto.cs" />
+    <Compile Include="NBall\Auto\AchievementManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExCountRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExHistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExItemRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExPrizeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExRankProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityExSendLogProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityHistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityPrizeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ActivityRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\AMoveDataToServeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ArenaExChangeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ArenaShopProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ArenaTeammemberProviderAuto.cs" />
+    <Compile Include="NBall\Auto\CoachManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ConstellationPackageProviderAuto.cs" />
+    <Compile Include="NBall\Auto\DailyAttendanceManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\DailycupcompetitorsProviderAuto.cs" />
+    <Compile Include="NBall\Auto\DailycupgambleProviderAuto.cs" />
+    <Compile Include="NBall\Auto\DailycupinfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\DailycupmatchProviderAuto.cs" />
+    <Compile Include="NBall\Auto\EuropeGambleProviderAuto.cs" />
+    <Compile Include="NBall\Auto\EuropeGambleRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\EuropeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\EuropeSeasonProviderAuto.cs" />
+    <Compile Include="NBall\Auto\EveryDayActivityPrizeProviderAuto.cs" />
+    <Compile Include="NBall\Auto\FriendInvitePrizeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\FriendInviteProviderAuto.cs" />
+    <Compile Include="NBall\Auto\FriendManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\FriendMatchProviderAuto.cs" />
+    <Compile Include="NBall\Auto\FriendOpenBoxRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleDetailProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleHostOptionRateProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleHostProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleOptionProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleRankProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleRankRewardLogProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleSeasonProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GambleTitleProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GoldBarRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\GuildListProviderAuto.cs" />
+    <Compile Include="NBall\Auto\InformationPopupProviderAuto.cs" />
+    <Compile Include="NBall\Auto\InvestManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ItemPackageProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderDayPrizeProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderExchangeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderHonorRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderHookProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderManagerHistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderMatchProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LadderSeasonProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LaegueManagerInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueEncounterProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueExchangeRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueFightMapProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueManagerRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueNpcManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueRankProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\LeagueWincountRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\MailInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\MailShareInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\MallExtrarecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\MallsalerecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerChargeNumberProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerMonthCardProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerSkillLibProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerSkillNewProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerSkillUseProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ManagerSkillWillSrcProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerBuffMemberProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerBuffPoolProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerCommonPackageProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerextraProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerHonorProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerMatchAchievementProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerShareProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerskillaskProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerskillaskrecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerskillbagProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbManagerskillmixrecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerTreeProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBManagerVipPackageProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbMatchstatProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbSolutionProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NbUserProviderAuto.cs" />
+    <Compile Include="NBall\Auto\NBUserregProviderAuto.cs" />
+    <Compile Include="NBall\Auto\OlympicManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\OlympicRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\OnlineinfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\OnlineLockManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PayChargehistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PayConsumehistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PayContinuingProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PayUserProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PenaltyKickManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PenaltyKickSeasonProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PlayerKillInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PlayerKillMatchProviderAuto.cs" />
+    <Compile Include="NBall\Auto\PlayerKillRevengeProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RankingLadderYesterdayProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RankingYesterdayProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationChallengeRevordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationCheckpointProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationDrawProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationHistoryOfTheGapProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationHookProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationMainProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationMyHistoryOfTheGapProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationMyHistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\RevelationShopProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ScoutingGoldBarProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ScoutingManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ScoutingRecordForDaysProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ScoutingrecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\ShareManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TaskDailyhistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TaskDailyrecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TaskHistoryProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TaskPendingProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TaskRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TeammemberGrowProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TeammemberProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TeammemberTrainProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TurntableLuckyRecordProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TurntableManagerProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TxLoginInfoProviderAuto.cs" />
+    <Compile Include="NBall\Auto\TxYellowvipProviderAuto.cs" />
+    <Compile Include="NBall\Auto\VipManagerProviderAuto.cs" />
+    <Compile Include="NBall\Partial\A8csdkProvider.cs" />
+    <Compile Include="NBall\Partial\A8csdkStartGameProvider.cs" />
+    <Compile Include="NBall\Partial\A8csdkStateProvider.cs" />
+    <Compile Include="NBall\Partial\AchievementManagerProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExCountRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExHistoryProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExItemRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExPrizeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExRankProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityExSendLogProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityHistoryProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityPrizeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ActivityRecordProvider.cs" />
+    <Compile Include="NBall\Partial\AMoveDataToServeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ArenaExChangeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\ArenaShopProvider.cs" />
+    <Compile Include="NBall\Partial\ArenaTeammemberProvider.cs" />
+    <Compile Include="NBall\Partial\CoachManagerProvider.cs" />
+    <Compile Include="NBall\Partial\ConstellationPackageProvider.cs" />
+    <Compile Include="NBall\Partial\DailyAttendanceManagerProvider.cs" />
+    <Compile Include="NBall\Partial\DailycupcompetitorsProvider.cs" />
+    <Compile Include="NBall\Partial\DailycupgambleProvider.cs" />
+    <Compile Include="NBall\Partial\DailycupinfoProvider.cs" />
+    <Compile Include="NBall\Partial\DailycupmatchProvider.cs" />
+    <Compile Include="NBall\Partial\EuropeGambleProvider.cs" />
+    <Compile Include="NBall\Partial\EuropeGambleRecordProvider.cs" />
+    <Compile Include="NBall\Partial\EuropeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\EuropeSeasonProvider.cs" />
+    <Compile Include="NBall\Partial\EveryDayActivityPrizeProvider.cs" />
+    <Compile Include="NBall\Partial\FriendInvitePrizeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\FriendInviteProvider.cs" />
+    <Compile Include="NBall\Partial\FriendManagerProvider.cs" />
+    <Compile Include="NBall\Partial\FriendMatchProvider.cs" />
+    <Compile Include="NBall\Partial\FriendOpenBoxRecordProvider.cs" />
+    <Compile Include="NBall\Partial\GambleDetailProvider.cs" />
+    <Compile Include="NBall\Partial\GambleHostOptionRateProvider.cs" />
+    <Compile Include="NBall\Partial\GambleHostProvider.cs" />
+    <Compile Include="NBall\Partial\GambleOptionProvider.cs" />
+    <Compile Include="NBall\Partial\GambleRankProvider.cs" />
+    <Compile Include="NBall\Partial\GambleRankRewardLogProvider.cs" />
+    <Compile Include="NBall\Partial\GambleSeasonProvider.cs" />
+    <Compile Include="NBall\Partial\GambleTitleProvider.cs" />
+    <Compile Include="NBall\Partial\GoldBarRecordProvider.cs" />
+    <Compile Include="NBall\Partial\GuildListProvider.cs" />
+    <Compile Include="NBall\Partial\InformationPopupProvider.cs" />
+    <Compile Include="NBall\Partial\InvestManagerProvider.cs" />
+    <Compile Include="NBall\Partial\ItemPackageProvider.cs" />
+    <Compile Include="NBall\Partial\LadderDayPrizeProvider.cs" />
+    <Compile Include="NBall\Partial\LadderExchangeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\LadderHonorRecordProvider.cs" />
+    <Compile Include="NBall\Partial\LadderHookProvider.cs" />
+    <Compile Include="NBall\Partial\LadderInfoProvider.cs" />
+    <Compile Include="NBall\Partial\LadderManagerHistoryProvider.cs" />
+    <Compile Include="NBall\Partial\LadderManagerProvider.cs" />
+    <Compile Include="NBall\Partial\LadderMatchProvider.cs" />
+    <Compile Include="NBall\Partial\LadderSeasonProvider.cs" />
+    <Compile Include="NBall\Partial\LaegueManagerInfoProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueEncounterProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueExchangeRecordProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueFightMapProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueManagerRecordProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueNpcManagerProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueRankProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueRecordProvider.cs" />
+    <Compile Include="NBall\Partial\LeagueWincountRecordProvider.cs" />
+    <Compile Include="NBall\Partial\MailInfoProvider.cs" />
+    <Compile Include="NBall\Partial\MailShareInfoProvider.cs" />
+    <Compile Include="NBall\Partial\MallExtrarecordProvider.cs" />
+    <Compile Include="NBall\Partial\MallsalerecordProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerChargeNumberProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerMonthCardProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerSkillLibProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerSkillNewProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerSkillUseProvider.cs" />
+    <Compile Include="NBall\Partial\ManagerSkillWillSrcProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerBuffMemberProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerBuffPoolProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerCommonPackageProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerextraProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerHonorProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerMatchAchievementProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerShareProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerskillaskProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerskillaskrecordProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerskillbagProvider.cs" />
+    <Compile Include="NBall\Partial\NbManagerskillmixrecordProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerTreeProvider.cs" />
+    <Compile Include="NBall\Partial\NBManagerVipPackageProvider.cs" />
+    <Compile Include="NBall\Partial\NbMatchstatProvider.cs" />
+    <Compile Include="NBall\Partial\NbSolutionProvider.cs" />
+    <Compile Include="NBall\Partial\NbUserProvider.cs" />
+    <Compile Include="NBall\Partial\NBUserregProvider.cs" />
+    <Compile Include="NBall\Partial\OlympicManagerProvider.cs" />
+    <Compile Include="NBall\Partial\OlympicRecordProvider.cs" />
+    <Compile Include="NBall\Partial\OnlineinfoProvider.cs" />
+    <Compile Include="NBall\Partial\OnlineLockManagerProvider.cs" />
+    <Compile Include="NBall\Partial\PayChargehistoryProvider.cs" />
+    <Compile Include="NBall\Partial\PayConsumehistoryProvider.cs" />
+    <Compile Include="NBall\Partial\PayContinuingProvider.cs" />
+    <Compile Include="NBall\Partial\PayUserProvider.cs" />
+    <Compile Include="NBall\Partial\PenaltyKickManagerProvider.cs" />
+    <Compile Include="NBall\Partial\PenaltyKickSeasonProvider.cs" />
+    <Compile Include="NBall\Partial\PlayerKillInfoProvider.cs" />
+    <Compile Include="NBall\Partial\PlayerKillMatchProvider.cs" />
+    <Compile Include="NBall\Partial\PlayerKillRevengeProvider.cs" />
+    <Compile Include="NBall\Partial\RankingLadderYesterdayProvider.cs" />
+    <Compile Include="NBall\Partial\RankingYesterdayProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationChallengeRevordProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationCheckpointProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationDrawProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationHistoryOfTheGapProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationHookProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationInfoProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationMainProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationMyHistoryOfTheGapProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationMyHistoryProvider.cs" />
+    <Compile Include="NBall\Partial\RevelationShopProvider.cs" />
+    <Compile Include="NBall\Partial\ScoutingGoldBarProvider.cs" />
+    <Compile Include="NBall\Partial\ScoutingManagerProvider.cs" />
+    <Compile Include="NBall\Partial\ScoutingRecordForDaysProvider.cs" />
+    <Compile Include="NBall\Partial\ScoutingrecordProvider.cs" />
+    <Compile Include="NBall\Partial\ShareManagerProvider.cs" />
+    <Compile Include="NBall\Partial\TaskDailyhistoryProvider.cs" />
+    <Compile Include="NBall\Partial\TaskDailyrecordProvider.cs" />
+    <Compile Include="NBall\Partial\TaskHistoryProvider.cs" />
+    <Compile Include="NBall\Partial\TaskPendingProvider.cs" />
+    <Compile Include="NBall\Partial\TaskRecordProvider.cs" />
+    <Compile Include="NBall\Partial\TeammemberGrowProvider.cs" />
+    <Compile Include="NBall\Partial\TeammemberProvider.cs" />
+    <Compile Include="NBall\Partial\TeammemberTrainProvider.cs" />
+    <Compile Include="NBall\Partial\TurntableLuckyRecordProvider.cs" />
+    <Compile Include="NBall\Partial\TurntableManagerProvider.cs" />
+    <Compile Include="NBall\Partial\TxLoginInfoProvider.cs" />
+    <Compile Include="NBall\Partial\TxYellowvipProvider.cs" />
+    <Compile Include="NBall\Partial\VipManagerProvider.cs" />
+    <Compile Include="NBall\RankProvider.cs" />
+    <Compile Include="Process\Auto\MatchprocessProviderAuto.cs" />
+    <Compile Include="Process\Partial\MatchprocessProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Shadow\ShadowProvider.cs" />
+    <Compile Include="Support\Auto\ActivityExCrossRankProviderAuto.cs" />
+    <Compile Include="Support\Auto\ActivityExZoneProviderAuto.cs" />
+    <Compile Include="Support\Auto\AnnouncementProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossActivityMainProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossActivityRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdInfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdManagerHistoryProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdManagerProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdMatchProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdMaxKillerRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdPairRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossCrowdPrizeRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderExchangeRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderHonorRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderHookProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderInfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderManagerDailyHistoryProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderManagerHistoryProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderManagerProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderMatchProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossLadderSeasonProviderAuto.cs" />
+    <Compile Include="Support\Auto\ArenaManagerInfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\ArenaManagerRecordProviderAuto.cs" />
+    <Compile Include="Support\Auto\ArenaSeasonInfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\ArenaSeasonProviderAuto.cs" />
+    <Compile Include="Support\Auto\CrossRobotManagerProviderAuto.cs" />
+    <Compile Include="Support\Auto\EuropeMatchProviderAuto.cs" />
+    <Compile Include="Support\Auto\ExchangeInfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\GmLogProviderAuto.cs" />
+    <Compile Include="Support\Auto\MonitorDailyEventProviderAuto.cs" />
+    <Compile Include="Support\Auto\MonitorScheduleProviderAuto.cs" />
+    <Compile Include="Support\Auto\StatisticClickProviderAuto.cs" />
+    <Compile Include="Support\Auto\StatisticdetailProviderAuto.cs" />
+    <Compile Include="Support\Auto\StatisticinfoProviderAuto.cs" />
+    <Compile Include="Support\Auto\StatistickpiProviderAuto.cs" />
+    <Compile Include="Support\Auto\StatisticonlineProviderAuto.cs" />
+    <Compile Include="Support\Auto\TemplateActivityExDetailProviderAuto.cs" />
+    <Compile Include="Support\Auto\TemplateActivityExGroupProviderAuto.cs" />
+    <Compile Include="Support\Auto\TemplateActivityExPrizeProviderAuto.cs" />
+    <Compile Include="Support\Auto\TemplateActivityExProviderAuto.cs" />
+    <Compile Include="Support\Auto\TransferDropOutProviderAuto.cs" />
+    <Compile Include="Support\Auto\TransferMainProviderAuto.cs" />
+    <Compile Include="Support\Auto\UserLoginZoneProviderAuto.cs" />
+    <Compile Include="Support\Auto\ZoneDailyEventTimeProviderAuto.cs" />
+    <Compile Include="Support\Partial\ActivityExCrossRankProvider.cs" />
+    <Compile Include="Support\Partial\ActivityExZoneProvider.cs" />
+    <Compile Include="Support\Partial\AnnouncementProvider.cs" />
+    <Compile Include="Support\Partial\CrossActivityMainProvider.cs" />
+    <Compile Include="Support\Partial\CrossActivityRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdInfoProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdManagerHistoryProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdManagerProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdMatchProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdMaxKillerRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdPairRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossCrowdPrizeRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderExchangeRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderHonorRecordProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderHookProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderInfoProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderManagerDailyHistoryProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderManagerHistoryProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderManagerProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderMatchProvider.cs" />
+    <Compile Include="Support\Partial\CrossLadderSeasonProvider.cs" />
+    <Compile Include="Support\Partial\ArenaManagerInfoProvider.cs" />
+    <Compile Include="Support\Partial\ArenaManagerRecordProvider.cs" />
+    <Compile Include="Support\Partial\ArenaSeasonInfoProvider.cs" />
+    <Compile Include="Support\Partial\ArenaSeasonProvider.cs" />
+    <Compile Include="Support\Partial\CrossRobotManagerProvider.cs" />
+    <Compile Include="Support\Partial\EuropeMatchProvider.cs" />
+    <Compile Include="Support\Partial\ExchangeInfoProvider.cs" />
+    <Compile Include="Support\Partial\GmLogProvider.cs" />
+    <Compile Include="Support\Partial\MonitorDailyEventProvider.cs" />
+    <Compile Include="Support\Partial\MonitorScheduleProvider.cs" />
+    <Compile Include="Support\Partial\StatisticClickProvider.cs" />
+    <Compile Include="Support\Partial\StatisticdetailProvider.cs" />
+    <Compile Include="Support\Partial\StatisticinfoProvider.cs" />
+    <Compile Include="Support\Partial\StatistickpiProvider.cs" />
+    <Compile Include="Support\Partial\StatisticonlineProvider.cs" />
+    <Compile Include="Support\Partial\TemplateActivityExDetailProvider.cs" />
+    <Compile Include="Support\Partial\TemplateActivityExGroupProvider.cs" />
+    <Compile Include="Support\Partial\TemplateActivityExPrizeProvider.cs" />
+    <Compile Include="Support\Partial\TemplateActivityExProvider.cs" />
+    <Compile Include="Support\Partial\TransferDropOutProvider.cs" />
+    <Compile Include="Support\Partial\TransferMainProvider.cs" />
+    <Compile Include="Support\Partial\UserLoginZoneProvider.cs" />
+    <Compile Include="Support\Partial\ZoneDailyEventTimeProvider.cs" />
+    <Compile Include="SystemLog\Auto\LogErrorProviderAuto.cs" />
+    <Compile Include="SystemLog\Auto\LogInfoProviderAuto.cs" />
+    <Compile Include="SystemLog\Auto\LogScheduleProviderAuto.cs" />
+    <Compile Include="SystemLog\Partial\LogErrorProvider.cs" />
+    <Compile Include="SystemLog\Partial\LogInfoProvider.cs" />
+    <Compile Include="SystemLog\Partial\LogScheduleProvider.cs" />
+    <Compile Include="Xsd\DailyCupCompetitorsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyCupCompetitorsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\DailycupMatchDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailycupMatchDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\DailycupSqlHelper.cs" />
+    <Compile Include="Xsd\ItemShadowDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemShadowDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\LadderManagerhistoryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LadderManagerhistoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\LadderSqlHelper.cs" />
+    <Compile Include="Xsd\MailinfoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MailinfoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\MailSqlHelper.cs" />
+    <Compile Include="Xsd\OnlineinfoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineinfoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\OnlineSqlHelper.cs" />
+    <Compile Include="Xsd\RankingLadderYesterdayDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RankingLadderYesterdayDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\RankSqlHelper.cs" />
+    <Compile Include="Xsd\RankingYesterdayDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RankingYesterdayDataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{836e0c0f-f9ff-4f58-9427-d6f0d6b793a5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{bbfbba66-7d0d-491f-aae9-d992270c775e}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\DailyCupCompetitorsDataSet.xsc">
+      <DependentUpon>DailyCupCompetitorsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\DailyCupCompetitorsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DailyCupCompetitorsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\DailyCupCompetitorsDataSet.xss">
+      <DependentUpon>DailyCupCompetitorsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\DailycupMatchDataSet.xsc">
+      <DependentUpon>DailycupMatchDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\DailycupMatchDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DailycupMatchDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\DailycupMatchDataSet.xss">
+      <DependentUpon>DailycupMatchDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\ItemShadowDataSet.xsc">
+      <DependentUpon>ItemShadowDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\ItemShadowDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ItemShadowDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\ItemShadowDataSet.xss">
+      <DependentUpon>ItemShadowDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\LadderManagerhistoryDataSet.xsc">
+      <DependentUpon>LadderManagerhistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\LadderManagerhistoryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LadderManagerhistoryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\LadderManagerhistoryDataSet.xss">
+      <DependentUpon>LadderManagerhistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\MailinfoDataSet.xsc">
+      <DependentUpon>MailinfoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\MailinfoDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MailinfoDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\MailinfoDataSet.xss">
+      <DependentUpon>MailinfoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\OnlineinfoDataSet.xsc">
+      <DependentUpon>OnlineinfoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\OnlineinfoDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OnlineinfoDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\OnlineinfoDataSet.xss">
+      <DependentUpon>OnlineinfoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\RankingLadderYesterdayDataSet.xsc">
+      <DependentUpon>RankingLadderYesterdayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\RankingLadderYesterdayDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RankingLadderYesterdayDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\RankingLadderYesterdayDataSet.xss">
+      <DependentUpon>RankingLadderYesterdayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\RankingYesterdayDataSet.xsc">
+      <DependentUpon>RankingYesterdayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Xsd\RankingYesterdayDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RankingYesterdayDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Xsd\RankingYesterdayDataSet.xss">
+      <DependentUpon>RankingYesterdayDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

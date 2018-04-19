@@ -1,0 +1,316 @@
+﻿<%@ CodeTemplate Language="C#" Inherits="MyCodeTemplate.BaseTemplate.BaseSqlTableTemplate" TargetLanguage="T-SQL" Description="Generates SELECT/INSERT/UPDATE/DELETE stored procedure based on a database table schema."  ResponseEncoding="UTF-8" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="MyCodeTemplate" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="MyCodeTempate.Common" %>
+
+<%if (IsDropOld) { %>
+
+-----------------------------
+--drop the old procedures
+
+<% if (SourceTable.PrimaryKey == null) throw new ApplicationException("SourceTable does not contain a primary key."); %>
+<% if (IncludeDrop) { %>
+	<% if (IncludeDelete) { %>
+/****** Object:  Stored Procedure <%= GetTableOwner() %><%= GetClassName(GetClassName(SourceTable.Name)) %>_<%= DeletePrefix %>    Script Date: <%= DateTime.Now.ToLongDateString() %> ******/
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= DeletePrefix %>]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure <%= GetTableOwner() %>[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= DeletePrefix %>]
+GO
+
+	<% } %>
+	<% if (IncludeGet) { %>
+/****** Object:  Stored Procedure <%= GetTableOwner() %><%= GetClassName(SourceTable.Name) %>_<%= SelectPrefix %>ById    Script Date: <%= DateTime.Now.ToLongDateString() %> ******/
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= SelectPrefix %>ById]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure <%= GetTableOwner() %>[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= SelectPrefix %>ById]
+GO
+
+	<% } %>
+	
+	
+	<% if (IncludeGetAll) { %>
+/****** Object:  Stored Procedure <%= GetTableOwner() %><%= GetClassName(SourceTable.Name) %>_<%= GetAllPrefix %>    Script Date: <%= DateTime.Now.ToLongDateString() %> ******/
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= GetAllPrefix %>]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure <%= GetTableOwner() %>[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= GetAllPrefix %>]
+GO
+
+	<% } %>
+	
+	
+
+	<% if (IncludeInsert) { %>
+/****** Object:  Stored Procedure <%= GetTableOwner() %><%= GetClassName(SourceTable.Name) %>_<%= InsertPrefix %>    Script Date: <%= DateTime.Now.ToLongDateString() %> ******/
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= InsertPrefix %>]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure <%= GetTableOwner() %>[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= InsertPrefix %>]
+GO
+
+	<% } %>
+	<% if (IncludeUpdate) { %>
+/****** Object:  Stored Procedure <%= GetTableOwner() %><%= GetClassName(SourceTable.Name) %>_<%= UpdatePrefix %>    Script Date: <%= DateTime.Now.ToLongDateString() %> ******/
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= UpdatePrefix %>]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure <%= GetTableOwner() %>[<%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= UpdatePrefix %>]
+GO
+
+	<% } %>
+	
+
+<% } %>
+-------------------------------------------------
+<% }%>
+
+    
+<% if (IncludeDelete) { %>
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= DeletePrefix %>
+	<% for (int i = 0; i < SourceTable.PrimaryKey.MemberColumns.Count; i++) { %>
+	<%= GetSqlParameterStatement(SourceTable.PrimaryKey.MemberColumns[i]) %><% if (i < SourceTable.PrimaryKey.MemberColumns.Count - 1) { %>,<% } %>
+	<% } %>
+    <% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+	<%if(SourceTable.Columns[i].Name=="RowVersion"){%>
+	,@RowVersion timestamp
+    <% } %>
+    <% } %>
+AS
+
+DELETE FROM <%= GetTableOwner() %>[<%= SourceTable.Name %>]
+WHERE
+	<% for (int i = 0; i < SourceTable.PrimaryKey.MemberColumns.Count; i++) { %>
+	<% if (i > 0) { %>AND <% } %>[<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>] = @<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>
+	<% } %>
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+    <% if (SourceTable.NonPrimaryKeyColumns[i].Name=="RowVersion") { %>
+	AND [<%= SourceTable.NonPrimaryKeyColumns[i].Name %>] = @<%= SourceTable.NonPrimaryKeyColumns[i].Name %>
+	<% } %>
+    <% } %>
+
+RETURN 0
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+<% } %>
+<% if (IncludeGet) { %>
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= SelectPrefix %>ById
+	<% for (int i = 0; i < SourceTable.PrimaryKey.MemberColumns.Count; i++) { %>
+	<%= GetSqlParameterStatement(SourceTable.PrimaryKey.MemberColumns[i]) %><% if (i < SourceTable.PrimaryKey.MemberColumns.Count - 1) { %>,<% } %>
+	<% } %>
+AS
+
+SET LOCK_TIMEOUT 2000
+SET XACT_ABORT ON
+SET NOCOUNT ON
+
+SELECT
+	*
+FROM
+	<%= GetTableOwner() %>[<%= SourceTable.Name %>] with(nolock)
+WHERE
+	<% for (int i = 0; i < SourceTable.PrimaryKey.MemberColumns.Count; i++) { %>
+	<% if (i > 0) { %>AND <% } %>[<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>] = @<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>
+	<% } %>
+	
+RETURN 0
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+<% } %>
+
+
+<% if (IncludeGetAll) { %>
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= GetAllPrefix %>
+AS
+
+SET LOCK_TIMEOUT 2000
+SET XACT_ABORT ON
+SET NOCOUNT ON
+
+SELECT
+	*
+FROM
+	<%= GetTableOwner() %>[<%= SourceTable.Name %>] with(nolock)
+	
+RETURN 0
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+<% } %>
+
+
+
+<% if (IncludeInsert) { %>
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+
+<% if (SourceTable.PrimaryKey.MemberColumns.Count == 1 
+	&& (SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Guid 
+		|| ((bool)SourceTable.PrimaryKey.MemberColumns[0].ExtendedProperties["CS_IsIdentity"].Value == true
+			&&(SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int16 
+				|| SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int32 
+				|| SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int64)))
+	 ) {
+	ColumnSchema primaryKey = SourceTable.PrimaryKey.MemberColumns[0];
+%>
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= InsertPrefix %>
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+    <% if (SourceTable.NonPrimaryKeyColumns[i].Name!="RowVersion") { %>
+	<%= GetSqlParameterStatement(SourceTable.NonPrimaryKeyColumns[i]) %> , 
+	<% } %>
+    <% } %>
+    <%= GetSqlParameterStatement(primaryKey, true) %> 
+AS
+
+SET LOCK_TIMEOUT 2000
+SET XACT_ABORT ON
+SET NOCOUNT OFF
+
+
+INSERT INTO <%= GetTableOwner() %>[<%= SourceTable.Name %>] (
+	<% if (primaryKey.DataType == DbType.Guid) { %>
+	[<%= primaryKey.Name %>],
+	<% } %>
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+    <% if (SourceTable.NonPrimaryKeyColumns[i].Name!="RowVersion") { %>
+	<% if (i >0) { %>,<% } %>[<%= SourceTable.NonPrimaryKeyColumns[i].Name %>]
+	<% } %>
+    <% } %>
+) VALUES (
+	<% if (primaryKey.DataType == DbType.Guid) { %>
+	@<%= primaryKey.Name %>,
+	<% } %>
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+        <% if (SourceTable.NonPrimaryKeyColumns[i].Name!="RowVersion") { %>
+    <% if (i >0) { %>,<% } %>@<%= SourceTable.NonPrimaryKeyColumns[i].Name %>
+        <% } %>
+	<% } %>
+)
+
+<% if (SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int16 
+				|| SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int32 
+				|| SourceTable.PrimaryKey.MemberColumns[0].DataType == DbType.Int64) { %>
+
+SET @<%= primaryKey.Name %> = @@IDENTITY
+
+<% } %>
+
+
+
+RETURN 0
+
+<% } else { %>
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= InsertPrefix %>
+	<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+	<% if (i >0) { %>,<% } %><%= GetSqlParameterStatement(SourceTable.Columns[i]) %>
+	<% } %>
+AS
+
+-- THIS STORED PROCEDURE NEEDS TO BE MANUALLY COMPLETED
+-- MULITPLE PRIMARY KEY MEMBERS OR NON-GUID/INT PRIMARY KEY
+
+
+INSERT INTO <%= GetTableOwner() %>[<%= SourceTable.Name %>] (
+	<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+    <% if (SourceTable.Columns[i].Name!="RowVersion") { %>
+	<% if (i >0) { %>,<% } %>[<%= SourceTable.Columns[i].Name %>]
+	<% } %>
+    <% } %>
+) VALUES (
+	<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+    <% if (SourceTable.Columns[i].Name!="RowVersion") { %>
+    <% if (i >0) { %>,<% } %>@<%= SourceTable.Columns[i].Name %>
+	<% } %>
+    <% } %>
+)
+
+select @<%=SourceTable.Columns[0].Name%>
+
+RETURN 0
+
+<% } %>
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+<% } %>
+<% if (IncludeUpdate) { %>
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE <%= GetTableOwner() %><%=ProcedureTag%><%= GetClassName(SourceTable.Name) %>_<%= UpdatePrefix %>
+	<% for (int i = 0; i < SourceTable.Columns.Count; i++) { %>
+	<%= GetSqlParameterStatement(SourceTable.Columns[i]) %><% if (i < SourceTable.Columns.Count - 1) { %>,<% } %> <% if (SourceTable.Columns[i].Description.Length > 0) { %>-- <%= SourceTable.Columns[i].Description.Replace("\r\n",";") %><% } %>
+	<% } %>
+AS
+
+
+
+UPDATE <%= GetTableOwner() %>[<%= SourceTable.Name %>] SET
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+    <% if (SourceTable.NonPrimaryKeyColumns[i].Name!="RowVersion") { %>
+	<% if (i >0) { %>,<% } %>[<%= SourceTable.NonPrimaryKeyColumns[i].Name %>] = @<%= SourceTable.NonPrimaryKeyColumns[i].Name %>
+	<% } %>
+    <% } %>
+WHERE
+	<% for (int i = 0; i < SourceTable.PrimaryKey.MemberColumns.Count; i++) { %>
+	<% if (i > 0) { %>AND <% } %>[<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>] = @<%= SourceTable.PrimaryKey.MemberColumns[i].Name %>
+	<% } %>
+	<% for (int i = 0; i < SourceTable.NonPrimaryKeyColumns.Count; i++) { %>
+    <% if (SourceTable.NonPrimaryKeyColumns[i].Name=="RowVersion") { %>
+	AND [<%= SourceTable.NonPrimaryKeyColumns[i].Name %>] = @<%= SourceTable.NonPrimaryKeyColumns[i].Name %>
+	<% } %>
+    <% } %>
+
+RETURN 0
+
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+<% } %>
+
+
+
+<script runat="template">
+
+</script>

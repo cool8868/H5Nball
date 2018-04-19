@@ -1,0 +1,53 @@
+﻿<Window x:Class="Games.NBall.WpfEmulator.Tools.DataExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="导出数据" Height="549.336" Width="724" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" WindowStyle="SingleBorderWindow">
+    <Canvas Margin="0,0,0,18" HorizontalAlignment="Left" Width="691">
+        <Button x:Name="btnExportAll" Content="一键导出" Style="{DynamicResource SimpleButton}" Height="27" Click="btnExportAll_Click" Canvas.Left="44" Canvas.Top="11" Width="102"/>
+        <Grid Canvas.Top="40" Width="694" Height="443">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="272*"/>
+                <ColumnDefinition Width="78*"/>
+                <ColumnDefinition Width="315*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnExportApi" Content="导出Api" Grid.Row="0" Style="{DynamicResource SimpleButton}" Click="btnExportApi_Click" Margin="44,11,125,7"/>
+            <Button x:Name="btnExportApiDebug" Content="导出Api[Debug]" Grid.Row="1" Style="{DynamicResource SimpleButton}" Click="btnExportApiDebug_Click" Margin="47,11,125,7"/>
+            <Button x:Name="btnExportMessage" Content="导出枚举消息" Grid.Row="2" Style="{DynamicResource SimpleButton}" Click="btnExportMessage_Click" Margin="44,10,125,8" />
+            <Button x:Name="btnExportItem" Content="导出物品Tips" Grid.Row="3" Style="{DynamicResource SimpleButton}" Click="btnExportItem_Click" Margin="44,10,125,8"/>
+            <Button x:Name="btnExportSkill" Content="导出技能Tips" Grid.Row="4" Style="{DynamicResource SimpleButton}" Click="btnExportSkill_Click" Margin="44,9,125,9"/>
+            <Button x:Name="btnExportFormation" Content="导出阵型" Grid.Row="5" Style="{DynamicResource SimpleButton}" Click="btnExportFormation_Click" Margin="44,11,125,8"/>
+            <Button x:Name="btnExportDescription" Content="导出字典描述" Grid.Row="6" Style="{DynamicResource SimpleButton}" Click="btnExportDescription_Click" Margin="44,10,125,8"/>
+            <Button x:Name="btnExportDescription1" Content="导出字典描述1" Grid.Row="7" Style="{DynamicResource SimpleButton}" Click="btnExportDescription1_Click" Margin="45,12,125,10"/>
+            <Button x:Name="btnExportNameLibrary" Content="导出随机名字" Grid.Row="8" Style="{DynamicResource SimpleButton}" Click="btnExportNameLibrary_Click" Margin="45,11,125,10"/>
+            <Button x:Name="btnExportNpcConfig" Content="导出NPC配置" Grid.Row="9" Style="{DynamicResource SimpleButton}" Click="btnExportNpcConfig_Click" Margin="45,10,125,12"/>
+            <Button Name="btnApiCheck" Content="查看" HorizontalAlignment="Left" Margin="187,12,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="btnApiCheck_Click"/>
+            <Button Name="btnApiDebug" Content="查看" HorizontalAlignment="Left" Margin="187,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="26" Click="btnApiDebug_Click"/>
+            <Button Name="btnEnumMessage" Content="查看" HorizontalAlignment="Left" Margin="187,11,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Height="26" Click="btnEnumMessage_Click"/>
+            <Button Name="btnItemTips" Content="查看" HorizontalAlignment="Left" Margin="187,11,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" Height="26" Click="btnItemTips_Click"/>
+            <Button Name="btnSkillTips" Content="查看" HorizontalAlignment="Left" Margin="187,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Height="26" Click="btnSkillTips_Click"/>
+            <Button Name="btnFormation" Content="查看" HorizontalAlignment="Left" Margin="187,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Height="26" Click="btnFormation_Click"/>
+            <Button Name="btnDescriptionDic" Content="查看" HorizontalAlignment="Left" Margin="187,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Height="27" Click="btnDescriptionDic_Click"/>
+            <Button Name="btnDescriptionDic1" Content="查看1" HorizontalAlignment="Left" Margin="187,12,0,0" Grid.Row="7" VerticalAlignment="Top" Width="75" Height="27" Click="btnDescriptionDic1_Click"/>
+            <Button Name="btnRandomName" Content="查看" HorizontalAlignment="Left" Margin="187,11,0,0" Grid.Row="8" VerticalAlignment="Top" Width="75" Height="28" Click="btnRandomName_Click"/>
+            <Button Name="btnNpcDic" Content="查看" HorizontalAlignment="Left" Margin="187,10,0,0" Grid.Row="9" VerticalAlignment="Top" Width="75" Height="27" Click="btnNpcDic_Click"/>
+            <Button x:Name="btnExportDescription_Copy" Content="导出80-108的球员卡" Style="{DynamicResource SimpleButton}" Click="btnExportPlaryKpi_Click" Margin="27,12,187,6" Grid.Column="2"/>
+            <Button x:Name="btnDescriptionDic_Copy" Content="查看" HorizontalAlignment="Left" Margin="198,12,0,0" VerticalAlignment="Top" Width="75" Height="27" Click="btnPlaryKpi_Click" Grid.Column="2"/>
+            <Button x:Name="btnExportSkill_Copy" Content="导出技能Tips(热血英超)" Grid.Row="4" Style="{DynamicResource SimpleButton}" Click="btnExportSkill2_Click" Margin="26,9,146,9" Grid.Column="2"/>
+            <Button x:Name="btnSkillTips_Copy" Content="查看" HorizontalAlignment="Left" Margin="217,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Height="26" Click="btnSkillTips_Click" Grid.Column="2"/>
+
+        </Grid>
+    </Canvas>
+
+</Window>

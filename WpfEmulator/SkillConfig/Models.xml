@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Models>
+  <Model id="0" name="正常" />
+  <Model id="1" name="消失" />
+  <Model id="2" name="假动作过人" />
+  <Model id="3" name="加速过人" />
+  <Model id="4" name="穿裆过人" />
+  <Model id="5" name="挑球过人" />
+  <Model id="6" name="踩单车" />
+  <Model id="7" name="幻影突破" />
+  <Model id="8" name="贴身防守" />
+  <Model id="9" name="怒吼特效" />
+  <Model id="10" name="咆哮特效" />
+  <Model id="11" name="倒地" />
+  <Model id="12" name="困惑" />
+  <Model id="13" name="眩晕" />
+  <Model id="14" name="惯性" />
+  <Model id="15" name="静止" />
+  <Model id="16" name="外星人" />
+  <Model id="17" name="葫芦娃" />
+  <Model id="18" name="幽灵" />
+  <Model id="19" name="小罗牛尾巴" />
+  <Model id="20" name="魔术盘带" />
+  <Model id="21" name="优雅蝴蝶" />
+  <Model id="22" name="金童" />
+  <Model id="23" name="炸弹效果" />
+  <Model id="24" name="燃烧效果" />
+  <Model id="25" name="装弹效果" />
+  <Model id="26" name="门神怒吼特效" />
+  <Model id="27" name="吸魂效果" />
+  <Model id="28" name="胶水" />
+  <Model id="29" name="战神" />
+  <Model id="30" name="独狼" />
+  <Model id="31" name="铁人" />
+  <Model id="32" name="足球皇帝" />
+  <Model id="33" name="郁金香之剑" />
+  <Model id="34" name="前锋梦魇" />
+  <Model id="35" name="定海神针" />
+  <Model id="36" name="星云锁链" />
+  <Model id="37" name="皮耶罗区域" />
+  <Model id="38" name="小飞侠"/>
+  <Model id="39" name="野兽"/>
+  <Model id="40" name="黑豹奔袭"/>
+  <Model id="41" name="追风者"/>
+  <Model id="42" name="灵狐跑位"/>
+  <Model id="43" name="愤怒的水牛"/>
+  <Model id="50" name="梦幻突破"/>
+  <Model id="51" name="猪猪侠"/>
+  <Model id="52" name="超级赛亚人"/>
+  <Model id="53" name="蜘蛛网"/>
+  <Model id="54" name="狮王怒吼"/>
+  <Model id="55" name="神龙摆尾"/>
+  <Model id="56" name="影子穿梭"/>
+  <Model id="57" name="疾翔的飞翼"/>
+  <Model id="58" name="八爪鱼"/>
+  <Model id="59" name="铁人"/>
+  <Model id="60" name="梦幻挑射"/>
+  <Model id="61" name="闪电倒钩"/>
+  <Model id="62" name="蓝白之梦"/>
+  <Model id="63" name="中场发动机"/>
+  <Model id="64" name="圣盾"/>
+  <Model id="65" name="突破"/>
+  <Model id="66" name="帽子戏法"/>
+  <Model id="69" name="致命威胁"/>
+  <Model id="71" name="沙皇"/>
+  <Model id="73" name="天神下凡"/>
+  <Model id="74" name="白雾"/>
+  <Model id="75" name="精灵王子"/>
+  <Model id="76" name="超级新星"/>
+  <Model id="78" name="超级野兽"/>
+  <Model id="79" name="巴萨魂"/>
+  <Model id="80" name="中场领袖"/>
+  <Model id="81" name="小哈波动"/>
+  <Model id="82" name="传奇大叔"/>
+  <Model id="83" name="皮少领域"/>
+  <Model id="84" name="来去如风"/>
+  <Model id="85" name="幻象球"/>
+  <Model id="86" name="闪电加速"/>
+  <Model id="87" name="皇家侍卫"/>
+  <Model id="88" name="精灵撕裂"/>
+  <Model id="89" name="疤面煞星"/>
+  <Model id="90" name="桑巴狼"/>
+  <Model id="91" name="罗马王子"/>
+  <Model id="92" name="金童子"/>
+  <Model id="93" name="乌拉圭王子"/>
+</Models>

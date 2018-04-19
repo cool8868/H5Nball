@@ -1,0 +1,8 @@
+D:\H5Nball\Common\bin\Debug\Games.NBall.Common.dll
+D:\H5Nball\Common\bin\Debug\Games.NBall.Common.pdb
+D:\H5Nball\Common\bin\Debug\log4net.dll
+D:\H5Nball\Common\bin\Debug\Newtonsoft.Json.dll
+D:\H5Nball\Common\bin\Debug\protobuf-net.dll
+D:\H5Nball\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+D:\H5Nball\Common\obj\Debug\Games.NBall.Common.dll
+D:\H5Nball\Common\obj\Debug\Games.NBall.Common.pdb

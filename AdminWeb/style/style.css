@@ -1,0 +1,50 @@
+body, table, td, th, span, p, div, a, form, input, button, select, option, textarea { font-family : simsun; font-size : 12px }
+a:link {color: #0000ea; text-decoration:none}
+a:visited {color: #006666; text-decoration: none}
+a:active {color:#ff0000; text-decoration: underline}
+a:hover {color: #ff0000; text-decoration: underline}
+a.btn-i1{display:block;width:120px;text-align:center;color:#E6E956;background-color:#CCEEEE; text-decoration:none; border-left:#99A52F 1px solid; border-top:#99A52F 1px solid; border-right:#61691E 1px solid; border-bottom:#3F4414 1px solid;padding:2px 0 0 0;}
+a.btn-i1:link {color: #000000; text-decoration:none}
+a.btn-i1:visited {color: #006666; text-decoration: none}
+a.btn-i1:active {
+color:#ff0000; text-decoration: underline}
+a.btn-i1:hover {color: #ff0000; text-decoration: underline}
+.bottomLine { border-bottom:1px solid #000000 }
+.rightLine { border-right:1px solid #000000 }
+.ftGreen { color : green }
+.bgColor { background-color:#33CCCC }
+.bgColor1 { background-color:#CCEEEE }
+.bgColor2 { background-color:#66CCFF }
+.bgDark { background-color:#000000 }
+.bgGray { background-color:Gray }
+.bgLightGray { background-color : #DDDDDD }
+.bgLightBlue { background-color : lightblue }
+.bgLightGreen { background-color : lightgreen }
+.bgWhite { background-color:#FFFFFF }
+.buttonWidth { width: 100px }
+.inputWidth { width: 200px }
+.SortFieldLable{text-decoration:underline;background-color:#66CCFF;color:#3366ff;cursor:hand;}
+.pagebar{line-height:20px;height:20px;}
+.pagebar a,.pagebar .now-page{padding:1px 3px 2px 3px;margin:0 2px;text-align:center;font-weight:bold;font-family:Verdana;border:1px solid #ccc;text-decoration:none;COLOR: #006699;}
+.pagebar a:hover{border:1px solid #c00;text-decoration:none;BACKGROUND-COLOR: #f1ffc0;COLOR: #c00;}
+a.wa {COLOR: #7c7b6b;BACKGROUND-COLOR: #f1ff00;}
+a.wah {COLOR: #7c7b6b;}
+
+.mySingleTr
+{
+	background-color:#F8FAFD;
+}
+
+.myDoubleTr
+{
+	background-color:#FFF7D2;
+}
+
+.red
+{
+	color:Red;
+}
+
+.trHeight {
+    height: 30px;
+}

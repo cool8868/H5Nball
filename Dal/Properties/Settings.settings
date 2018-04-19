@@ -1,0 +1,66 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Games.NBall.Dal.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NBallConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=180.150.177.96;Initial Catalog=NBall;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=180.150.177.96;Initial Catalog=NBall;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NB_ShadowConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=180.150.177.96;Initial Catalog=NB_Shadow;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=180.150.177.96;Initial Catalog=NB_Shadow;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NB_ConfigConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=115.28.140.73,20003;Initial Catalog=NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=115.28.140.73,20003;Initial Catalog=NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NBallConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=115.28.140.73,20003;Initial Catalog=NBall;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=115.28.140.73,20003;Initial Catalog=NBall;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NB_ProcessConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=180.150.177.96;Initial Catalog=NB_SystemLog;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=180.150.177.96;Initial Catalog=NB_SystemLog;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NB_SystemlogConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=180.150.177.96;Initial Catalog=NB_SystemLog;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=180.150.177.96;Initial Catalog=NB_SystemLog;Persist Security Info=True;User ID=nbuser;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NBallConnectionString2" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=115.28.140.73,20003;Initial Catalog=NBall;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=115.28.140.73,20003;Initial Catalog=NBall;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</Value>
+    </Setting>
+    <Setting Name="NB_SupportConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=115.28.140.73,20003;Initial Catalog=NB_Support;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=115.28.140.73,20003;Initial Catalog=NB_Support;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

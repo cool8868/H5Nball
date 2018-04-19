@@ -1,0 +1,482 @@
+﻿<?xml version="1.0"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <propertySets>
+    <propertySet output="Generator\ConfigAppsetting.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_AppSetting</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigDatabase.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_Database</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigEquipmentplus.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_EquipmentPlus</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigEquipmentsynthesize.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_EquipmentSynthesize</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigFormationlevel.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_FormationLevel</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigManagerlevel.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_ManagerLevel</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigPlayerlevel.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_PlayerLevel</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigSkillcardaskrank.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_SkillCardAskRank</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\ConfigSkillcardlevel.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Config_SkillCardLevel</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicBallsoul.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Ballsoul</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicBuff.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Buff</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicEquipment.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Equipment</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicEquipmentsuit.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_EquipmentSuit</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicFormation.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Formation</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicFormationdetail.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_FormationDetail</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicFormula.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Formula</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicGrow.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Grow</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicItem.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Item</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicItemtype.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_ItemType</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicMallitem.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_MallItem</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicNpc.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_NPC</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicPlayer.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Player</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicPlayercarddec.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_PlayerCardDec</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicSkillcard.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_SkillCard</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicStarskills.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_StarSkills</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicSuitdrawing.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_SuitDrawing</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicTourelite.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_TourElite</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicToureliteprize.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_TourElitePrize</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicTourleague.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_TourLeague</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicTourprize.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_TourPrize</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicTourstage.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_TourStage</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\DicVip.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Dic_Vip</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\TemplateRegister.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Template_Register</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+    <propertySet output="Generator\TemplateRegisterplayer.csp" template="..\CodeTemplate\Model_Config.csp.cst">
+      <property name="ClassNameRule">1</property>
+      <property name="Namespace">Games.NBall</property>
+      <property name="TablePrefix">""</property>
+      <property name="SourceTable">
+        <connectionString>Data Source=180.150.178.193;Initial Catalog=H5NB_Config;Persist Security Info=True;User ID=sa;Password=2df!3T*)d12</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <table>
+          <owner>dbo</owner>
+          <name>Template_RegisterPlayer</name>
+        </table>
+      </property>
+      <property name="CanOverwriteOld">False</property>
+    </propertySet>
+  </propertySets>
+</codeSmith>
+

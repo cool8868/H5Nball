@@ -1,0 +1,1693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://nball.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://nball.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://nball.com/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="SetStartGameEntity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serverId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pf" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsNeed" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nickName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="common" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetStartGameEntityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetStartGameEntityResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStartgameEntity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStartgameEntityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStartgameEntityResult" type="tns:A8csdkStartgameEntity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="A8csdkStartgameEntity">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OpenId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServerId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JsNeed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NickName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Common" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddCoin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="coin" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCoinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddCoinResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCoin2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="coin" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCoin2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddCoin2Result" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Charge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="cash" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="point" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bonus" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChargeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChargeResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuyPointShipments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="managerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billingId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cash" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="mallCode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuyPointShipmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BuyPointShipmentsResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsRegist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serverNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsRegistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsRegistResult" type="tns:NbManagerEntity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NbManagerEntity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Idx" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Account" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Logo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Level" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EXP" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sophisticate" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Coin" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reiki" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TeammemberMax" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TrainSeatMax" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VipLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Mod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RowTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RowVersion" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="FriendShipPoint" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LevelupExp" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Kpi" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsLevelup" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TourLeague" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FunctionList" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OpenFuncs" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasOpenTask" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddCoin" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddExp" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CoinSourceType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CoinOrderId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Vigor" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpenLevelGift" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsYellowVip" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsRegistByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serverNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsRegistByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsRegistByNameResult" type="tns:NbManagerEntity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsRegistByNameList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsRegistByNameListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsRegistByNameListResult" type="tns:ArrayOfNbManagerEntity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNbManagerEntity">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NbManagerEntity" nillable="true" type="tns:NbManagerEntity" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetManagerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManagerListResult" type="tns:ArrayOfNbManagerEntity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckActive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckActiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckActiveResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AttachmentReceive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="recordId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AttachmentReceiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AttachmentReceiveResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TxBuyItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="payItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zoneId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="amt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="payamt_coins" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pubacct_payamt_coins" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="exchangeRate" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TxBuyItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TxBuyItemResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TxTaskStep">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="activityId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="activityStep" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cmd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="billno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TxTaskStepResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TxTaskStepResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KickSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KickSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KickSessionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockUserUnexpect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="adminName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockUserUnexpectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LockUserUnexpectResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cacheType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetCacheResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrowdStart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="startTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrowdStartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrowdStartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeakStart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="startTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PeakStartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PeakStartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrowdSendPrize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="crowdId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrowdSendPrizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrowdSendPrizeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddManagerData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="prizeExp" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="prizeCoin" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="prizeSophisticate" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddManagerDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddManagerDataResult" type="tns:MessageCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="MessageCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="AdFailUpdatePack" />
+          <s:enumeration value="BadRequest" />
+          <s:enumeration value="WebServerException" />
+          <s:enumeration value="ExecuteFail" />
+          <s:enumeration value="Exception" />
+          <s:enumeration value="SystemBusy" />
+          <s:enumeration value="NbFunctionNotOpen" />
+          <s:enumeration value="Success" />
+          <s:enumeration value="NbParameterError" />
+          <s:enumeration value="NbCoinShortage" />
+          <s:enumeration value="NbPointShortage" />
+          <s:enumeration value="NbNoDefineMessageCode" />
+          <s:enumeration value="NbUpdateFail" />
+          <s:enumeration value="NbLotteryNot" />
+          <s:enumeration value="NbNowHook" />
+          <s:enumeration value="NbDeleteFail" />
+          <s:enumeration value="NbStaminaShortage" />
+          <s:enumeration value="NbNoPackage" />
+          <s:enumeration value="NbManagerLevelOver" />
+          <s:enumeration value="NbRankAfter" />
+          <s:enumeration value="NbUpdateFailPackage" />
+          <s:enumeration value="NbUpdateFailManager" />
+          <s:enumeration value="NbPrizeRepeat" />
+          <s:enumeration value="NbMatchCd" />
+          <s:enumeration value="NbMatchNoCd" />
+          <s:enumeration value="NbDomainInvalid" />
+          <s:enumeration value="NbBindPointShortage" />
+          <s:enumeration value="LoginNoRegister" />
+          <s:enumeration value="LoginNoLogin" />
+          <s:enumeration value="LoginOnlineLock" />
+          <s:enumeration value="LoginOnlineBump" />
+          <s:enumeration value="LoginOnlineKick" />
+          <s:enumeration value="LoginMultiManager" />
+          <s:enumeration value="LoginNoUser" />
+          <s:enumeration value="NoMergeZoneInfo" />
+          <s:enumeration value="BindCodeNotExist" />
+          <s:enumeration value="HaveSetName" />
+          <s:enumeration value="LoginNoManager" />
+          <s:enumeration value="LoginError" />
+          <s:enumeration value="RegisterNameRepeat" />
+          <s:enumeration value="RegisterNameContainBadWord" />
+          <s:enumeration value="RegisterNameIsEmpty" />
+          <s:enumeration value="RegisterNameHasValidWord" />
+          <s:enumeration value="RegisterNameLengthRange" />
+          <s:enumeration value="RegisterExistsManager" />
+          <s:enumeration value="RegisterFail" />
+          <s:enumeration value="RegisterNoTemplate" />
+          <s:enumeration value="RegisterRealNameValid" />
+          <s:enumeration value="RegisterCertIdValid" />
+          <s:enumeration value="MatchCreateFail" />
+          <s:enumeration value="MatchWait" />
+          <s:enumeration value="MatchMiss" />
+          <s:enumeration value="MatchStateObjisNull" />
+          <s:enumeration value="MainPlayerNoStrength" />
+          <s:enumeration value="TrainPlayerNoStrength" />
+          <s:enumeration value="ItemsNotSell" />
+          <s:enumeration value="PlayerHaveEquipment" />
+          <s:enumeration value="ProtectItemNot" />
+          <s:enumeration value="ItemNotSell" />
+          <s:enumeration value="ItemPackageFull" />
+          <s:enumeration value="ItemNotExists" />
+          <s:enumeration value="ItemIsLocked" />
+          <s:enumeration value="ItemIsBinding" />
+          <s:enumeration value="ItemEquipmentNotExists" />
+          <s:enumeration value="ItemIdRepeat" />
+          <s:enumeration value="ItemPropertyIsNull" />
+          <s:enumeration value="ItemStrengthInvalid" />
+          <s:enumeration value="ItemStrengthNoConfig" />
+          <s:enumeration value="ItemStrengthProtectShortage" />
+          <s:enumeration value="ItemSynthesisNoConfig" />
+          <s:enumeration value="ItemSynthesisDiffCardlevel" />
+          <s:enumeration value="ItemCountInvalid" />
+          <s:enumeration value="ItemDecomposeInvalid" />
+          <s:enumeration value="ItemDecomposeNoConfig" />
+          <s:enumeration value="ItemEquipmentSynthesisNoConfig" />
+          <s:enumeration value="ItemEquipmentSynthesisQuality1" />
+          <s:enumeration value="ItemEquipmentSynthesisCardOver" />
+          <s:enumeration value="ItemEquipmentSynthesisFormulaInvalid" />
+          <s:enumeration value="ItemEquipmentSynthesisNoSuitdrawing" />
+          <s:enumeration value="ItemPackageFullToMail" />
+          <s:enumeration value="ItemNoShadow" />
+          <s:enumeration value="ItemLapOver" />
+          <s:enumeration value="ItemMosaicColorNotMatch" />
+          <s:enumeration value="ItemWashStoneNotMatch" />
+          <s:enumeration value="ItemBallsoulLevelOver" />
+          <s:enumeration value="ItemWashStoneLevelOver" />
+          <s:enumeration value="ItemSplitCountOver" />
+          <s:enumeration value="ItemLuckyParameterError" />
+          <s:enumeration value="ItemSynthesisWildcardCoutOver" />
+          <s:enumeration value="ItemSynthesisMallCountShortage" />
+          <s:enumeration value="ItemSynthesisWildcardQualityError" />
+          <s:enumeration value="ItemNewplayerPackCantDelete" />
+          <s:enumeration value="ItemCopyCardTypeError" />
+          <s:enumeration value="ItemIsCopyedCard" />
+          <s:enumeration value="ItemUpgradeItemCountShortage" />
+          <s:enumeration value="ItemEquipmentLeverError" />
+          <s:enumeration value="NonePrecisionCastingProperty" />
+          <s:enumeration value="PrecisionCastingMaxChoice" />
+          <s:enumeration value="PrecisionCastingMethod" />
+          <s:enumeration value="HookItemCountShortage" />
+          <s:enumeration value="NoneEliteHookSuperPrize" />
+          <s:enumeration value="ItemLevelOver" />
+          <s:enumeration value="ItemCountNot" />
+          <s:enumeration value="ItemCountNot1" />
+          <s:enumeration value="ItemExchangeMedalNoconfig" />
+          <s:enumeration value="NoItemExchangeMedal" />
+          <s:enumeration value="MedalExchangeItemNoconfig" />
+          <s:enumeration value="MedalShortage" />
+          <s:enumeration value="TeammemberNotPlary" />
+          <s:enumeration value="LadderBusy" />
+          <s:enumeration value="LadderGrouping" />
+          <s:enumeration value="LadderCountdown" />
+          <s:enumeration value="LadderClose" />
+          <s:enumeration value="LadderMatchNotExists" />
+          <s:enumeration value="LadderExchangeScoreShortage" />
+          <s:enumeration value="LadderExchangeHonorShortage" />
+          <s:enumeration value="LadderNoSeason" />
+          <s:enumeration value="LadderSeasonDonotNeedSend" />
+          <s:enumeration value="LadderStaminaShortage" />
+          <s:enumeration value="LadderExchangeTimesOver" />
+          <s:enumeration value="LadderMatchCding" />
+          <s:enumeration value="LadderCdEnd" />
+          <s:enumeration value="TourEliteCountLimit" />
+          <s:enumeration value="TourEliteResetCountLimit" />
+          <s:enumeration value="TourHookOver" />
+          <s:enumeration value="TourStageNotEnable" />
+          <s:enumeration value="TourLotteryRepeat" />
+          <s:enumeration value="TourStageNotExists" />
+          <s:enumeration value="TourStageNotPass" />
+          <s:enumeration value="TourHookBusy" />
+          <s:enumeration value="TourHookFightTimesOver" />
+          <s:enumeration value="TourHookHasFinish" />
+          <s:enumeration value="TourHookMatchNotExists" />
+          <s:enumeration value="TourHasLottery" />
+          <s:enumeration value="TourMatchWait" />
+          <s:enumeration value="TourMatchLoop" />
+          <s:enumeration value="TourNoPassPrize" />
+          <s:enumeration value="TourPassPrizeHasReceive" />
+          <s:enumeration value="TeammemberGrowMax" />
+          <s:enumeration value="TeammemberGrowUp" />
+          <s:enumeration value="TeammemberGrowShortage" />
+          <s:enumeration value="TeammemberReikiShortage" />
+          <s:enumeration value="TeammemberSophisticateShortage" />
+          <s:enumeration value="TeammemberRepeat" />
+          <s:enumeration value="TeammemberOver" />
+          <s:enumeration value="TeammemberInvalidCount" />
+          <s:enumeration value="TeammemberSolutionPlayerRepeat" />
+          <s:enumeration value="TeammemberInvalidPlayer" />
+          <s:enumeration value="TeammemberIsMain" />
+          <s:enumeration value="TeammemberHasEquip" />
+          <s:enumeration value="TeammemberCardNotMatch" />
+          <s:enumeration value="TeammemberFormationLevelMax" />
+          <s:enumeration value="TeammemberFormationLevelOver" />
+          <s:enumeration value="TeammemberTrainLevelOver" />
+          <s:enumeration value="TeammemberTrainSeatOver" />
+          <s:enumeration value="TeammemberTraining" />
+          <s:enumeration value="TeammemberTrainNotin" />
+          <s:enumeration value="TeammemberTrainNoStamina" />
+          <s:enumeration value="TeammemberTrainFinish" />
+          <s:enumeration value="TeammemberPropertyShortage" />
+          <s:enumeration value="TeammemberPropertyOver" />
+          <s:enumeration value="TeammemberVeteranCountOver" />
+          <s:enumeration value="TeammemberNotExists" />
+          <s:enumeration value="TeammemberCardLevelOver" />
+          <s:enumeration value="TeammemberPowerOver" />
+          <s:enumeration value="TeammemberUsedPropertyShortage" />
+          <s:enumeration value="TeammemberTrainingNoInherit" />
+          <s:enumeration value="TeammemberArousalShortage" />
+          <s:enumeration value="TeammemberArousalMax" />
+          <s:enumeration value="SpeedUpItemCodeNumber" />
+          <s:enumeration value="TeammemberNotMain" />
+          <s:enumeration value="TeammemberCantDecompose" />
+          <s:enumeration value="TeammemberTrainLevelNoAddExp" />
+          <s:enumeration value="TeammemberCantSell" />
+          <s:enumeration value="TeammemberTrainSell" />
+          <s:enumeration value="TeammemberTrainSkill" />
+          <s:enumeration value="MallBuyCountLimit" />
+          <s:enumeration value="MallAddStaminaLimit" />
+          <s:enumeration value="MallAddTrainSeatLimit" />
+          <s:enumeration value="MallBuyPackageCountLimit" />
+          <s:enumeration value="MallResetEliteLimit" />
+          <s:enumeration value="MallItemNotExists" />
+          <s:enumeration value="MallStaminaOver" />
+          <s:enumeration value="MallBuyStaminaCheck" />
+          <s:enumeration value="MallBuyPackageCheck" />
+          <s:enumeration value="MallBuyTrainSeatCheck" />
+          <s:enumeration value="MallResetEliteCheck" />
+          <s:enumeration value="MallQuickenTrainCheck" />
+          <s:enumeration value="MallItemInvalidBuy" />
+          <s:enumeration value="MallBuySubstitute" />
+          <s:enumeration value="MallUsedNewPlayerPack" />
+          <s:enumeration value="MallUsedNoRestTeammember" />
+          <s:enumeration value="MallUsedLevelShortage" />
+          <s:enumeration value="MallAddPkCount" />
+          <s:enumeration value="MallItemBuyFail" />
+          <s:enumeration value="GoldmallExpired" />
+          <s:enumeration value="GoldmallBuyMax" />
+          <s:enumeration value="TeammemberGrowLevelShortage" />
+          <s:enumeration value="MallStaminaGiftNoTime" />
+          <s:enumeration value="BuyPointFail" />
+          <s:enumeration value="TxBuyPointFail" />
+          <s:enumeration value="FirstChargeNot" />
+          <s:enumeration value="DailycupNoMatch" />
+          <s:enumeration value="DailycupNoMatchTomorrow" />
+          <s:enumeration value="DailycupAttendRepeat" />
+          <s:enumeration value="DailycupTimeOut" />
+          <s:enumeration value="DailycupInsCompetitorFail" />
+          <s:enumeration value="DailycupGambleClosed" />
+          <s:enumeration value="DailycupGamebleCountLimit" />
+          <s:enumeration value="DailycupGamblePointLimit" />
+          <s:enumeration value="DailycupGambleStrengthenLimit" />
+          <s:enumeration value="DailycupgGambleCardlevelOver" />
+          <s:enumeration value="DailycupNotExists" />
+          <s:enumeration value="DailycupStatusNotClose" />
+          <s:enumeration value="DailycupStatusNotEnd" />
+          <s:enumeration value="DailycupGambleOpened" />
+          <s:enumeration value="DailycupNoCompetitors" />
+          <s:enumeration value="DailycupNotimetoSendPrize" />
+          <s:enumeration value="DailycupNottimetoRun" />
+          <s:enumeration value="DailycupStatusNotOpen" />
+          <s:enumeration value="ScoutingLotteryFail" />
+          <s:enumeration value="ScoutingCoinTenVipLevelShortage" />
+          <s:enumeration value="LeagueIdMarkNotLock" />
+          <s:enumeration value="LeagueHasStart" />
+          <s:enumeration value="LeagueMatchHasReMatched" />
+          <s:enumeration value="LeagueNoEnd" />
+          <s:enumeration value="LeaguePrizeReceivedToday" />
+          <s:enumeration value="LeagueNotChampion" />
+          <s:enumeration value="LeagueMatchHasFight" />
+          <s:enumeration value="LeagueMatchWheelNotRight" />
+          <s:enumeration value="LeagueMatchConfirmed" />
+          <s:enumeration value="LeagueStaminaNotEnough" />
+          <s:enumeration value="LeagueExchangeTimesOver" />
+          <s:enumeration value="LeagueExchangeHonorShortage" />
+          <s:enumeration value="LeagueWincountPrizeCannotReceive" />
+          <s:enumeration value="LeagueWincountPrizeReceived" />
+          <s:enumeration value="LeagueHavePass" />
+          <s:enumeration value="LeagueMatchNotConfirmed" />
+          <s:enumeration value="LeagueNotStart" />
+          <s:enumeration value="LeaguePrizeNotGet" />
+          <s:enumeration value="TaskNoConfig" />
+          <s:enumeration value="TaskSubmitInvalid" />
+          <s:enumeration value="TaskNoDaily" />
+          <s:enumeration value="TaskDailyLevelShortage" />
+          <s:enumeration value="TaskDailyCountOver" />
+          <s:enumeration value="MailNoAttachment" />
+          <s:enumeration value="MailAttachmentReceiveRepeat" />
+          <s:enumeration value="MailNoAttachmentBatch" />
+          <s:enumeration value="GambleTitleNoExist" />
+          <s:enumeration value="ThisGambleTitleIsOfficial" />
+          <s:enumeration value="GambleParamError" />
+          <s:enumeration value="GambleNotEnoughMoney" />
+          <s:enumeration value="GambleHostsIsFull" />
+          <s:enumeration value="GamblePayError" />
+          <s:enumeration value="GambleNotStart" />
+          <s:enumeration value="GambleStoped" />
+          <s:enumeration value="GambleUareNotHost" />
+          <s:enumeration value="GambleAddMoneyError" />
+          <s:enumeration value="GambleTooPoor" />
+          <s:enumeration value="GambleNeedMoreTotalMoney" />
+          <s:enumeration value="GambleTooManyPeopleIsGambling" />
+          <s:enumeration value="GambleOnlyOnce" />
+          <s:enumeration value="GambleHostRateInsertError" />
+          <s:enumeration value="GambleCannotGambleSelf" />
+          <s:enumeration value="ChatMsgIsEmpty" />
+          <s:enumeration value="ChatMsgLengthRange" />
+          <s:enumeration value="HaveBannedToPost" />
+          <s:enumeration value="FriendNotExistsName" />
+          <s:enumeration value="FriendHasExists" />
+          <s:enumeration value="FriendIsByBlack" />
+          <s:enumeration value="FriendCountOver" />
+          <s:enumeration value="FriendNotSelf" />
+          <s:enumeration value="FriendHelpTrainOver" />
+          <s:enumeration value="FriendByHelpTrainOver" />
+          <s:enumeration value="FriendDayHelpOver" />
+          <s:enumeration value="FriendMatchWait" />
+          <s:enumeration value="FriendBlackExists" />
+          <s:enumeration value="FriendInviteNotCount" />
+          <s:enumeration value="FriendshipPointShortage" />
+          <s:enumeration value="FriendMatchOver" />
+          <s:enumeration value="FriendBoxHasOpen" />
+          <s:enumeration value="FriendBoxCountOver" />
+          <s:enumeration value="ActivityNoPrize" />
+          <s:enumeration value="ActivityHasReceive" />
+          <s:enumeration value="ActivityNoConfigPrize" />
+          <s:enumeration value="ActivityStatusNotSend" />
+          <s:enumeration value="ActivityConfigPrizeIsNull" />
+          <s:enumeration value="ActivityReceiveFail" />
+          <s:enumeration value="ActivityPrizeJobSending" />
+          <s:enumeration value="InvestDeposited" />
+          <s:enumeration value="UserNotItemCode" />
+          <s:enumeration value="ExchangeCodeNotExists" />
+          <s:enumeration value="ExchangeIsUsed" />
+          <s:enumeration value="ExchangeBatchLimit" />
+          <s:enumeration value="PlayerKillMatchWait" />
+          <s:enumeration value="PlayerKillTimesOver" />
+          <s:enumeration value="PlayerKillByTimesOver" />
+          <s:enumeration value="PlayerKillRevenged" />
+          <s:enumeration value="PlayerKillNoSelf" />
+          <s:enumeration value="PlayerKillMinLevel" />
+          <s:enumeration value="PlayerKillBuyTimesOver" />
+          <s:enumeration value="PlayerKillWinOver" />
+          <s:enumeration value="PlayerKillNoAway" />
+          <s:enumeration value="LackofGold" />
+          <s:enumeration value="LackofCoin" />
+          <s:enumeration value="LackofManagerLevel" />
+          <s:enumeration value="LackofVipLevel" />
+          <s:enumeration value="FaillCostGold" />
+          <s:enumeration value="FailCostCoin" />
+          <s:enumeration value="FailUpdate" />
+          <s:enumeration value="InvalidArgs" />
+          <s:enumeration value="MissManager" />
+          <s:enumeration value="InvalidOp" />
+          <s:enumeration value="MissManagers" />
+          <s:enumeration value="InvalidCrossConfig" />
+          <s:enumeration value="SkillInvalidCid" />
+          <s:enumeration value="SkillMissConfig" />
+          <s:enumeration value="SkillExpNotFind" />
+          <s:enumeration value="SkillMissCard" />
+          <s:enumeration value="SkillExpNotEnough" />
+          <s:enumeration value="SkillMixOverCardLevel" />
+          <s:enumeration value="SkillMixMissSameCard" />
+          <s:enumeration value="SkillAskInvalidAskno" />
+          <s:enumeration value="SkillAskMissNpc" />
+          <s:enumeration value="SkillAskLackofCells" />
+          <s:enumeration value="SkillAskLackofCoin" />
+          <s:enumeration value="SkillAskExistsNpc" />
+          <s:enumeration value="SkillPickLackofCells" />
+          <s:enumeration value="SkillPickMissCardList" />
+          <s:enumeration value="SkillSetInvalidArgs" />
+          <s:enumeration value="SkillSetLackofCells" />
+          <s:enumeration value="SkillSetLimitRepeat" />
+          <s:enumeration value="TalentMissConfig" />
+          <s:enumeration value="WillMissConfig" />
+          <s:enumeration value="TalentHitLackofManagerLevel" />
+          <s:enumeration value="TalentHitExisits" />
+          <s:enumeration value="TalentHitLimitStep" />
+          <s:enumeration value="TalentHitLimitNumber" />
+          <s:enumeration value="TalentSetMiss" />
+          <s:enumeration value="TalentSetUnable" />
+          <s:enumeration value="TalentSetLimitRepeat" />
+          <s:enumeration value="TalentResetMiss" />
+          <s:enumeration value="WillPutExists" />
+          <s:enumeration value="WillPutExistsCard" />
+          <s:enumeration value="WillPutMissCard" />
+          <s:enumeration value="WillPutUnfitCard" />
+          <s:enumeration value="WillPutUnfitCardStrength" />
+          <s:enumeration value="WillSetMiss" />
+          <s:enumeration value="WillSetUnable" />
+          <s:enumeration value="WillSetLimitNumber" />
+          <s:enumeration value="WillCardMain" />
+          <s:enumeration value="MSkillTypeNotMatching" />
+          <s:enumeration value="MSkillMaxPoint" />
+          <s:enumeration value="MSkillNotRequireSeries" />
+          <s:enumeration value="FirstTransfer" />
+          <s:enumeration value="HaveFirstTransfer" />
+          <s:enumeration value="AdMissManager" />
+          <s:enumeration value="PaySuccess" />
+          <s:enumeration value="PayOrderIsExist" />
+          <s:enumeration value="PayCreateAccountFail" />
+          <s:enumeration value="PayUpdatePointFail" />
+          <s:enumeration value="PayInsertPayHistoryFail" />
+          <s:enumeration value="PayNoPayAccount" />
+          <s:enumeration value="PayNoEnoughPoint" />
+          <s:enumeration value="PayTakePointFail" />
+          <s:enumeration value="PayInsertConsumeHistoryFail" />
+          <s:enumeration value="PayDuplicateConsume" />
+          <s:enumeration value="PayNoActiveGame" />
+          <s:enumeration value="PayNoOrderId" />
+          <s:enumeration value="PayCreateItemFail" />
+          <s:enumeration value="PayCashFail" />
+          <s:enumeration value="NotSufficientFunds" />
+          <s:enumeration value="VigorInsufficient" />
+          <s:enumeration value="HiringACoachFail" />
+          <s:enumeration value="UnknownCoach" />
+          <s:enumeration value="PrestigeInsufficient" />
+          <s:enumeration value="CoachReachTheLimit" />
+          <s:enumeration value="AlreadyHaveCoach" />
+          <s:enumeration value="NotToHireCoach" />
+          <s:enumeration value="ChangeCoachFail" />
+          <s:enumeration value="OnlyOneCoach" />
+          <s:enumeration value="ExpelCoachFail" />
+          <s:enumeration value="VigorNotEnough" />
+          <s:enumeration value="ThereIsNoSkills" />
+          <s:enumeration value="ByIGreaterThanInherit" />
+          <s:enumeration value="UpgradeVigorNotEnough" />
+          <s:enumeration value="NotUseCoach" />
+          <s:enumeration value="BeBCoach" />
+          <s:enumeration value="CoachLevelNotManager" />
+          <s:enumeration value="ActiveNotReceive" />
+          <s:enumeration value="ActiveReceive" />
+          <s:enumeration value="ActiveNotIntegral" />
+          <s:enumeration value="ActiveHaveComplete" />
+          <s:enumeration value="ActiveNotPrize" />
+          <s:enumeration value="InvestGetTomorrow" />
+          <s:enumeration value="EuroCardOnly" />
+          <s:enumeration value="NoProtectCard" />
+          <s:enumeration value="NotProtectCard" />
+          <s:enumeration value="SilverCardCannotSynthesis" />
+          <s:enumeration value="MainPlayerCannotSynthesis" />
+          <s:enumeration value="PrizeHaveSend" />
+          <s:enumeration value="NotVip" />
+          <s:enumeration value="HasReceiveToday" />
+          <s:enumeration value="NotSellPrpo" />
+          <s:enumeration value="MaxThePrpo" />
+          <s:enumeration value="AlreadyShare" />
+          <s:enumeration value="MaxShareNumber" />
+          <s:enumeration value="NowShareNotPrize" />
+          <s:enumeration value="NotHaveMatch" />
+          <s:enumeration value="HaveGambleTime" />
+          <s:enumeration value="HaveGamble" />
+          <s:enumeration value="PointConfigNotHave" />
+          <s:enumeration value="Match2HoursEnd" />
+          <s:enumeration value="LuckyCoinInsufficient" />
+          <s:enumeration value="TurntableNotReset" />
+          <s:enumeration value="ItemNotUpgradeTheStar" />
+          <s:enumeration value="MaxTheStar" />
+          <s:enumeration value="PlayerInsufficient" />
+          <s:enumeration value="PotentialNot" />
+          <s:enumeration value="JsonException" />
+          <s:enumeration value="ParameterIsNull" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetOnlineCount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOnlineCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOnlineCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetSessionId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetSessionIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetSessionIdResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionIdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLockStateNDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLockStateNDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckLockStateNDateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakLock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="managerId" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="GMName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zoneId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BreakLockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BreakLockResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendItemByShare">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="type" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendItemByShareResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendItemByShareResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SetStartGameEntitySoapIn">
+    <wsdl:part name="parameters" element="tns:SetStartGameEntity" />
+  </wsdl:message>
+  <wsdl:message name="SetStartGameEntitySoapOut">
+    <wsdl:part name="parameters" element="tns:SetStartGameEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStartgameEntitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetStartgameEntity" />
+  </wsdl:message>
+  <wsdl:message name="GetStartgameEntitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetStartgameEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddCoinSoapIn">
+    <wsdl:part name="parameters" element="tns:AddCoin" />
+  </wsdl:message>
+  <wsdl:message name="AddCoinSoapOut">
+    <wsdl:part name="parameters" element="tns:AddCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddCoin2SoapIn">
+    <wsdl:part name="parameters" element="tns:AddCoin2" />
+  </wsdl:message>
+  <wsdl:message name="AddCoin2SoapOut">
+    <wsdl:part name="parameters" element="tns:AddCoin2Response" />
+  </wsdl:message>
+  <wsdl:message name="ChargeSoapIn">
+    <wsdl:part name="parameters" element="tns:Charge" />
+  </wsdl:message>
+  <wsdl:message name="ChargeSoapOut">
+    <wsdl:part name="parameters" element="tns:ChargeResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuyPointShipmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:BuyPointShipments" />
+  </wsdl:message>
+  <wsdl:message name="BuyPointShipmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:BuyPointShipmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistSoapIn">
+    <wsdl:part name="parameters" element="tns:IsRegist" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistSoapOut">
+    <wsdl:part name="parameters" element="tns:IsRegistResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:IsRegistByName" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:IsRegistByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistByNameListSoapIn">
+    <wsdl:part name="parameters" element="tns:IsRegistByNameList" />
+  </wsdl:message>
+  <wsdl:message name="IsRegistByNameListSoapOut">
+    <wsdl:part name="parameters" element="tns:IsRegistByNameListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManagerList" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckActiveSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckActive" />
+  </wsdl:message>
+  <wsdl:message name="CheckActiveSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="AttachmentReceiveSoapIn">
+    <wsdl:part name="parameters" element="tns:AttachmentReceive" />
+  </wsdl:message>
+  <wsdl:message name="AttachmentReceiveSoapOut">
+    <wsdl:part name="parameters" element="tns:AttachmentReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="TxBuyItemSoapIn">
+    <wsdl:part name="parameters" element="tns:TxBuyItem" />
+  </wsdl:message>
+  <wsdl:message name="TxBuyItemSoapOut">
+    <wsdl:part name="parameters" element="tns:TxBuyItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="TxTaskStepSoapIn">
+    <wsdl:part name="parameters" element="tns:TxTaskStep" />
+  </wsdl:message>
+  <wsdl:message name="TxTaskStepSoapOut">
+    <wsdl:part name="parameters" element="tns:TxTaskStepResponse" />
+  </wsdl:message>
+  <wsdl:message name="KickSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:KickSession" />
+  </wsdl:message>
+  <wsdl:message name="KickSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:KickSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="LockUserUnexpectSoapIn">
+    <wsdl:part name="parameters" element="tns:LockUserUnexpect" />
+  </wsdl:message>
+  <wsdl:message name="LockUserUnexpectSoapOut">
+    <wsdl:part name="parameters" element="tns:LockUserUnexpectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetCache" />
+  </wsdl:message>
+  <wsdl:message name="ResetCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrowdStartSoapIn">
+    <wsdl:part name="parameters" element="tns:CrowdStart" />
+  </wsdl:message>
+  <wsdl:message name="CrowdStartSoapOut">
+    <wsdl:part name="parameters" element="tns:CrowdStartResponse" />
+  </wsdl:message>
+  <wsdl:message name="PeakStartSoapIn">
+    <wsdl:part name="parameters" element="tns:PeakStart" />
+  </wsdl:message>
+  <wsdl:message name="PeakStartSoapOut">
+    <wsdl:part name="parameters" element="tns:PeakStartResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrowdSendPrizeSoapIn">
+    <wsdl:part name="parameters" element="tns:CrowdSendPrize" />
+  </wsdl:message>
+  <wsdl:message name="CrowdSendPrizeSoapOut">
+    <wsdl:part name="parameters" element="tns:CrowdSendPrizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddManagerDataSoapIn">
+    <wsdl:part name="parameters" element="tns:AddManagerData" />
+  </wsdl:message>
+  <wsdl:message name="AddManagerDataSoapOut">
+    <wsdl:part name="parameters" element="tns:AddManagerDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOnlineCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOnlineCount" />
+  </wsdl:message>
+  <wsdl:message name="GetOnlineCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOnlineCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetSessionIdSoapIn">
+    <wsdl:part name="parameters" element="tns:SetSessionId" />
+  </wsdl:message>
+  <wsdl:message name="SetSessionIdSoapOut">
+    <wsdl:part name="parameters" element="tns:SetSessionIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionId" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckLockStateNDateSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckLockStateNDate" />
+  </wsdl:message>
+  <wsdl:message name="CheckLockStateNDateSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckLockStateNDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="BreakLockSoapIn">
+    <wsdl:part name="parameters" element="tns:BreakLock" />
+  </wsdl:message>
+  <wsdl:message name="BreakLockSoapOut">
+    <wsdl:part name="parameters" element="tns:BreakLockResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendItemByShareSoapIn">
+    <wsdl:part name="parameters" element="tns:SendItemByShare" />
+  </wsdl:message>
+  <wsdl:message name="SendItemByShareSoapOut">
+    <wsdl:part name="parameters" element="tns:SendItemByShareResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NwWebServiceSoap">
+    <wsdl:operation name="SetStartGameEntity">
+      <wsdl:input message="tns:SetStartGameEntitySoapIn" />
+      <wsdl:output message="tns:SetStartGameEntitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStartgameEntity">
+      <wsdl:input message="tns:GetStartgameEntitySoapIn" />
+      <wsdl:output message="tns:GetStartgameEntitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin">
+      <wsdl:input message="tns:AddCoinSoapIn" />
+      <wsdl:output message="tns:AddCoinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin2">
+      <wsdl:input message="tns:AddCoin2SoapIn" />
+      <wsdl:output message="tns:AddCoin2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Charge">
+      <wsdl:input message="tns:ChargeSoapIn" />
+      <wsdl:output message="tns:ChargeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyPointShipments">
+      <wsdl:input message="tns:BuyPointShipmentsSoapIn" />
+      <wsdl:output message="tns:BuyPointShipmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsRegist">
+      <wsdl:input message="tns:IsRegistSoapIn" />
+      <wsdl:output message="tns:IsRegistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByName">
+      <wsdl:input message="tns:IsRegistByNameSoapIn" />
+      <wsdl:output message="tns:IsRegistByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByNameList">
+      <wsdl:input message="tns:IsRegistByNameListSoapIn" />
+      <wsdl:output message="tns:IsRegistByNameListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerList">
+      <wsdl:input message="tns:GetManagerListSoapIn" />
+      <wsdl:output message="tns:GetManagerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckActive">
+      <wsdl:input message="tns:CheckActiveSoapIn" />
+      <wsdl:output message="tns:CheckActiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AttachmentReceive">
+      <wsdl:input message="tns:AttachmentReceiveSoapIn" />
+      <wsdl:output message="tns:AttachmentReceiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TxBuyItem">
+      <wsdl:input message="tns:TxBuyItemSoapIn" />
+      <wsdl:output message="tns:TxBuyItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TxTaskStep">
+      <wsdl:input message="tns:TxTaskStepSoapIn" />
+      <wsdl:output message="tns:TxTaskStepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KickSession">
+      <wsdl:input message="tns:KickSessionSoapIn" />
+      <wsdl:output message="tns:KickSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LockUserUnexpect">
+      <wsdl:input message="tns:LockUserUnexpectSoapIn" />
+      <wsdl:output message="tns:LockUserUnexpectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <wsdl:input message="tns:ResetCacheSoapIn" />
+      <wsdl:output message="tns:ResetCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrowdStart">
+      <wsdl:input message="tns:CrowdStartSoapIn" />
+      <wsdl:output message="tns:CrowdStartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PeakStart">
+      <wsdl:input message="tns:PeakStartSoapIn" />
+      <wsdl:output message="tns:PeakStartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrowdSendPrize">
+      <wsdl:input message="tns:CrowdSendPrizeSoapIn" />
+      <wsdl:output message="tns:CrowdSendPrizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddManagerData">
+      <wsdl:input message="tns:AddManagerDataSoapIn" />
+      <wsdl:output message="tns:AddManagerDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineCount">
+      <wsdl:input message="tns:GetOnlineCountSoapIn" />
+      <wsdl:output message="tns:GetOnlineCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSessionId">
+      <wsdl:input message="tns:SetSessionIdSoapIn" />
+      <wsdl:output message="tns:SetSessionIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionId">
+      <wsdl:input message="tns:GetSessionIdSoapIn" />
+      <wsdl:output message="tns:GetSessionIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLockStateNDate">
+      <wsdl:input message="tns:CheckLockStateNDateSoapIn" />
+      <wsdl:output message="tns:CheckLockStateNDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BreakLock">
+      <wsdl:input message="tns:BreakLockSoapIn" />
+      <wsdl:output message="tns:BreakLockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendItemByShare">
+      <wsdl:input message="tns:SendItemByShareSoapIn" />
+      <wsdl:output message="tns:SendItemByShareSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NwWebServiceSoap" type="tns:NwWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetStartGameEntity">
+      <soap:operation soapAction="http://nball.com/SetStartGameEntity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStartgameEntity">
+      <soap:operation soapAction="http://nball.com/GetStartgameEntity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin">
+      <soap:operation soapAction="http://nball.com/AddCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin2">
+      <soap:operation soapAction="http://nball.com/AddCoin2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Charge">
+      <soap:operation soapAction="http://nball.com/Charge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyPointShipments">
+      <soap:operation soapAction="http://nball.com/BuyPointShipments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegist">
+      <soap:operation soapAction="http://nball.com/IsRegist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByName">
+      <soap:operation soapAction="http://nball.com/IsRegistByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByNameList">
+      <soap:operation soapAction="http://nball.com/IsRegistByNameList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerList">
+      <soap:operation soapAction="http://nball.com/GetManagerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckActive">
+      <soap:operation soapAction="http://nball.com/CheckActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AttachmentReceive">
+      <soap:operation soapAction="http://nball.com/AttachmentReceive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TxBuyItem">
+      <soap:operation soapAction="http://nball.com/TxBuyItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TxTaskStep">
+      <soap:operation soapAction="http://nball.com/TxTaskStep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KickSession">
+      <soap:operation soapAction="http://nball.com/KickSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockUserUnexpect">
+      <soap:operation soapAction="http://nball.com/LockUserUnexpect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap:operation soapAction="http://nball.com/ResetCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrowdStart">
+      <soap:operation soapAction="http://nball.com/CrowdStart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeakStart">
+      <soap:operation soapAction="http://nball.com/PeakStart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrowdSendPrize">
+      <soap:operation soapAction="http://nball.com/CrowdSendPrize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddManagerData">
+      <soap:operation soapAction="http://nball.com/AddManagerData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineCount">
+      <soap:operation soapAction="http://nball.com/GetOnlineCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSessionId">
+      <soap:operation soapAction="http://nball.com/SetSessionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionId">
+      <soap:operation soapAction="http://nball.com/GetSessionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLockStateNDate">
+      <soap:operation soapAction="http://nball.com/CheckLockStateNDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakLock">
+      <soap:operation soapAction="http://nball.com/BreakLock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendItemByShare">
+      <soap:operation soapAction="http://nball.com/SendItemByShare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NwWebServiceSoap12" type="tns:NwWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetStartGameEntity">
+      <soap12:operation soapAction="http://nball.com/SetStartGameEntity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStartgameEntity">
+      <soap12:operation soapAction="http://nball.com/GetStartgameEntity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin">
+      <soap12:operation soapAction="http://nball.com/AddCoin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCoin2">
+      <soap12:operation soapAction="http://nball.com/AddCoin2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Charge">
+      <soap12:operation soapAction="http://nball.com/Charge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyPointShipments">
+      <soap12:operation soapAction="http://nball.com/BuyPointShipments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegist">
+      <soap12:operation soapAction="http://nball.com/IsRegist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByName">
+      <soap12:operation soapAction="http://nball.com/IsRegistByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRegistByNameList">
+      <soap12:operation soapAction="http://nball.com/IsRegistByNameList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerList">
+      <soap12:operation soapAction="http://nball.com/GetManagerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckActive">
+      <soap12:operation soapAction="http://nball.com/CheckActive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AttachmentReceive">
+      <soap12:operation soapAction="http://nball.com/AttachmentReceive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TxBuyItem">
+      <soap12:operation soapAction="http://nball.com/TxBuyItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TxTaskStep">
+      <soap12:operation soapAction="http://nball.com/TxTaskStep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KickSession">
+      <soap12:operation soapAction="http://nball.com/KickSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockUserUnexpect">
+      <soap12:operation soapAction="http://nball.com/LockUserUnexpect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetCache">
+      <soap12:operation soapAction="http://nball.com/ResetCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrowdStart">
+      <soap12:operation soapAction="http://nball.com/CrowdStart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeakStart">
+      <soap12:operation soapAction="http://nball.com/PeakStart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrowdSendPrize">
+      <soap12:operation soapAction="http://nball.com/CrowdSendPrize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddManagerData">
+      <soap12:operation soapAction="http://nball.com/AddManagerData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnlineCount">
+      <soap12:operation soapAction="http://nball.com/GetOnlineCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSessionId">
+      <soap12:operation soapAction="http://nball.com/SetSessionId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionId">
+      <soap12:operation soapAction="http://nball.com/GetSessionId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLockStateNDate">
+      <soap12:operation soapAction="http://nball.com/CheckLockStateNDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BreakLock">
+      <soap12:operation soapAction="http://nball.com/BreakLock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendItemByShare">
+      <soap12:operation soapAction="http://nball.com/SendItemByShare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NwWebService">
+    <wsdl:port name="NwWebServiceSoap" binding="tns:NwWebServiceSoap">
+      <soap:address location="http://localhost:4428/NwWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NwWebServiceSoap12" binding="tns:NwWebServiceSoap12">
+      <soap12:address location="http://localhost:4428/NwWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

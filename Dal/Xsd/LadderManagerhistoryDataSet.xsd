@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="LadderManagerhistoryDataSet" targetNamespace="http://tempuri.org/LadderManagerhistoryDataSet.xsd" xmlns:mstns="http://tempuri.org/LadderManagerhistoryDataSet.xsd" xmlns="http://tempuri.org/LadderManagerhistoryDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NBallConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NBallConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Games.NBall.Dal.Properties.Settings.GlobalReference.Default.NBallConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="LadderManagerhistoryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="LadderManagerhistoryDataSet" msprop:Generator_UserDSName="LadderManagerhistoryDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Ladder_ManagerHistory" msprop:Generator_TableClassName="Ladder_ManagerHistoryDataTable" msprop:Generator_TableVarName="tableLadder_ManagerHistory" msprop:Generator_TablePropName="Ladder_ManagerHistory" msprop:Generator_RowDeletingName="Ladder_ManagerHistoryRowDeleting" msprop:Generator_RowChangingName="Ladder_ManagerHistoryRowChanging" msprop:Generator_RowEvHandlerName="Ladder_ManagerHistoryRowChangeEventHandler" msprop:Generator_RowDeletedName="Ladder_ManagerHistoryRowDeleted" msprop:Generator_UserTableName="Ladder_ManagerHistory" msprop:Generator_RowChangedName="Ladder_ManagerHistoryRowChanged" msprop:Generator_RowEvArgName="Ladder_ManagerHistoryRowChangeEvent" msprop:Generator_RowClassName="Ladder_ManagerHistoryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Idx" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIdx" msprop:Generator_ColumnPropNameInRow="Idx" msprop:Generator_ColumnPropNameInTable="IdxColumn" msprop:Generator_UserColumnName="Idx" type="xs:int" />
+              <xs:element name="Season" msprop:Generator_ColumnVarNameInTable="columnSeason" msprop:Generator_ColumnPropNameInRow="Season" msprop:Generator_ColumnPropNameInTable="SeasonColumn" msprop:Generator_UserColumnName="Season" type="xs:int" />
+              <xs:element name="ManagerId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnManagerId" msprop:Generator_ColumnPropNameInRow="ManagerId" msprop:Generator_ColumnPropNameInTable="ManagerIdColumn" msprop:Generator_UserColumnName="ManagerId" type="xs:string" />
+              <xs:element name="Rank" msprop:Generator_ColumnVarNameInTable="columnRank" msprop:Generator_ColumnPropNameInRow="Rank" msprop:Generator_ColumnPropNameInTable="RankColumn" msprop:Generator_UserColumnName="Rank" type="xs:int" />
+              <xs:element name="Score" msprop:Generator_ColumnVarNameInTable="columnScore" msprop:Generator_ColumnPropNameInRow="Score" msprop:Generator_ColumnPropNameInTable="ScoreColumn" msprop:Generator_UserColumnName="Score" type="xs:int" />
+              <xs:element name="PrizeItems" msprop:Generator_ColumnVarNameInTable="columnPrizeItems" msprop:Generator_ColumnPropNameInRow="PrizeItems" msprop:Generator_ColumnPropNameInTable="PrizeItemsColumn" msprop:Generator_UserColumnName="PrizeItems">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:int" />
+              <xs:element name="RowTime" msprop:Generator_ColumnVarNameInTable="columnRowTime" msprop:Generator_ColumnPropNameInRow="RowTime" msprop:Generator_ColumnPropNameInTable="RowTimeColumn" msprop:Generator_UserColumnName="RowTime" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Ladder_ManagerHistory" />
+      <xs:field xpath="mstns:Idx" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

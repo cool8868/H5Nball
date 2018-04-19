@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Games.NBall.WpfEmulator.Component.UserControls.LotteryCardUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="90" d:DesignWidth="70">
+    <Grid>
+         <Rectangle Visibility="Visible" x:Name="recBack" Width="70" Height="90" Fill="LightGray" Stroke="#FF595959"></Rectangle>
+        <Label Visibility="Visible" x:Name="lblBack" Content="卡 牌" Background="Black" Width="70" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="White"></Label>
+        <Rectangle Visibility="Hidden" x:Name="recFront" Width="70" Height="90" Fill="#FFB8C9AE" Stroke="#FF595959"></Rectangle>
+        <Label Visibility="Hidden" x:Name="lblName" Content="" Background="Olive"  Width="70" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="White"></Label>
+        <Label Visibility="Hidden" x:Name="lblStatus" Content="(已获取)" HorizontalAlignment="Center" Margin="0,55,0,0"></Label>
+    </Grid>
+</UserControl>

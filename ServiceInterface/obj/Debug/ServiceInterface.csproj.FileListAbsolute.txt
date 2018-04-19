@@ -1,0 +1,13 @@
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.ServiceContract.IService.dll
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.ServiceContract.IService.pdb
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.Common.dll
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.Entity.dll
+D:\H5Nball\ServiceInterface\bin\Debug\log4net.dll
+D:\H5Nball\ServiceInterface\bin\Debug\Newtonsoft.Json.dll
+D:\H5Nball\ServiceInterface\bin\Debug\protobuf-net.dll
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.Common.pdb
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.Entity.pdb
+D:\H5Nball\ServiceInterface\bin\Debug\Games.NBall.Entity.xml
+D:\H5Nball\ServiceInterface\obj\Debug\ServiceInterface.csprojResolveAssemblyReference.cache
+D:\H5Nball\ServiceInterface\obj\Debug\Games.NBall.ServiceContract.IService.dll
+D:\H5Nball\ServiceInterface\obj\Debug\Games.NBall.ServiceContract.IService.pdb
